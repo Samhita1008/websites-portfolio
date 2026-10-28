@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ironhide Strength Club — Concept Demo</title>
+<meta name="description" content="Concept demo gym website by Edit Theory. Fictional club, sample classes and prices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0b0b0c;--ink2:#151517;--volt:#C8FF2E;--bone:#EFEDE6;--st:#8a8d91;--line:rgba(239,237,230,.16)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--ink);color:var(--bone);font-family:'Space Grotesk',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.55}
+  a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit;color:inherit}
+  h1,h2,h3,.an{font-family:'Anton','Impact',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.005em;line-height:.95}
+  .cap{font-size:11px;letter-spacing:.28em;text-transform:uppercase;font-weight:700;color:var(--volt)}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 22px;width:100%}
+  .sec{padding:clamp(80px,12vw,140px) 0}
+  .h2{font-size:clamp(48px,9vw,128px);margin-top:12px}
+  .h2 em{font-style:normal;color:var(--volt)}
+  .note{display:inline-block;margin-top:16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px dashed currentColor;padding:6px 12px;border-radius:4px;opacity:.7;font-weight:700}
+  .strip{position:fixed;top:0;left:0;right:0;height:26px;z-index:90;background:var(--volt);color:var(--ink);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;font-weight:700;padding:0 10px;text-align:center}
+  header{position:fixed;top:26px;left:0;right:0;z-index:80;padding:16px 26px;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:background .3s}
+  header.solid{background:#0b0b0cee;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .logo{font-family:'Anton',sans-serif;font-size:24px;letter-spacing:.04em;text-transform:uppercase}
+  .logo b{color:var(--volt);font-weight:400}
+  nav{display:none;gap:30px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:700}
+  nav a:hover{color:var(--volt)}
+  @media(min-width:900px){nav{display:flex}}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:2px solid var(--bone);border-radius:4px;padding:14px 26px;font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;background:transparent;transition:transform .2s,background .2s,color .2s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}
+  .btn:hover{transform:translateY(-3px)}
+  .btn.v{background:var(--volt);border-color:var(--volt);color:var(--ink)}
+  .btn.sm{padding:10px 16px}
+
+  /* HERO */
+  .hero{position:relative;height:100svh;min-height:640px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(60% 50% at 50% 62%,#1f2410 0,#0b0b0c 70%)}
+  .big{position:absolute;left:0;right:0;top:14%;text-align:center;font-family:'Anton',sans-serif;font-size:clamp(90px,24vw,360px);line-height:.85;color:transparent;-webkit-text-stroke:2px rgba(239,237,230,.22);text-transform:uppercase;pointer-events:none;white-space:nowrap}
+  .big span{display:inline-block}
+  .htxt{position:relative;z-index:3;padding-bottom:clamp(24px,5vh,56px)}
+  .hero h1{font-size:clamp(46px,8.4vw,128px);max-width:14ch}
+  .hero h1 em{font-style:normal;color:var(--volt)}
+  .hero .lead{max-width:40ch;margin:14px 0 22px;color:rgba(239,237,230,.85)}
+  .bell{position:absolute;left:50%;top:44%;width:min(150vw,1500px);transform:translate(-50%,-50%);z-index:2}
+  @media(min-width:900px){.bell{width:min(110vw,1300px);top:40%}}
+  .kg{position:absolute;right:26px;top:120px;z-index:4;text-align:right}
+  .kg .an{font-size:clamp(64px,10vw,150px);color:var(--volt);line-height:.9}
+  .kg small{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;display:block}
+  .pr{position:absolute;left:50%;top:44%;z-index:4;transform:translate(-50%,-50%) rotate(-6deg) scale(0);background:var(--volt);color:var(--ink);font-family:'Anton',sans-serif;font-size:clamp(40px,8vw,110px);padding:4px 26px;text-transform:uppercase;pointer-events:none}
+  .hint{position:absolute;left:26px;top:130px;z-index:4;font-size:10px;letter-spacing:.28em;text-transform:uppercase;opacity:.7}
+  body.static .hero{height:auto;min-height:100svh}
+
+
+  .stk{position:absolute;left:0;right:0;top:15%;height:46%;z-index:1;pointer-events:none}
+  .stk .w{position:absolute;left:0;right:0;top:0;text-align:center;font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(56px,12.5vw,230px);line-height:1;color:var(--bone);will-change:clip-path,transform;white-space:nowrap}
+  .stk .w small{display:block;font-family:'Space Grotesk',sans-serif;font-size:clamp(11px,1.3vw,15px);letter-spacing:.3em;color:var(--volt);margin-top:10px;font-weight:700}
+  .stk .w:nth-child(2){color:var(--volt)}
+  .idx{position:absolute;right:26px;top:120px;z-index:4;font-size:12px;letter-spacing:.24em;font-weight:700}
+  .idx span{color:var(--volt)}
+  .ln{position:absolute;left:26px;right:26px;bottom:0;height:3px;background:var(--line);z-index:4}
+  .ln i{display:block;height:100%;width:0;background:var(--volt)}
+  .tick{background:var(--volt);color:var(--ink);overflow:hidden;white-space:nowrap;padding:14px 0;border-block:2px solid var(--ink)}
+  .tick .tr{display:inline-flex;gap:46px;font-family:'Anton',sans-serif;font-size:clamp(26px,3.6vw,46px);text-transform:uppercase;animation:mq 28s linear infinite;padding-right:46px}
+  @keyframes mq{to{transform:translateX(-50%)}}
+
+  /* PROGRAMS */
+  .pgs{position:relative;overflow:hidden;background:var(--ink2)}
+  .ph{padding:clamp(100px,12vw,130px) 22px 20px}
+  .pt{display:flex;gap:22px;width:max-content;padding:0 26px 50px}
+  .pk{width:min(80vw,380px);flex:none;border:1px solid var(--line);padding:26px;background:var(--ink);display:grid;gap:12px;align-content:start;min-height:clamp(300px,calc(100svh - 360px),420px);position:relative;overflow:hidden}
+  .pk .no{font-family:'Anton',sans-serif;font-size:clamp(90px,12vw,150px);color:transparent;-webkit-text-stroke:2px var(--volt);line-height:.9}
+  .pk h3{font-size:clamp(30px,3.6vw,42px)}
+  .pk p{color:rgba(239,237,230,.78);font-size:14px}
+  .pk .tg{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+  .pk .tg i{font-style:normal;font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);padding:4px 10px;font-weight:700}
+  .pk::after{content:'';position:absolute;left:0;bottom:0;height:5px;width:var(--w);background:var(--volt)}
+  body.static .pt{flex-wrap:wrap;width:auto}
+
+  /* SPLIT */
+  .light{background:var(--bone);color:var(--ink)}
+  .light .cap{color:#4d6a00}
+  .light .h2 em{color:#4d6a00}
+  .sb{display:grid;gap:30px;margin-top:40px}
+  @media(min-width:960px){.sb{grid-template-columns:.8fr 1.2fr}}
+  .box{border:2px solid var(--ink);padding:clamp(20px,3vw,32px)}
+  .grp{margin-bottom:24px}
+  .grp .cap{display:block;margin-bottom:10px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{border:2px solid var(--ink);background:transparent;padding:10px 16px;cursor:pointer;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;transition:all .2s}
+  .chip.on{background:var(--ink);color:var(--volt)}
+  input[type=range]{width:100%;accent-color:var(--ink);height:28px}
+  .dv{display:flex;justify-content:space-between;font-family:'Anton',sans-serif;font-size:40px}
+  .wk{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+  .wk .d{border:2px solid var(--ink);padding:10px 4px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;text-align:center;transition:background .3s,color .3s}
+  .wk .d b{font-size:11px;letter-spacing:.14em}
+  .wk .d span{font-family:'Anton',sans-serif;font-size:clamp(14px,2vw,24px);text-transform:uppercase;line-height:1}
+  .wk .d em{font-style:normal;font-size:10px;opacity:.7;letter-spacing:.08em;text-transform:uppercase}
+  .wk .d.on{background:var(--ink);color:var(--bone)}
+  .wk .d.on span{color:var(--volt)}
+  @media(max-width:600px){.wk{grid-template-columns:repeat(4,1fr)}.wk .d{min-height:110px}}
+
+  /* TIMETABLE */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:30px}
+  .tabs .chip{border-color:var(--bone);color:var(--bone)}
+  .tabs .chip.on{background:var(--volt);border-color:var(--volt);color:var(--ink)}
+  .tl{margin-top:20px;border-top:1px solid var(--line)}
+  .sl{display:grid;grid-template-columns:90px 1fr auto;gap:14px;align-items:center;padding:20px 0;border-bottom:1px solid var(--line)}
+  @media(min-width:700px){.sl{grid-template-columns:130px 1fr 160px auto}}
+  .sl .tm{font-family:'Anton',sans-serif;font-size:clamp(28px,3.4vw,44px)}
+  .sl h3{font-size:clamp(22px,2.6vw,32px)}
+  .sl small{display:block;color:var(--st);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+  .sl .sp{display:none;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+  @media(min-width:700px){.sl .sp{display:block}}
+  .sl .sp i{display:block;height:4px;background:var(--line);margin-top:6px}
+  .sl .sp i b{display:block;height:100%;background:var(--volt)}
+  .sl.now{background:linear-gradient(90deg,rgba(200,255,46,.12),transparent)}
+  .sl.now .tm::after{content:'NEXT';font-family:'Space Grotesk';font-size:10px;letter-spacing:.2em;background:var(--volt);color:var(--ink);padding:2px 8px;display:block;width:max-content;margin-top:4px}
+
+  /* PLANS */
+  .bl{display:inline-flex;border:2px solid var(--ink);margin-top:30px}
+  .bl button{padding:12px 22px;border:0;background:transparent;cursor:pointer;font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+  .bl button.on{background:var(--ink);color:var(--volt)}
+  .pl{display:grid;gap:18px;margin-top:30px}
+  @media(min-width:860px){.pl{grid-template-columns:repeat(3,1fr)}}
+  .pn{border:2px solid var(--ink);padding:28px;display:grid;gap:12px;align-content:start;position:relative;transition:transform .3s}
+  .pn:hover{transform:translateY(-6px)}
+  .pn.f{background:var(--ink);color:var(--bone)}
+  .pn.f .pp{color:var(--volt)}
+  .pn h3{font-size:34px}
+  .pn .pp{font-family:'Anton',sans-serif;font-size:clamp(54px,6vw,80px);line-height:1}
+  .pn .pp small{font-family:'Space Grotesk';font-size:13px;letter-spacing:.1em;font-weight:700}
+  .pn ul{list-style:none;display:grid;gap:6px;font-size:14px}
+  .pn li::before{content:'+ ';font-weight:700;color:#4d6a00}
+  .pn.f li::before{color:var(--volt)}
+  .pn .tagx{position:absolute;right:-2px;top:-2px;background:var(--volt);color:var(--ink);padding:5px 12px;font-size:10px;letter-spacing:.2em;font-weight:700;text-transform:uppercase}
+
+  /* CONTACT */
+  .ct{position:relative;overflow:hidden}
+  .ecg{position:absolute;left:0;right:0;top:50%;width:100%;height:240px;transform:translateY(-50%);opacity:.5;pointer-events:none}
+  .ecg path{fill:none;stroke:var(--volt);stroke-width:3;vector-effect:non-scaling-stroke}
+  .cg{display:grid;gap:40px;position:relative;z-index:1}
+  @media(min-width:900px){.cg{grid-template-columns:1fr 1fr;align-items:start}}
+  .ct h2{font-size:clamp(54px,9vw,140px)}
+  .ct h2 em{font-style:normal;color:var(--volt)}
+  form{display:grid;gap:14px;background:rgba(11,11,12,.85);padding:clamp(20px,3vw,32px);border:1px solid var(--line)}
+  label{display:grid;gap:6px;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:700}
+  select,input[type=text],textarea{background:var(--ink2);border:1px solid var(--line);padding:14px 16px;font-size:16px;outline:none;width:100%;border-radius:0}
+  select:focus,input:focus,textarea:focus{border-color:var(--volt)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  footer{padding:70px 0 50px;overflow:hidden;font-size:14px;color:rgba(239,237,230,.7)}
+  footer .giant{font-family:'Anton',sans-serif;font-size:clamp(90px,22vw,340px);line-height:.9;color:var(--volt);white-space:nowrap;text-transform:uppercase}
+  footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;margin-top:30px}
+  .wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em}
+  .wd .in{display:inline-block}
+</style>
+</head>
+<body>
+<div class="strip">Concept demo by Edit Theory · Fictional club · Sample classes and prices</div>
+<header id="hdr">
+  <a href="#top" class="logo">Iron<b>hide</b></a>
+  <nav><a href="#programs">Programs</a><a href="#split">Build a split</a><a href="#classes">Classes</a><a href="#plans">Plans</a></nav>
+  <a href="#contact" class="btn v sm">Free trial</a>
+</header>
+
+<section class="hero" id="top">
+  <div class="stk" id="stk"></div>
+  <div class="idx"><span id="ix">01</span> / 03</div>
+  <div class="ln"><i id="ln"></i></div>
+  <div class="wrap htxt">
+    <div class="cap" id="h0">Ironhide Strength Club · Chennai (sample)</div>
+    <h1 id="h1">Heavier <em>every</em> day.</h1>
+    <p class="lead" id="hp">Coached strength training, conditioning and boxing. Real racks, real plates, no mirrors-only gym floor.</p>
+    <div id="hc"><a class="btn v" href="#contact">Book a free trial</a> <a class="btn" href="#split">Build my week</a></div>
+  </div>
+</section>
+
+<div class="tick"><div class="tr" id="tr"></div></div>
+
+<main>
+  <section class="pgs" id="programs">
+    <div class="ph wrap"><div class="cap">Five programs</div><h2 class="h2 split">Pick your <em>fight</em></h2><span class="note">Sample programs · fictional club</span></div>
+    <div class="pt" id="pt"></div>
+  </section>
+
+  <section class="sec light" id="split">
+    <div class="wrap">
+      <div class="cap">Build a split</div>
+      <h2 class="h2 split">Your week, <em>sorted</em></h2>
+      <span class="note">Illustrative example plan, not personal training advice</span>
+      <div class="sb">
+        <div class="box">
+          <div class="grp"><span class="cap">Goal</span><div class="chips" id="gG"></div></div>
+          <div class="grp"><span class="cap">Days per week</span><div class="dv"><span id="dn">4</span><span>DAYS</span></div><input type="range" id="dR" min="3" max="6" value="4"></div>
+          <button class="btn v" id="bSp" type="button" style="background:var(--ink);border-color:var(--ink);color:var(--volt)">Book this plan</button>
+        </div>
+        <div class="wk" id="wk"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="classes">
+    <div class="wrap">
+      <div class="cap">Class timetable</div>
+      <h2 class="h2 split">Show up. <em>Sweat.</em></h2>
+      <span class="note">Sample timetable and spots</span>
+      <div class="tabs" id="tb"></div>
+      <div class="tl" id="tl"></div>
+    </div>
+  </section>
+
+  <section class="sec light" id="plans">
+    <div class="wrap">
+      <div class="cap">Membership</div>
+      <h2 class="h2 split">Pay for <em>iron</em></h2>
+      <span class="note">Sample prices</span><br>
+      <div class="bl" id="bl"><button type="button" data-m="1" class="on">Monthly</button><button type="button" data-m="3">3 months</button><button type="button" data-m="12">12 months</button></div>
+      <div class="pl" id="pl"></div>
+    </div>
+  </section>
+
+  <section class="sec ct" id="contact">
+    <svg class="ecg" viewBox="0 0 1200 240" preserveAspectRatio="none"><path id="ecg" d="M0 120H220L250 120L275 40L310 200L340 80L365 120H620L650 120L675 30L712 210L742 90L768 120H1200"/></svg>
+    <div class="wrap cg">
+      <div>
+        <div class="cap">Free first session</div>
+        <h2>Your first rep <em>is on us.</em></h2>
+        <p style="max-width:40ch;margin-top:16px;color:rgba(239,237,230,.85)">Tell us your goal and a time. This opens a WhatsApp message to the club, ready to send.</p>
+        <span class="note">Demo · sample WhatsApp number</span>
+      </div>
+      <form id="cf">
+        <label>Your name<input id="fN" type="text" placeholder="Name" required></label>
+        <div class="two">
+          <label>Goal<select id="fG"><option>Build strength</option><option>Lose fat</option><option>Build muscle</option><option>Learn boxing</option></select></label>
+          <label>Preferred time<select id="fT"><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label>
+        </div>
+        <label>Experience<select id="fE"><option>Complete beginner</option><option>Some experience</option><option>Trained before</option></select></label>
+        <button class="btn v" type="submit">Claim free trial on WhatsApp</button>
+      </form>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><div class="giant" id="giant">Ironhide</div><div class="row"><span>Ironhide Strength Club is a fictional gym. A concept demo by Edit Theory. All classes, prices and numbers are samples.</span><span>© 2026 Edit Theory</span></div></div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)},$$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches,hasG=!!window.gsap,lenis=null,WA='910000000000';
+  function inr(n){return '₹'+Math.round(n).toLocaleString('en-IN');}
+  function cl(x){return Math.min(1,Math.max(0,x));}
+  function sm(p,a,b){var x=cl((p-a)/(b-a));return x*x*(3-2*x);}
+  function wa(m){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(m),'_blank');}
+  window.addEventListener('scroll',function(){$('#hdr').classList.toggle('solid',window.scrollY>80);},{passive:true});
+
+  /* ticker */
+  var T=['Squat','Bench','Deadlift','Boxing','Conditioning','Mobility','Coaching'];
+  var tx='';for(var k=0;k<2;k++){T.forEach(function(t){tx+='<span>'+t+' ✦</span>';});}
+  $('#tr').innerHTML=tx+tx;
+
+  /* hero word stack */
+  var WD=[['Strength','Squat, press, pull'],['Conditioning','Sleds, rowers, intervals'],['Boxing','Pads, bags, footwork']];
+  $('#stk').innerHTML=WD.map(function(w){return '<div class="w">'+w[0]+'<small>'+w[1]+'</small></div>';}).join('');
+  var wEls=$$('#stk .w');
+  function bellP(p){
+    var n=WD.length,seg=1/n,cur=0;
+    wEls.forEach(function(el,i){
+      var a=i===0?1:sm(p,i*seg-.06,i*seg+.08);
+      var ex=i<n-1?sm(p,(i+1)*seg-.06,(i+1)*seg+.08):0;
+      var show=a*(1-ex);
+      el.style.clipPath='inset('+((1-a)*100)+'% 0 '+(ex*100)+'% 0)';
+      el.style.transform='translateY('+(-ex*8)+'%)';
+      el.style.opacity=show>.01?1:0;
+      if(p>=i*seg-.02){cur=i;}
+    });
+    $('#ix').textContent='0'+(cur+1);
+    $('#ln').style.width=(p*100)+'%';
+  }
+
+  /* programs */
+  var PR=[['Strength Base','Squat, bench, deadlift and press taught properly. Linear progress, written down.',['Beginner','3 days'],'90%'],['Conditioning','Sleds, rowers, kettlebells and intervals that leave the tank empty.',['All levels','45 min'],'72%'],['Boxing Club','Bag work, pads and footwork, with light sparring for those who want it.',['Mixed','60 min'],'80%'],['Mobility Lab','Joints that work, hips that open and shoulders that stop hurting.',['Recovery','30 min'],'55%'],['Women’s Hour','A quiet, coached floor with a women-only coach, twice a day.',['Women only','60 min'],'68%']];
+  $('#pt').innerHTML=PR.map(function(p,i){return '<article class="pk" style="--w:'+p[3]+'"><div class="no">0'+(i+1)+'</div><h3>'+p[0]+'</h3><p>'+p[1]+'</p><div class="tg">'+p[2].map(function(t){return '<i>'+t+'</i>';}).join('')+'</div></article>';}).join('');
+
+  /* split builder */
+  var GOAL=['Strength','Fat loss','Muscle'],SG=0,SD=4;
+  var TPL={3:['Full body','Rest','Full body','Rest','Full body','Walk','Rest'],4:['Upper','Lower','Rest','Upper','Lower','Walk','Rest'],5:['Push','Pull','Legs','Rest','Upper','Lower','Walk'],6:['Push','Pull','Legs','Push','Pull','Legs','Rest']};
+  var FIN={Strength:'Heavy 5s',Muscle:'8 to 12 reps','Fat loss':'Short rests'},CON={Strength:'Sled push','Fat loss':'Intervals',Muscle:'Pump finisher'};
+  var DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  $('#gG').innerHTML=GOAL.map(function(g,i){return '<button class="chip'+(i===0?' on':'')+'" type="button" data-i="'+i+'">'+g+'</button>';}).join('');
+  function renderWk(){
+    var g=GOAL[SG],t=TPL[SD];
+    $('#dn').textContent=SD;
+    $('#wk').innerHTML=t.map(function(f,i){var on=f!=='Rest'&&f!=='Walk';return '<div class="d'+(on?' on':'')+'"><b>'+DAYS[i]+'</b><span>'+f+'</span><em>'+(on?(i%2?CON[g]:FIN[g]):f==='Walk'?'30 min easy':'Recover')+'</em></div>';}).join('');
+    if(hasG&&!reduce&&window.gsap){gsap.from('#wk .d',{y:30,opacity:0,duration:.4,stagger:.04,ease:'power2.out'});}
+  }
+  $('#gG').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;SG=+b.dataset.i;$$('#gG .chip').forEach(function(c){c.classList.toggle('on',c===b);});renderWk();});
+  $('#dR').addEventListener('input',function(){SD=+this.value;renderWk();});
+  $('#bSp').addEventListener('click',function(){wa('Hi Ironhide, I built a week: goal '+GOAL[SG]+', '+SD+' days. Can I book a trial session?');});
+  renderWk();
+
+  /* timetable */
+  var CLS=[['06:00','Strength Base','Coach Arun',14,20],['07:30','Conditioning','Coach Meera',6,16],['12:30','Mobility Lab','Coach Dev',9,12],['18:00','Boxing Club','Coach Ravi',3,14],['19:30','Strength Base','Coach Arun',11,20]];
+  var TD=(new Date().getDay()+6)%7,TS=TD;
+  $('#tb').innerHTML=DAYS.map(function(d,i){return '<button class="chip'+(i===TS?' on':'')+'" type="button" data-i="'+i+'">'+d+'</button>';}).join('');
+  function renderTl(){
+    var now=new Date(),mins=now.getHours()*60+now.getMinutes(),nx=-1;
+    if(TS===TD){for(var k=0;k<CLS.length;k++){var m=CLS[k][0].split(':');if(+m[0]*60+ +m[1]>mins){nx=k;break;}}}
+    $('#tl').innerHTML=CLS.map(function(c,k){var left=Math.max(1,c[3]-((TS*3+k*2)%5)),pct=100-(left/c[4])*100;
+      return '<div class="sl'+(k===nx?' now':'')+'"><div class="tm">'+c[0]+'</div><div><h3>'+c[1]+'</h3><small>'+c[2]+'</small></div><div class="sp">'+left+' spots left<i><b style="width:'+pct+'%"></b></i></div><button class="btn sm v" type="button" data-k="'+k+'">Book</button></div>';}).join('');
+  }
+  $('#tb').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;TS=+b.dataset.i;$$('#tb .chip').forEach(function(c){c.classList.toggle('on',c===b);});renderTl();});
+  $('#tl').addEventListener('click',function(e){var b=e.target.closest('button[data-k]');if(!b)return;var c=CLS[+b.dataset.k];wa('Hi Ironhide, please book me into '+c[1]+' on '+DAYS[TS]+' at '+c[0]+'.');});
+  renderTl();
+
+  /* plans */
+  var TIERS=[['Day Pass','',[600,600,600],['Open floor access','One coached intro','Locker'],0],['Core','Most picked',[1800,1500,1100],['Open floor 6am to 10pm','2 classes a week','Locker and towel'],1],['Pro','',[2800,2400,1900],['Unlimited classes','Monthly body check-in','Boxing and women’s hour','1 guest pass a month'],0]];
+  var BI=0,BM=[1,3,12];
+  function renderPl(){
+    $('#pl').innerHTML=TIERS.map(function(t){var pr=t[2][BI],tot=pr*BM[BI];return '<div class="pn'+(t[4]?' f':'')+'">'+(t[1]?'<span class="tagx">'+t[1]+'</span>':'')+'<h3>'+t[0]+'</h3><div class="pp">'+inr(pr)+'<small> / month</small></div>'+(BM[BI]>1&&t[0]!=='Day Pass'?'<div style="font-size:13px;opacity:.75">Billed '+inr(tot)+' for '+BM[BI]+' months</div>':'')+'<ul>'+t[3].map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><button class="btn sm '+(t[4]?'v':'')+'" style="'+(t[4]?'':'border-color:var(--ink)')+'" type="button" data-t="'+t[0]+'">Join '+t[0]+'</button></div>';}).join('');
+  }
+  $('#bl').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;BI=BM.indexOf(+b.dataset.m);$$('#bl button').forEach(function(x){x.classList.toggle('on',x===b);});renderPl();});
+  $('#pl').addEventListener('click',function(e){var b=e.target.closest('button[data-t]');if(!b)return;wa('Hi Ironhide, I would like to join the '+b.dataset.t+' plan ('+['monthly','3 month','12 month'][BI]+').');});
+  renderPl();
+  $('#cf').addEventListener('submit',function(e){e.preventDefault();wa('Hi Ironhide, I am '+$('#fN').value+'. Goal: '+$('#fG').value+'. Time: '+$('#fT').value+'. Experience: '+$('#fE').value+'. I would like my free trial.');});
+
+  /* fallback */
+  if(!hasG||reduce){document.body.classList.add('static');bellP(0);if(!hasG)return;return;}
+  bellP(0);
+  gsap.registerPlugin(ScrollTrigger);
+  if(window.Lenis){lenis=new Lenis({lerp:.09});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(function(t){lenis.raf(t*1000);});gsap.ticker.lagSmoothing(0);}
+  $$('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href'),el=id.length>1?$(id):null;if(!el)return;e.preventDefault();if(lenis){lenis.scrollTo(el,{offset:-50});}else{el.scrollIntoView({behavior:'smooth'});}});});
+  gsap.from('#h0,#h1,#hp,#hc',{y:50,opacity:0,duration:1.1,stagger:.12,ease:'power4.out',delay:.15});
+  $$('.split').forEach(function(el){var w=el.innerHTML.replace(/<em>/g,'§e§').replace(/<\/em>/g,'§/e§').split(/\s+/);var inE=false;
+    el.innerHTML=w.map(function(x){var o='',c='';if(x.indexOf('§e§')>-1){inE=true;x=x.replace('§e§','');}var e=inE;if(x.indexOf('§/e§')>-1){inE=false;x=x.replace('§/e§','');}return '<span class="wd"><span class="in">'+(e?'<em>'+x+'</em>':x)+'</span></span>';}).join(' ');
+    gsap.from(el.querySelectorAll('.in'),{yPercent:115,duration:.9,stagger:.07,ease:'power4.out',scrollTrigger:{trigger:el,start:'top 88%'}});});
+  ScrollTrigger.create({trigger:'#top',start:'top top',end:'+=300%',pin:true,scrub:true,onUpdate:function(s){bellP(s.progress);var hh=1-sm(s.progress,.05,.2);$('.htxt').style.opacity=hh;}});
+  var pt=$('#pt');function dist(){return Math.max(0,pt.scrollWidth-window.innerWidth);}
+  gsap.to(pt,{x:function(){return -dist();},ease:'none',scrollTrigger:{trigger:'#programs',start:'top top',end:function(){return '+='+(dist()+window.innerHeight*.3);},pin:true,scrub:true,invalidateOnRefresh:true}});
+  gsap.from('.pn',{y:60,opacity:0,duration:.8,stagger:.12,ease:'power3.out',scrollTrigger:{trigger:'#pl',start:'top 85%'}});
+  gsap.from('.sl',{x:-60,opacity:0,duration:.7,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:'#tl',start:'top 85%'}});
+  gsap.from('.sb > *',{y:50,opacity:0,duration:.9,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'.sb',start:'top 85%'}});
+  var ecg=$('#ecg');ecg.setAttribute('pathLength','1');ecg.style.strokeDasharray=1;ecg.style.strokeDashoffset=1;
+  gsap.to(ecg,{strokeDashoffset:0,ease:'none',scrollTrigger:{trigger:'#contact',start:'top 80%',end:'center 40%',scrub:true}});
+  gsap.from('.cg > *',{y:50,opacity:0,duration:1,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'#contact',start:'top 70%'}});
+  gsap.fromTo('#giant',{x:'6%'},{x:'-14%',ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:true}});
+  window.addEventListener('load',function(){ScrollTrigger.refresh();});
+})();
+</script>
+</body>
+</html>

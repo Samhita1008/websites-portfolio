@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amber Hearth — Dum &amp; Grill (Concept Demo)</title>
+<meta name="description" content="Concept demo restaurant website by Edit Theory. Fictional brand, sample content.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0a0f0e;--card:#101614;--card2:#141c1a;--line:#ffffff18;--ink:#efe9e1;--muted:#a39a8e;--or:#ee8b2b;--red:#c8161d}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:auto}
+  body{background:var(--bg);color:var(--ink);font-family:'Outfit',system-ui,sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .serif,h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500}
+  .script{font-family:'Allura',cursive;color:var(--or);font-size:clamp(30px,5.5vw,48px);line-height:1.1;font-weight:400}
+  .title{font-size:clamp(40px,8.5vw,88px);letter-spacing:.14em;text-transform:uppercase;line-height:1.05}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 22px}
+  section{position:relative}
+  .center{text-align:center}
+  .sec{padding:clamp(80px,14vw,150px) 0}
+  .lead{color:var(--muted);max-width:52ch;margin:18px auto 0;font-size:clamp(15px,2.2vw,18px)}
+
+  /* concept strip + header */
+  .strip{position:fixed;top:0;left:0;right:0;height:26px;z-index:70;background:var(--or);color:#1a0e03;font-size:11px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;font-weight:500;padding:0 10px;text-align:center}
+  header{position:fixed;top:26px;left:0;right:0;z-index:60;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;transition:background .4s,padding .4s}
+  header.solid{background:#0a0f0ee8;backdrop-filter:blur(10px);padding:12px 22px}
+  .logo{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,4.6vw,28px);letter-spacing:.32em;text-transform:uppercase;font-weight:500;line-height:1.1}
+  .logo small{display:block;font-family:'Outfit';font-size:10px;letter-spacing:.5em;color:var(--muted);margin-top:6px;font-weight:300}
+  .burger{width:44px;height:44px;display:grid;place-content:center;gap:7px;background:none;border:0;cursor:pointer}
+  .burger i{display:block;width:30px;height:2px;background:var(--ink)}
+  .bar{position:fixed;top:26px;left:0;height:2px;background:var(--or);width:100%;transform-origin:left;transform:scaleX(0);z-index:80}
+
+  /* nav overlay */
+  .nav{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;clip-path:circle(0px at calc(100% - 42px) 70px);visibility:hidden}
+  .nav a{font-family:'Cormorant Garamond';font-size:clamp(40px,9vw,72px);letter-spacing:.16em;text-transform:uppercase;overflow:hidden;display:block}
+  .nav a span{display:block}
+  .nav a:hover{color:var(--or)}
+  .nav .x{position:absolute;top:36px;right:22px;font-size:34px;background:none;border:0;color:var(--ink);cursor:pointer;width:44px;height:44px}
+  .nav .sm{margin-top:30px;font-size:13px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase}
+
+  /* FABs */
+  .fabs{position:fixed;right:16px;bottom:18px;z-index:65;display:flex;flex-direction:column;gap:14px}
+  .fab{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;box-shadow:0 10px 30px -8px #000}
+  .fab.m{background:var(--or);color:#1a0e03}
+  .fab.w{background:#22c55e;color:#fff}
+  .fab svg{width:26px;height:26px}
+
+  /* placeholders for photos */
+  .ph{position:absolute;inset:0;background-size:cover;background-position:center;
+    background-image:var(--img),radial-gradient(circle at 50% 50%,#4a2410 0 22%,#241109 23% 38%,#150a05 39% 100%)}
+  .media{position:relative;overflow:hidden;background:#150a05}
+  .media .ph{inset:-9% 0}
+
+  /* HERO */
+  .hero{min-height:100svh;display:grid;place-items:center;text-align:center;overflow:hidden;padding:150px 22px 100px}
+  .hero .ph{inset:0;--img:url('images/hero.jpg');background-image:var(--img),radial-gradient(80% 70% at 50% 40%,#5a2a0f,#120905 75%)}
+  .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,#0a0f0e99 0%,#0a0f0e66 40%,#0a0f0eee 100%)}
+  .hero .in{position:relative;z-index:2;max-width:900px}
+  .hero h1{font-size:clamp(58px,15vw,150px);letter-spacing:.1em;text-transform:uppercase;line-height:.98;margin:24px 0 8px}
+  .hero p.d{color:#d6cdc1;max-width:44ch;margin:22px auto 34px;font-size:clamp(16px,2.4vw,20px)}
+  .btn{display:inline-block;background:var(--or);color:#1a0e03;font-weight:500;letter-spacing:.3em;text-transform:uppercase;font-size:14px;padding:20px 38px;border-radius:6px}
+  .btn.o{background:transparent;color:var(--or);border:1px solid #ee8b2b66}
+  .btn.full{display:block;text-align:center}
+  .scrollcue{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:2;font-size:11px;letter-spacing:.35em;color:var(--muted);text-transform:uppercase}
+
+  /* MARQUEE */
+  .mq{overflow:hidden;border-block:1px solid var(--line);padding:14px 0;white-space:nowrap;background:var(--card)}
+  .mq div{display:inline-flex;gap:40px;font-family:'Cormorant Garamond';font-size:clamp(30px,6vw,56px);letter-spacing:.12em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px #ffffff55}
+  .mq i{font-style:normal;color:var(--or);-webkit-text-stroke:0}
+
+  /* ABOUT */
+  .about-grid{display:grid;gap:28px;margin-top:56px}
+  .about-grid .media{aspect-ratio:4/3;border-radius:14px}
+  .about-grid .media .ph{--img:url('images/about.jpg')}
+  .abox{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:clamp(28px,5vw,56px);text-align:center}
+  .abox h3{font-size:clamp(30px,5.5vw,52px);letter-spacing:.16em;text-transform:uppercase;margin:12px 0 20px;line-height:1.15}
+  .abox p{color:var(--muted)}
+  @media(min-width:900px){.about-grid{grid-template-columns:1.1fr 1fr;align-items:stretch}.about-grid .media{aspect-ratio:auto;min-height:480px}.abox{display:flex;flex-direction:column;justify-content:center}}
+
+  /* DISHES */
+  .dgrid{display:grid;gap:22px;margin-top:60px}
+  .dcard{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;text-align:left}
+  .dcard .media{aspect-ratio:4/3}
+  .badge{position:absolute;top:16px;right:16px;z-index:3;background:var(--red);color:#fff;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:6px}
+  .dbody{padding:22px 24px 26px}
+  .drow{display:flex;justify-content:space-between;gap:12px;align-items:center}
+  .dbody h3{font-size:clamp(26px,4vw,34px)}
+  .price{background:#ee8b2b22;color:var(--or);font-family:'Cormorant Garamond';font-size:24px;padding:6px 14px;border-radius:8px;white-space:nowrap}
+  .dbody p{color:var(--muted);margin-top:12px;font-size:15px}
+  @media(min-width:700px){.dgrid{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1050px){.dgrid{grid-template-columns:repeat(4,1fr)}}
+
+  /* QR */
+  .qrbox{max-width:900px;margin:0 auto;border:1px solid #ee8b2b44;border-radius:18px;background:var(--card);padding:clamp(26px,5vw,60px);display:grid;gap:34px}
+  .pill{display:inline-flex;align-items:center;gap:10px;border:1px solid #ee8b2b66;background:#ee8b2b12;color:var(--or);font-weight:500;letter-spacing:.08em;text-transform:uppercase;font-size:13px;padding:12px 18px;border-radius:8px}
+  .step{border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:14px;color:var(--muted);display:flex;gap:14px;align-items:center}
+  .step b{color:var(--or);font-weight:500}
+  .qrph{aspect-ratio:1;max-width:320px;width:100%;margin:0 auto;background:#fff;border-radius:12px;display:grid;place-items:center;color:#555;font-size:13px;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:20px;background-image:linear-gradient(45deg,#eee 25%,transparent 25% 75%,#eee 75%),linear-gradient(45deg,#eee 25%,transparent 25% 75%,#eee 75%);background-size:28px 28px;background-position:0 0,14px 14px}
+  @media(min-width:800px){.qrbox{grid-template-columns:1.2fr 1fr;align-items:center}}
+
+  /* DRINKS */
+  .dr{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:56px}
+  .drink{position:relative;aspect-ratio:3/4;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;text-align:center;padding:16px 10px 20px}
+  .drink .ph{inset:0;background-image:var(--img),radial-gradient(circle at 50% 40%,#3a1a4a 0 20%,#1a0d20 21% 60%,#0b0610 61% 100%)}
+  .drink::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,#000000cc 100%)}
+  .drink *{position:relative;z-index:2}
+  .drink h3{font-size:clamp(20px,3.6vw,28px);line-height:1.15}
+  .drink .price{background:none;padding:6px 0 0;font-size:26px}
+  @media(min-width:900px){.dr{grid-template-columns:repeat(4,1fr)}}
+
+  /* ORDER */
+  .ord{max-width:620px;margin:40px auto 0;display:grid;gap:14px}
+  .ord a{padding:22px;border-radius:8px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;text-align:center;font-size:14px}
+  .ord .z{background:#e31212;color:#fff}
+  .ord .s{background:var(--or);color:#1a0e03}
+
+  /* GALLERY */
+  .gal{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:56px}
+  .gal .g{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:1;background:#150a05}
+  .gal .g.big{grid-column:1/-1;aspect-ratio:4/3}
+  .gal .g .ph{inset:-6% 0}
+  @media(min-width:900px){.gal{grid-template-columns:repeat(4,1fr)}.gal .g.big{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}}
+
+  /* CONTACT */
+  .cbox{max-width:760px;margin:56px auto 0;border:1px solid #ee8b2b33;border-radius:18px;padding:clamp(16px,4vw,44px);display:grid;gap:16px;background:linear-gradient(180deg,#ee8b2b0d,transparent)}
+  .citem{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;gap:20px;align-items:center;text-align:left}
+  .ic{flex:none;width:58px;height:58px;border-radius:10px;background:#ee8b2b22;color:var(--or);display:grid;place-items:center}
+  .ic svg{width:26px;height:26px}
+  .citem small{display:block;color:var(--or);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:13px}
+  .citem b{font-weight:400;font-size:clamp(17px,3vw,22px);display:block;color:var(--ink)}
+  .citem span{color:var(--muted);font-size:14px}
+
+  /* VISIT */
+  .map{max-width:980px;margin:56px auto 0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card)}
+  .mapph{height:clamp(220px,40vw,380px);background:radial-gradient(circle at 50% 50%,#1b2a27 0 30%,transparent 31%),repeating-linear-gradient(35deg,#16201e 0 2px,transparent 2px 36px),repeating-linear-gradient(-55deg,#131b19 0 2px,transparent 2px 48px),#0f1514;display:grid;place-items:center;color:var(--muted);font-size:13px;letter-spacing:.2em;text-transform:uppercase;position:relative}
+  .pin{width:34px;height:34px;background:var(--red);border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 0 0 8px #c8161d33;margin-bottom:12px}
+  .mapb{padding:30px 26px;text-align:left}
+  .mapb h3{font-size:clamp(28px,5vw,44px);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+  .mapb p{color:var(--muted);margin-bottom:22px}
+  .mapb .btn{margin-bottom:12px}
+  @media(min-width:760px){.mapb .row{display:flex;gap:14px}.mapb .btn{margin:0;flex:1}}
+
+  /* REVIEWS */
+  .rgrid{display:grid;gap:18px;margin-top:56px}
+  .rev{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;text-align:left}
+  .rev .st{color:var(--or);letter-spacing:.2em;font-size:18px}
+  .rev p{color:var(--muted);margin:14px 0 16px}
+  .rev b{font-weight:500;letter-spacing:.1em;font-size:13px;text-transform:uppercase}
+  .tagline{display:inline-block;margin-top:14px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px dashed #ee8b2b88;color:var(--or);padding:6px 12px;border-radius:99px}
+  @media(min-width:800px){.rgrid{grid-template-columns:repeat(3,1fr)}}
+
+  footer{border-top:1px solid var(--line);padding:70px 0 100px;background:#070b0a}
+  footer .fg{display:grid;gap:40px}
+  footer h4{font-family:'Cormorant Garamond';font-size:24px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;font-weight:500}
+  footer a{display:block;color:var(--muted);padding:6px 0}
+  footer .cp{border-top:1px solid var(--line);margin-top:44px;padding-top:26px;text-align:center;color:var(--muted);font-size:13px}
+  @media(min-width:800px){footer .fg{grid-template-columns:1.4fr 1fr 1fr}}
+
+  .wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em}
+  .wd .in{display:inline-block}
+</style>
+</head>
+<body>
+
+<div class="strip">Concept demo by Edit Theory · Fictional restaurant · Sample content</div>
+<div class="bar" id="bar"></div>
+
+<header id="hdr">
+  <a href="#home" class="logo">Amber Hearth<small>— DUM &amp; GRILL —</small></a>
+  <button class="burger" id="burger" aria-label="Open menu"><i></i><i></i><i></i></button>
+</header>
+
+<nav class="nav" id="nav" aria-label="Main">
+  <button class="x" id="close" aria-label="Close menu">×</button>
+  <a href="#home"><span>Home</span></a>
+  <a href="#menu"><span>Menu</span></a>
+  <a href="#about"><span>About</span></a>
+  <a href="#gallery"><span>Gallery</span></a>
+  <a href="#contact"><span>Contact</span></a>
+  <a href="#visit"><span>Location</span></a>
+  <div class="sm">@amberhearth (sample)</div>
+</nav>
+
+<div class="fabs">
+  <a class="fab m" href="#menu" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v7a2 2 0 0 0 2 2v9M8 3v7M12 3v18"/><path d="M18 3c-2 2-3 5-3 8h3v10"/></svg></a>
+  <a class="fab w" href="https://wa.me/910000000000" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.7-5.2A8.5 8.5 0 1 1 21 12z"/></svg></a>
+</div>
+
+<section class="hero" id="home">
+  <div class="ph" id="heroBg"></div>
+  <div class="in">
+    <div class="script" id="hs">Slow-cooked, never rushed</div>
+    <h1 id="ht">Amber Hearth</h1>
+    <p class="d" id="hp">A dum and grill kitchen where every pot is sealed, every flame is patient, and every table stays a little longer.</p>
+    <a class="btn" id="hb" href="#about">Explore more</a>
+  </div>
+  <div class="scrollcue">Scroll</div>
+</section>
+
+<div class="mq" aria-hidden="true"><div id="mq"><span>Dum Biryani</span><i>✦</i><span>Charcoal Grill</span><i>✦</i><span>Slow Curries</span><i>✦</i><span>Fresh Shakes</span><i>✦</i><span>Dum Biryani</span><i>✦</i><span>Charcoal Grill</span><i>✦</i><span>Slow Curries</span><i>✦</i><span>Fresh Shakes</span></div></div>
+
+<main>
+  <section class="sec" id="about">
+    <div class="wrap center">
+      <div class="script rv">Our story</div>
+      <h2 class="title split">About Us</h2>
+      <div class="about-grid">
+        <div class="media rv"><div class="ph"></div></div>
+        <div class="abox rv">
+          <div class="script">Taste perception</div>
+          <h3>Traditional<br>&amp; Modern</h3>
+          <p>Old recipes, sealed-pot cooking and a charcoal grill, served in a warm room built for long evenings with friends and family.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="menu" style="padding-top:0">
+    <div class="wrap center">
+      <div class="script rv">Fresh from our kitchen</div>
+      <h2 class="title split">Our Popular Dishes</h2>
+      <p class="lead rv">Signature favourites, slow-cooked and plated fresh.</p>
+      <span class="tagline rv">Sample menu · prices are placeholders</span>
+      <div class="dgrid">
+        <article class="dcard rv"><div class="media"><span class="badge">Popular</span><div class="ph" style="--img:url('images/dish1.jpg')"></div></div><div class="dbody"><div class="drow"><h3>Hearth Dum Biryani</h3><span class="price">₹349</span></div><p>Fragrant basmati and tender chicken, sealed and slow-cooked in its own steam.</p></div></article>
+        <article class="dcard rv"><div class="media"><div class="ph" style="--img:url('images/dish2.jpg')"></div></div><div class="dbody"><div class="drow"><h3>Charred Paneer Tikka</h3><span class="price">₹289</span></div><p>Smoky paneer, bell peppers and onions finished over charcoal.</p></div></article>
+        <article class="dcard rv"><div class="media"><span class="badge">Popular</span><div class="ph" style="--img:url('images/dish3.jpg')"></div></div><div class="dbody"><div class="drow"><h3>Pepper Fry Chicken</h3><span class="price">₹329</span></div><p>Crisp pieces tossed with crushed pepper, curry leaves and green chillies.</p></div></article>
+        <article class="dcard rv"><div class="media"><div class="ph" style="--img:url('images/dish4.jpg')"></div></div><div class="dbody"><div class="drow"><h3>Garlic Butter Prawns</h3><span class="price">₹389</span></div><p>Juicy prawns in a rich garlic butter masala with fresh coriander.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="qrbox rv">
+        <div>
+          <span class="pill">Scan for full menu</span>
+          <div class="script" style="margin-top:22px">Complete menu in one scan</div>
+          <h2 class="title" style="font-size:clamp(36px,7vw,64px);margin:6px 0 16px">Scan &amp; Download Menu</h2>
+          <p style="color:var(--muted)">Open your phone camera, scan the QR code, and download the complete menu as a PDF.</p>
+          <div class="step"><b>1</b> Point your phone camera at the code.</div>
+          <div class="step"><b>2</b> Tap the menu link to save the PDF.</div>
+          <a class="btn o" href="#" style="margin-top:22px">Open PDF menu</a>
+        </div>
+        <div class="qrph">QR code goes here</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap center">
+      <div class="script rv">Refreshing</div>
+      <h2 class="title split">Drinks &amp; Shakes</h2>
+      <div class="dr">
+        <div class="drink rv"><div class="ph" style="--img:url('images/drink1.jpg')"></div><h3>Hearth Royal Shake</h3><span class="price">₹199</span></div>
+        <div class="drink rv"><div class="ph" style="--img:url('images/drink2.jpg')"></div><h3>Triple Chocolate Shake</h3><span class="price">₹199</span></div>
+        <div class="drink rv"><div class="ph" style="--img:url('images/drink3.jpg')"></div><h3>Blue Lagoon</h3><span class="price">₹139</span></div>
+        <div class="drink rv"><div class="ph" style="--img:url('images/drink4.jpg')"></div><h3>Virgin Mojito</h3><span class="price">₹129</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap center">
+      <div class="script rv">Craving something?</div>
+      <h2 class="title split">Order Online</h2>
+      <p class="lead rv">Get your favourite dishes delivered right to your doorstep.</p>
+      <div class="ord rv"><a class="z" href="#">Order on Zomato</a><a class="s" href="#">Order on Swiggy</a></div>
+    </div>
+  </section>
+
+  <section class="sec" id="gallery" style="padding-top:0">
+    <div class="wrap center">
+      <div class="script rv">Visual feast</div>
+      <h2 class="title split">Gallery</h2>
+      <div class="gal">
+        <div class="g big gr"><div class="ph" style="--img:url('images/gallery1.jpg')"></div></div>
+        <div class="g gr"><div class="ph" style="--img:url('images/gallery2.jpg')"></div></div>
+        <div class="g gr"><div class="ph" style="--img:url('images/gallery3.jpg')"></div></div>
+        <div class="g gr"><div class="ph" style="--img:url('images/gallery4.jpg')"></div></div>
+        <div class="g gr"><div class="ph" style="--img:url('images/gallery5.jpg')"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="contact" style="padding-top:0">
+    <div class="wrap center">
+      <div class="script rv">Get in touch</div>
+      <h2 class="title split">Contact</h2>
+      <p class="lead rv">Our friendly team is happy to help with anything you need.</p>
+      <div class="cbox rv">
+        <div class="citem"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div><div><small>Email us</small><b>hello@yourrestaurant.com</b><span>Sample email</span></div></div>
+        <div class="citem"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div><div><small>Call us</small><b>+91 00000 00000</b><span>Mon-Sun · 11:00 AM - 10:00 PM (sample)</span></div></div>
+        <div class="citem"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><small>Address</small><b>Street Name, Your City</b><span>Sample address</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="visit" style="padding-top:0">
+    <div class="wrap center">
+      <div class="script rv">Location &amp; visit us</div>
+      <h2 class="title split">Visit Us</h2>
+      <p class="lead rv">Find us easily. A perfect spot for dining with friends and family.</p>
+      <div class="map rv">
+        <div class="mapph"><div style="text-align:center"><div class="pin" style="margin:0 auto 14px"></div>Map goes here</div></div>
+        <div class="mapb">
+          <h3>Amber Hearth</h3>
+          <p>Street Name, Your City</p>
+          <div class="row"><a class="btn full" href="#">Get directions</a><a class="btn o full" href="https://wa.me/910000000000" target="_blank" rel="noopener">WhatsApp now</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap center">
+      <div class="script rv">Guest love</div>
+      <h2 class="title split">What Our Customers Say</h2>
+      <span class="tagline rv">Sample layout · real reviews go here</span>
+      <div class="rgrid">
+        <div class="rev rv"><div class="st">★★★★★</div><p>Sample review text. Replace with a real guest review from the restaurant's Google listing.</p><b>Guest name</b></div>
+        <div class="rev rv"><div class="st">★★★★★</div><p>Sample review text. Replace with a real guest review from the restaurant's Google listing.</p><b>Guest name</b></div>
+        <div class="rev rv"><div class="st">★★★★★</div><p>Sample review text. Replace with a real guest review from the restaurant's Google listing.</p><b>Guest name</b></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div><div class="logo" style="font-size:28px">Amber Hearth</div><p style="color:var(--muted);margin-top:14px;max-width:34ch">A dum and grill kitchen. Slow-cooked flavours, warm ambience.</p></div>
+      <div><h4>Quick links</h4><a href="#home">Home</a><a href="#menu">Menu</a><a href="#about">About</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a><a href="#visit">Location</a></div>
+      <div><h4>Follow us</h4><a href="#">@amberhearth (sample)</a></div>
+    </div>
+    <div class="cp">Concept demo by Edit Theory. Amber Hearth is a fictional restaurant. All content and prices are samples.<br>© 2026 Edit Theory</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)};
+  var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+  var hdr=$('#hdr'),nav=$('#nav'),lenis=null;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* header turns solid after the hero */
+  window.addEventListener('scroll',function(){hdr.classList.toggle('solid',window.scrollY>80);},{passive:true});
+
+  if(!window.gsap){
+    /* no animation library: menu still works */
+    $('#burger').onclick=function(){nav.style.visibility='visible';nav.style.clipPath='none';};
+    $('#close').onclick=function(){nav.style.visibility='hidden';};
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+
+  if(!reduce && window.Lenis){
+    lenis=new Lenis({lerp:0.09});
+    lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(function(t){lenis.raf(t*1000);});
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* anchor links scroll smoothly */
+  $$('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href');
+      if(id.length<2)return;
+      var el=$(id); if(!el)return;
+      e.preventDefault();
+      closeNav();
+      if(lenis){lenis.scrollTo(el,{offset:-70});}else{el.scrollIntoView({behavior:reduce?'auto':'smooth'});}
+    });
+  });
+
+  /* full-screen menu */
+  var open=false;
+  function openNav(){
+    open=true;nav.style.visibility='visible';if(lenis)lenis.stop();
+    gsap.to(nav,{clipPath:'circle(150% at calc(100% - 42px) 70px)',duration:reduce?0:.8,ease:'power3.inOut'});
+    if(!reduce)gsap.fromTo('.nav a span',{yPercent:110},{yPercent:0,duration:.8,stagger:.06,ease:'power4.out',delay:.25});
+  }
+  function closeNav(){
+    if(!open)return;open=false;if(lenis)lenis.start();
+    gsap.to(nav,{clipPath:'circle(0px at calc(100% - 42px) 70px)',duration:reduce?0:.6,ease:'power3.inOut',onComplete:function(){nav.style.visibility='hidden';}});
+  }
+  $('#burger').addEventListener('click',openNav);
+  $('#close').addEventListener('click',closeNav);
+
+  if(reduce){return;}
+
+  /* scroll progress line */
+  gsap.to('#bar',{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:true}});
+
+  /* hero intro */
+  gsap.from('#heroBg',{scale:1.2,duration:2.4,ease:'power3.out'});
+  gsap.timeline({delay:.2})
+    .from('#hs',{y:30,opacity:0,duration:1,ease:'power3.out'})
+    .from('#ht',{y:60,opacity:0,duration:1.1,ease:'power4.out'},'-=.6')
+    .from('#hp',{y:30,opacity:0,duration:.9,ease:'power3.out'},'-=.7')
+    .from('#hb',{y:30,opacity:0,duration:.9,ease:'power3.out'},'-=.7');
+  gsap.to('#heroBg',{yPercent:18,ease:'none',scrollTrigger:{trigger:'#home',start:'top top',end:'bottom top',scrub:true}});
+  gsap.to('#home .in',{yPercent:-12,opacity:.2,ease:'none',scrollTrigger:{trigger:'#home',start:'top top',end:'bottom top',scrub:true}});
+
+  /* marquee follows the scroll */
+  gsap.to('#mq',{xPercent:-38,ease:'none',scrollTrigger:{trigger:'.mq',start:'top bottom',end:'bottom top',scrub:true}});
+
+  /* headings reveal word by word */
+  $$('.split').forEach(function(el){
+    var words=el.textContent.trim().split(/\s+/);
+    el.innerHTML=words.map(function(w){return '<span class="wd"><span class="in">'+w+'</span></span>';}).join(' ');
+    gsap.from(el.querySelectorAll('.in'),{yPercent:115,duration:1.1,stagger:.1,ease:'power4.out',scrollTrigger:{trigger:el,start:'top 88%'}});
+  });
+
+  /* general reveal: script lines, cards, drinks (batched so grids stagger) */
+  ScrollTrigger.batch('.rv',{start:'top 90%',once:true,
+    onEnter:function(els){gsap.fromTo(els,{y:50,opacity:0},{y:0,opacity:1,duration:1,stagger:.12,ease:'power3.out',overwrite:true});}});
+  gsap.set('.rv',{opacity:0});
+
+  /* parallax inside image frames */
+  $$('.media .ph,.gal .g .ph').forEach(function(p){
+    gsap.fromTo(p,{yPercent:-7},{yPercent:7,ease:'none',scrollTrigger:{trigger:p.parentNode,start:'top bottom',end:'bottom top',scrub:true}});
+  });
+
+  /* gallery tiles wipe in */
+  $$('.gr').forEach(function(g,i){
+    gsap.from(g,{clipPath:'inset(100% 0% 0% 0%)',duration:1.1,ease:'power4.out',delay:(i%4)*.08,scrollTrigger:{trigger:g,start:'top 90%'}});
+  });
+
+  window.addEventListener('load',function(){ScrollTrigger.refresh();});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Petal &amp; Pine — Beauty Parlour (Concept Demo)</title>
+<meta name="description" content="Concept demo beauty parlour website by Edit Theory. Fictional brand, sample content.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#f4ece3;--paper:#fbf6ef;--plum:#231418;--rose:#c9776a;--blush:#e9c9bd;--gold:#b98a4b;--muted:#7a6a66}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:auto}
+  body{background:var(--cream);color:var(--plum);font-family:'DM Sans',system-ui,sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
+  a{color:inherit;text-decoration:none}
+  button,input,select,textarea{font:inherit;color:inherit}
+  .disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;letter-spacing:-.045em;line-height:.9}
+  .mono{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:400}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 22px}
+  .sec{padding:clamp(80px,13vw,150px) 0}
+
+  .strip{position:fixed;top:0;left:0;right:0;height:26px;z-index:70;background:var(--plum);color:var(--blush);font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;padding:0 10px;text-align:center}
+  header{position:fixed;top:26px;left:0;right:0;z-index:60;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;color:#fff;mix-blend-mode:difference}
+  .logo{font-family:'Bricolage Grotesque';font-weight:800;font-size:22px;letter-spacing:-.04em}
+  .pill{border:1px solid #fff;border-radius:99px;padding:10px 20px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+
+  .ph{position:absolute;inset:0;background-size:cover;background-position:center;background-image:var(--img),linear-gradient(160deg,var(--c1,#e9c9bd),var(--c2,#c9776a))}
+
+  /* HERO */
+  .hero{position:relative;height:100svh;overflow:hidden;background:var(--cream)}
+  .arch{position:absolute;left:50%;top:54%;transform:translate(-50%,-50%);width:min(72vw,400px);height:min(62svh,560px);border-top-left-radius:200px;border-top-right-radius:200px;overflow:hidden;z-index:2;background:var(--blush)}
+  .arch .ph{--img:url('images/hero.jpg');--c1:#f1d3c6;--c2:#c9776a}
+  .arch::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,#231418aa)}
+  .hl{position:absolute;inset:0;z-index:3;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:96px 4vw 7vh;color:var(--plum)}
+  .hl span{font-size:clamp(76px,21vw,300px);display:block}
+  .hl .b{text-align:right}
+  .hl .b em{font-style:normal;color:var(--rose)}
+  .hsub{position:absolute;z-index:4;left:50%;bottom:3.4vh;transform:translateX(-50%);text-align:center;white-space:nowrap}
+  .after{position:absolute;inset:0;z-index:4;display:grid;place-items:center;text-align:center;color:#fff3ea;padding:0 22px;pointer-events:none}
+  .after h2{font-size:clamp(46px,10vw,150px);max-width:14ch}
+
+  /* MARQUEE */
+  .mq{overflow:hidden;white-space:nowrap;padding:22px 0;border-block:1px solid #231418;background:var(--paper)}
+  .mq div{display:inline-flex;gap:34px;font-family:'Bricolage Grotesque';font-weight:800;letter-spacing:-.04em;font-size:clamp(44px,9vw,110px);line-height:1;color:transparent;-webkit-text-stroke:1.2px var(--plum)}
+  .mq i{font-style:normal;color:var(--rose);-webkit-text-stroke:0}
+
+  /* INTRO */
+  .intro h2{font-size:clamp(40px,8.4vw,120px);max-width:16ch;margin-top:22px}
+  .intro .w{display:inline-block;opacity:.16}
+  .intro p{max-width:46ch;margin-top:34px;font-size:clamp(16px,2vw,19px);color:var(--muted)}
+
+  /* RITUALS */
+  .rits{margin-top:56px;border-top:1px solid var(--plum);list-style:none}
+  .rit{position:relative;border-bottom:1px solid #231418}
+  .rh{width:100%;display:grid;grid-template-columns:44px 1fr auto;gap:10px 16px;align-items:center;text-align:left;background:none;border:0;padding:22px 0;cursor:pointer}
+  .rh .n{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)}
+  .rh .nm{font-family:'Bricolage Grotesque';font-weight:800;letter-spacing:-.04em;font-size:clamp(32px,7vw,88px);line-height:1;transition:transform .5s,color .3s}
+  .rh .meta{grid-column:2;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .rh .pl{grid-row:1;grid-column:3;font-size:34px;line-height:1;transition:transform .4s}
+  .rit:hover .nm{color:var(--rose);transform:translateX(12px)}
+  .rit.open .pl{transform:rotate(45deg)}
+  .rp{max-height:0;overflow:hidden;transition:max-height .6s cubic-bezier(.2,.7,.2,1)}
+  .rit.open .rp{max-height:300px}
+  .rp div{padding:0 0 26px 60px;max-width:62ch;color:var(--muted)}
+  .rp b{font-weight:500;color:var(--plum)}
+  .peek{position:fixed;left:0;top:0;width:230px;height:300px;border-radius:120px 120px 0 0;overflow:hidden;z-index:55;pointer-events:none;opacity:0;transform:scale(.7);background:var(--blush)}
+  @media(hover:none){.peek{display:none}}
+
+  /* JOURNEY (pinned) */
+  .journey{position:relative;height:100svh;background:var(--plum);color:var(--cream);overflow:hidden}
+  .jwrap{position:absolute;inset:0;max-width:1240px;margin:0 auto;padding:110px 22px 60px;display:grid;gap:30px;align-content:center}
+  .jtop{display:flex;justify-content:space-between;align-items:end;gap:12px}
+  .jtop .mono{color:var(--blush)}
+  .jhead{font-size:clamp(34px,6.4vw,84px)}
+  .jstage{position:relative;min-height:46svh}
+  .js{position:absolute;inset:0;display:grid;gap:22px;align-content:start;opacity:0}
+  .js .big{font-family:'Bricolage Grotesque';font-weight:800;letter-spacing:-.05em;font-size:clamp(120px,32vw,380px);line-height:.8;color:transparent;-webkit-text-stroke:1.2px var(--rose)}
+  .js h3{font-family:'Bricolage Grotesque';font-weight:800;letter-spacing:-.04em;font-size:clamp(34px,6vw,76px);line-height:.95}
+  .js p{max-width:44ch;color:#d9c7bf}
+  .jv{position:absolute;right:0;top:50%;transform:translateY(-50%);width:min(34vw,300px);height:min(44svh,380px);border-radius:200px 200px 0 0;overflow:hidden;opacity:.9}
+  .jv i{position:absolute;inset:0;opacity:0}
+  .jv i:nth-child(1){background:linear-gradient(160deg,#e9c9bd,#c9776a)}
+  .jv i:nth-child(2){background:linear-gradient(160deg,#c9776a,#7a3b4b)}
+  .jv i:nth-child(3){background:linear-gradient(160deg,#b98a4b,#e9c9bd)}
+  .jline{height:2px;background:#ffffff22;position:relative}
+  .jline b{position:absolute;inset:0;background:var(--rose);transform-origin:left;transform:scaleX(0)}
+  @media(max-width:700px){.jv{width:30vw;opacity:.55}}
+
+  /* PACKAGES */
+  .pk{display:grid;gap:18px;margin-top:56px}
+  .pcard{background:var(--paper);border:1px solid var(--plum);border-radius:26px;padding:30px 26px;display:flex;flex-direction:column;gap:14px;transition:transform .4s,background .4s,color .4s}
+  .pcard:hover{transform:translateY(-8px)}
+  .pcard.hot{background:var(--plum);color:var(--cream)}
+  .pcard h3{font-family:'Bricolage Grotesque';font-weight:800;letter-spacing:-.04em;font-size:clamp(34px,4.4vw,48px);line-height:1}
+  .pcard .pr{font-family:'Bricolage Grotesque';font-weight:700;font-size:28px;color:var(--rose)}
+  .pcard ul{list-style:none;color:var(--muted);display:grid;gap:6px}
+  .pcard.hot ul{color:#d9c7bf}
+  .pcard li::before{content:"— ";color:var(--rose)}
+  .tag{align-self:flex-start;background:var(--rose);color:#fff;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:99px}
+  .note{display:inline-block;margin-top:14px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px dashed var(--rose);color:var(--rose);padding:6px 12px;border-radius:99px}
+  @media(min-width:860px){.pk{grid-template-columns:repeat(3,1fr)}}
+
+  /* BOOKING */
+  .book{background:var(--blush)}
+  .bgrid{display:grid;gap:44px}
+  .book h2{font-size:clamp(46px,9vw,130px)}
+  form{display:grid;gap:22px}
+  label{display:grid;gap:8px}
+  input,select,textarea{background:transparent;border:0;border-bottom:1px solid var(--plum);padding:12px 0;font-size:18px;outline:none;border-radius:0}
+  textarea{resize:vertical;min-height:90px}
+  input:focus,select:focus,textarea:focus{border-bottom-color:var(--rose)}
+  .send{background:var(--plum);color:var(--cream);border:0;border-radius:99px;padding:20px 34px;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;justify-self:start}
+  @media(min-width:860px){.bgrid{grid-template-columns:1fr 1fr;align-items:start}}
+
+  /* VISIT */
+  .vgrid{display:grid;gap:30px;margin-top:50px;border-top:1px solid var(--plum);padding-top:30px}
+  .vgrid h3{font-family:'Bricolage Grotesque';font-weight:800;letter-spacing:-.03em;font-size:28px;margin:10px 0}
+  .vgrid p{color:var(--muted)}
+  @media(min-width:760px){.vgrid{grid-template-columns:repeat(3,1fr)}}
+
+  footer{background:var(--plum);color:var(--blush);padding:80px 0 60px;overflow:hidden}
+  footer .giant{font-family:'Bricolage Grotesque';font-weight:800;letter-spacing:-.06em;line-height:.8;font-size:clamp(80px,24vw,360px);color:var(--cream);white-space:nowrap}
+  footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;margin-top:40px;font-size:13px}
+
+  .wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em}
+  .wd .in{display:inline-block}
+  body.reduce .journey{height:auto}
+  body.reduce .jwrap{position:static}
+  body.reduce .jstage{min-height:0;display:grid;gap:40px}
+  body.reduce .js{position:static;opacity:1}
+  body.reduce .jv,body.reduce .peek{display:none}
+</style>
+</head>
+<body>
+
+<div class="strip">Concept demo by Edit Theory · Fictional beauty parlour · Sample content</div>
+<header>
+  <a href="#top" class="logo">Petal &amp; Pine</a>
+  <a href="#book" class="pill">Book now</a>
+</header>
+<div class="peek" id="peek"><div class="ph" id="peekImg"></div></div>
+
+<section class="hero" id="top">
+  <div class="arch" id="arch"><div class="ph"></div></div>
+  <div class="hl"><span class="disp a">Petal</span><span class="disp b"><em>&amp;</em> Pine</span></div>
+  <div class="hsub mono">Beauty parlour &amp; bridal studio</div>
+  <div class="after"><h2 class="disp">Beauty is a ritual, not a rush.</h2></div>
+</section>
+
+<div class="mq" aria-hidden="true"><div id="mq"><span>Hair</span><i>✦</i><span>Skin</span><i>✦</i><span>Bridal</span><i>✦</i><span>Nails</span><i>✦</i><span>Spa</span><i>✦</i><span>Hair</span><i>✦</i><span>Skin</span><i>✦</i><span>Bridal</span><i>✦</i><span>Nails</span><i>✦</i><span>Spa</span></div></div>
+
+<main>
+  <section class="sec intro">
+    <div class="wrap">
+      <div class="mono">The parlour</div>
+      <h2 class="disp" id="introH">A small studio for slow, careful beauty.</h2>
+      <p>No rush, no crowd. One chair, one artist, your time. From a quick trim to a full bridal morning, we plan it with you first.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="rituals" style="padding-top:0">
+    <div class="wrap">
+      <div class="mono">Rituals · sample menu</div>
+      <h2 class="disp split" style="font-size:clamp(46px,9vw,130px);margin-top:16px">Pick your ritual</h2>
+      <span class="note">Sample prices · replace with real ones</span>
+      <ul class="rits">
+        <li class="rit open" data-c1="#f1d3c6" data-c2="#c9776a" data-img="images/ritual-hair.jpg">
+          <button class="rh"><span class="n">01</span><span class="nm">Hair &amp; Styling</span><span class="pl">+</span><span class="meta">45–90 min · from ₹499</span></button>
+          <div class="rp"><div><b>Cut, colour and finish.</b> A consult first, then a cut shaped to your face and routine. Blow-dry, waves or a sleek finish for the evening.</div></div>
+        </li>
+        <li class="rit" data-c1="#e9c9bd" data-c2="#b98a4b" data-img="images/ritual-skin.jpg">
+          <button class="rh"><span class="n">02</span><span class="nm">Facials &amp; Skin</span><span class="pl">+</span><span class="meta">60 min · from ₹799</span></button>
+          <div class="rp"><div><b>Matched to your skin.</b> Cleanse, treat and glow. We pick the facial after a quick skin check, not the other way round.</div></div>
+        </li>
+        <li class="rit" data-c1="#c9776a" data-c2="#7a3b4b" data-img="images/ritual-bridal.jpg">
+          <button class="rh"><span class="n">03</span><span class="nm">Bridal Makeup</span><span class="pl">+</span><span class="meta">Trial + day · from ₹9,999</span></button>
+          <div class="rp"><div><b>Trial first, always.</b> We test the full look, adjust it, and plan the morning together so the day itself is calm.</div></div>
+        </li>
+        <li class="rit" data-c1="#f4ece3" data-c2="#c9776a" data-img="images/ritual-nails.jpg">
+          <button class="rh"><span class="n">04</span><span class="nm">Nails</span><span class="pl">+</span><span class="meta">45 min · from ₹399</span></button>
+          <div class="rp"><div><b>Clean, neat, yours.</b> Manicure, pedicure and nail art, with tools sterilised between every guest.</div></div>
+        </li>
+        <li class="rit" data-c1="#b98a4b" data-c2="#231418" data-img="images/ritual-spa.jpg">
+          <button class="rh"><span class="n">05</span><span class="nm">Hair Spa</span><span class="pl">+</span><span class="meta">60 min · from ₹899</span></button>
+          <div class="rp"><div><b>Reset your hair.</b> Deep conditioning, scalp massage and a steam finish for dry or tired hair.</div></div>
+        </li>
+        <li class="rit" data-c1="#e9c9bd" data-c2="#c9776a" data-img="images/ritual-wax.jpg">
+          <button class="rh"><span class="n">06</span><span class="nm">Waxing &amp; Threading</span><span class="pl">+</span><span class="meta">15–60 min · from ₹99</span></button>
+          <div class="rp"><div><b>Quick and gentle.</b> Skin-friendly wax and precise threading, done quickly so you can get on with your day.</div></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="journey" id="journey">
+    <div class="jwrap">
+      <div class="jtop"><div class="jhead disp">The bridal journey</div><div class="mono" id="jnum">01 / 03</div></div>
+      <div class="jstage">
+        <div class="jv"><i></i><i></i><i></i></div>
+        <div class="js"><div class="big">01</div><h3>Consult</h3><p>We sit down first. Skin, hair, outfit, mood and timing. Nothing is booked until the plan feels right to you.</p></div>
+        <div class="js"><div class="big">02</div><h3>Trial</h3><p>A full run of your look, a few weeks ahead. We change what you don't love, and note it all down.</p></div>
+        <div class="js"><div class="big">03</div><h3>The day</h3><p>Everything is ready before you are. Calm morning, steady hands, and a touch-up kit for the rest of the day.</p></div>
+      </div>
+      <div class="jline"><b id="jprog"></b></div>
+    </div>
+  </section>
+
+  <section class="sec" id="packages">
+    <div class="wrap">
+      <div class="mono">Packages</div>
+      <h2 class="disp split" style="font-size:clamp(46px,9vw,130px);margin-top:16px">Pick a bundle</h2>
+      <span class="note">Sample packages · replace with real ones</span>
+      <div class="pk">
+        <article class="pcard rv"><h3>Everyday Glow</h3><div class="pr">from ₹1,499</div><ul><li>Haircut and blow-dry</li><li>Express facial</li><li>Threading</li></ul></article>
+        <article class="pcard hot rv"><span class="tag">Most booked</span><h3>Bridal Signature</h3><div class="pr">from ₹15,999</div><ul><li>Consult and trial</li><li>Bridal makeup and hair</li><li>Draping and touch-up kit</li></ul></article>
+        <article class="pcard rv"><h3>Party Ready</h3><div class="pr">from ₹2,999</div><ul><li>Hair styling</li><li>Makeup</li><li>Nails</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec book" id="book">
+    <div class="wrap bgrid">
+      <div>
+        <div class="mono">Book</div>
+        <h2 class="disp" style="margin-top:16px">Hold your chair.</h2>
+        <p style="margin-top:24px;max-width:36ch">Fill this in and it opens a WhatsApp message to us, ready to send. We reply with the nearest slots.</p>
+        <span class="note" style="border-color:var(--plum);color:var(--plum)">Demo · uses a sample WhatsApp number</span>
+      </div>
+      <form id="bk">
+        <label><span class="mono">Your name</span><input id="fn" type="text" placeholder="Name" required></label>
+        <label><span class="mono">Ritual</span>
+          <select id="fs"><option>Hair &amp; Styling</option><option>Facials &amp; Skin</option><option>Bridal Makeup</option><option>Nails</option><option>Hair Spa</option><option>Waxing &amp; Threading</option></select></label>
+        <label><span class="mono">Preferred date</span><input id="fd" type="date"></label>
+        <label><span class="mono">Anything we should know</span><textarea id="fm" placeholder="Occasion, allergies, reference photos..."></textarea></label>
+        <button class="send" type="submit">Send on WhatsApp</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="sec" id="visit">
+    <div class="wrap">
+      <div class="mono">Visit</div>
+      <h2 class="disp split" style="font-size:clamp(46px,9vw,130px);margin-top:16px">Find the studio</h2>
+      <div class="vgrid">
+        <div><div class="mono">Where</div><h3>Street Name, Your City</h3><p>Sample address. Add the real one and a map link.</p></div>
+        <div><div class="mono">When</div><h3>Tue–Sun · 10 AM – 8 PM</h3><p>Sample hours. Closed Mondays.</p></div>
+        <div><div class="mono">Talk to us</div><h3>+91 00000 00000</h3><p>hello@yourparlour.com (sample)</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="giant" id="giant">Petal &amp; Pine</div>
+    <div class="row"><span>Concept demo by Edit Theory. Petal &amp; Pine is a fictional business. All content is sample.</span><span>© 2026 Edit Theory</span></div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)};
+  var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function sm(p,a,b){var x=Math.min(1,Math.max(0,(p-a)/(b-a)));return x*x*(3-2*x);}
+
+  /* booking form opens a prefilled WhatsApp message */
+  $('#bk').addEventListener('submit',function(e){
+    e.preventDefault();
+    var msg='Hi Petal & Pine, I am '+$('#fn').value+'. I would like to book '+$('#fs').value+
+      ($('#fd').value?' on '+$('#fd').value:'')+'.'+($('#fm').value?' Note: '+$('#fm').value:'');
+    window.open('https://wa.me/910000000000?text='+encodeURIComponent(msg),'_blank');
+  });
+
+  /* rituals accordion (pure CSS height transition) */
+  $$('.rit').forEach(function(r){
+    r.querySelector('.rh').addEventListener('click',function(){
+      var was=r.classList.contains('open');
+      $$('.rit').forEach(function(x){x.classList.remove('open');});
+      if(!was){r.classList.add('open');}
+      setTimeout(function(){if(window.ScrollTrigger){ScrollTrigger.refresh();}},700);
+    });
+  });
+
+  if(!window.gsap){return;}
+  gsap.registerPlugin(ScrollTrigger);
+  if(reduce){document.body.classList.add('reduce');return;}
+
+  var lenis=null;
+  if(window.Lenis){
+    lenis=new Lenis({lerp:0.09});
+    lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(function(t){lenis.raf(t*1000);});
+    gsap.ticker.lagSmoothing(0);
+  }
+  $$('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href'),el=id.length>1?$(id):null;
+      if(!el)return;
+      e.preventDefault();
+      if(lenis){lenis.scrollTo(el,{offset:-60});}else{el.scrollIntoView({behavior:'smooth'});}
+    });
+  });
+
+  /* HERO: type slides in, then the arch opens to full screen as you scroll */
+  gsap.from('.hl .a',{yPercent:90,opacity:0,duration:1.2,ease:'power4.out',delay:.2});
+  gsap.from('.hl .b',{yPercent:-90,opacity:0,duration:1.2,ease:'power4.out',delay:.35});
+  gsap.from('#arch',{scale:.85,opacity:0,duration:1.4,ease:'power3.out',delay:.1});
+  gsap.from('.hsub',{opacity:0,y:20,duration:1,delay:.9});
+  var htl=gsap.timeline({scrollTrigger:{trigger:'.hero',start:'top top',end:'+=130%',scrub:.6,pin:true,anticipatePin:1}});
+  htl.to('#arch',{width:'100vw',height:'100svh',top:'50%',borderTopLeftRadius:0,borderTopRightRadius:0,ease:'none'},0)
+     .to('.hl .a',{xPercent:-40,opacity:0,ease:'none'},0)
+     .to('.hl .b',{xPercent:40,opacity:0,ease:'none'},0)
+     .to('.hsub',{opacity:0,ease:'none'},0)
+     .fromTo('.after h2',{y:60,opacity:0},{y:0,opacity:1,ease:'none'},.55);
+
+  /* marquee */
+  gsap.to('#mq',{xPercent:-40,ease:'none',scrollTrigger:{trigger:'.mq',start:'top bottom',end:'bottom top',scrub:true}});
+
+  /* intro headline: words light up */
+  var ih=$('#introH');
+  ih.innerHTML=ih.textContent.trim().split(/\s+/).map(function(w){return '<span class="w">'+w+'</span>';}).join(' ');
+  gsap.to('#introH .w',{opacity:1,stagger:.12,ease:'none',scrollTrigger:{trigger:'#introH',start:'top 80%',end:'bottom 45%',scrub:true}});
+  gsap.from('.intro p',{y:40,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:'.intro p',start:'top 90%'}});
+
+  /* headings reveal word by word */
+  $$('.split').forEach(function(el){
+    var words=el.textContent.trim().split(/\s+/);
+    el.innerHTML=words.map(function(w){return '<span class="wd"><span class="in">'+w+'</span></span>';}).join(' ');
+    gsap.from(el.querySelectorAll('.in'),{yPercent:115,duration:1.1,stagger:.1,ease:'power4.out',scrollTrigger:{trigger:el,start:'top 88%'}});
+  });
+
+  /* ritual rows rise in */
+  gsap.from('.rit',{y:50,opacity:0,duration:.9,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:'.rits',start:'top 85%'}});
+
+  /* floating preview follows the cursor on laptops */
+  if(window.matchMedia('(hover:hover)').matches){
+    var peek=$('#peek'),pi=$('#peekImg');
+    var qx=gsap.quickTo(peek,'x',{duration:.5,ease:'power3'}),qy=gsap.quickTo(peek,'y',{duration:.5,ease:'power3'});
+    $$('.rit').forEach(function(r){
+      r.addEventListener('mouseenter',function(){
+        pi.style.setProperty('--img',"url('"+r.dataset.img+"')");
+        pi.style.setProperty('--c1',r.dataset.c1);pi.style.setProperty('--c2',r.dataset.c2);
+        gsap.to(peek,{opacity:1,scale:1,duration:.4});
+      });
+      r.addEventListener('mouseleave',function(){gsap.to(peek,{opacity:0,scale:.7,duration:.3});});
+      r.addEventListener('mousemove',function(e){qx(e.clientX+30);qy(e.clientY-150);});
+    });
+  }
+
+  /* BRIDAL JOURNEY: pinned, three steps driven by scroll */
+  var steps=$$('.js'),vs=$$('.jv i'),jp=$('#jprog'),jn=$('#jnum');
+  function upd(p){
+    jp.style.transform='scaleX('+p+')';
+    jn.textContent='0'+(Math.min(2,Math.floor(p*3))+1)+' / 03';
+    steps.forEach(function(el,i){
+      var s=i/3,inn=i===0?1:sm(p,s,s+.06),out=i===2?1:1-sm(p,s+.27,s+.333),op=inn*out;
+      el.style.opacity=op;
+      el.style.transform='translateY('+((1-inn)*40-(1-out)*40)+'px)';
+      vs[i].style.opacity=op;
+    });
+  }
+  upd(0);
+  ScrollTrigger.create({trigger:'#journey',start:'top top',end:'+=300%',pin:true,scrub:true,onUpdate:function(s){upd(s.progress);}});
+
+  /* packages */
+  gsap.from('.pcard',{y:80,opacity:0,duration:1,stagger:.14,ease:'power3.out',scrollTrigger:{trigger:'.pk',start:'top 85%'}});
+
+  /* booking + visit */
+  gsap.from('.book .wrap > *',{y:60,opacity:0,duration:1,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'.book',start:'top 70%'}});
+  gsap.from('.vgrid > div',{y:40,opacity:0,duration:.9,stagger:.12,ease:'power3.out',scrollTrigger:{trigger:'.vgrid',start:'top 88%'}});
+
+  /* giant footer name slides sideways */
+  gsap.fromTo('#giant',{x:'12%'},{x:'-18%',ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:true}});
+
+  window.addEventListener('load',function(){ScrollTrigger.refresh();});
+})();
+</script>
+</body>
+</html>

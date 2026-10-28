@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember &amp; Ash Interiors (Concept Demo)</title>
+<meta name="description" content="Concept demo interior design studio website by Edit Theory. Fictional studio, sample projects and numbers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--mo:#5A3E2B;--mo2:#43301f;--mo3:#2e2015;--gd:#F3EBDB;--am:#DD851F;--sg:#87A96B;--line:rgba(243,235,219,.22);--lineD:rgba(90,62,43,.25)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:auto}
+  body{background:var(--mo);color:var(--gd);font-family:'Jost',system-ui,sans-serif;font-weight:400;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.65}
+  a{color:inherit;text-decoration:none}
+  button,input,select,textarea{font:inherit;color:inherit}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;letter-spacing:.01em;line-height:1}
+  .cap{font-size:11px;letter-spacing:.3em;text-transform:uppercase;font-weight:500;color:var(--gd);opacity:.8}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 22px;width:100%}
+  .sec{padding:clamp(80px,12vw,140px) 0}
+  .h2{font-size:clamp(44px,7.6vw,110px);margin-top:14px;text-transform:uppercase;letter-spacing:.02em}
+  .h2 em{font-style:italic;text-transform:none;color:var(--am)}
+  .note{display:inline-block;margin-top:16px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;border:1px dashed currentColor;padding:6px 12px;border-radius:99px;opacity:.75}
+  .light{background:var(--gd);color:var(--mo2)}
+  .light .cap{color:var(--mo);opacity:1}
+
+  #cg{position:fixed;inset:0;pointer-events:none;z-index:70;background:radial-gradient(420px circle at var(--mx,50%) var(--my,40%),rgba(221,133,31,.12),transparent 60%);mix-blend-mode:screen;opacity:0;transition:opacity .6s}
+  #cg.on{opacity:1}
+
+  .strip{position:fixed;top:0;left:0;right:0;height:26px;z-index:90;background:var(--am);color:var(--mo3);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;font-weight:500;padding:0 10px;text-align:center}
+  header{position:fixed;top:26px;left:0;right:0;z-index:80;padding:18px 28px;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:background .4s,padding .4s,color .4s;color:var(--mo2)}
+  header.solid{color:var(--gd);background:#43301fee;backdrop-filter:blur(10px);padding:11px 28px;border-bottom:1px solid var(--line)}
+  .logo{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:28px;letter-spacing:.04em}
+  .logo i{color:var(--am)}
+  nav{display:none;gap:34px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:500}
+  nav a:hover{color:var(--am)}
+  @media(min-width:900px){nav{display:flex}}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid var(--gd);border-radius:99px;padding:15px 28px;font-weight:500;font-size:11px;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--gd);transition:transform .25s,background .25s,color .25s}
+  .btn:hover{transform:translateY(-3px)}
+  .btn.am{background:var(--am);border-color:var(--am);color:var(--mo3)}
+  .btn.dk{background:var(--mo2);border-color:var(--mo2);color:var(--gd)}
+  .btn.sm{padding:10px 18px}
+
+  /* STAGE: hero -> door -> room */
+  .stage{position:relative;height:100svh;overflow:hidden;background:var(--gd)}
+  .hl,.rl{position:absolute;inset:0}
+  .hl{display:flex;align-items:center;padding:130px 0 60px;color:var(--mo2)}
+  .hl .cap{color:var(--mo);opacity:.9}
+  .hl .btn{color:var(--mo2);border-color:var(--mo2)}
+  .hl .btn.am{color:var(--mo3);border-color:var(--am)}
+  .hg{display:grid;gap:30px;align-items:center}
+  @media(min-width:900px){.hg{grid-template-columns:1.25fr .75fr}}
+  .hl h1{font-size:clamp(54px,8.6vw,132px);font-weight:400;margin:22px 0 22px;letter-spacing:-.01em;line-height:.95}
+  .hl h1 em{font-style:italic;text-transform:none;color:var(--am)}
+  .hl .lead{max-width:40ch;color:#5d4733;font-size:clamp(15px,1.8vw,18px)}
+  .hl .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .ray{position:absolute;left:-10%;width:150%;height:90px;background:linear-gradient(90deg,transparent,rgba(221,133,31,.13),transparent);transform-origin:60% 50%;pointer-events:none}
+  .ray.r1{top:12%;transform:rotate(-30deg)}.ray.r2{top:30%;height:150px;transform:rotate(-30deg);opacity:.7}.ray.r3{top:52%;height:60px;transform:rotate(-30deg)}
+  .hv{position:relative;width:min(66vw,340px);margin:0 auto}
+  .arch{position:relative;width:100%;aspect-ratio:3/4.3;border-radius:999px 999px 8px 8px;overflow:hidden;border:1px solid rgba(90,62,43,.35);background:#F6E3B8}
+  .furn{position:absolute;left:-52%;bottom:-5%;width:150%;pointer-events:none;filter:drop-shadow(0 18px 18px rgba(46,32,21,.25))}
+  .arch svg{position:absolute;inset:0;width:100%;height:100%}
+  .sidev{color:var(--mo2);position:absolute;right:26px;top:50%;writing-mode:vertical-rl;transform:translateY(-50%);font-size:10px;letter-spacing:.34em;text-transform:uppercase;opacity:.65;display:none}
+  .scrollh{position:absolute;left:28px;bottom:26px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;opacity:.7;display:flex;gap:12px;align-items:center}
+  .scrollh i{display:block;width:46px;height:1px;background:currentColor}
+  @media(min-width:1100px){.sidev{display:block}}
+  .rl{background:var(--mo3);display:flex;align-items:center;padding-top:80px;clip-path:inset(50% 50% 50% 50%);visibility:hidden}
+  .sg{display:grid;gap:18px;align-items:center}
+  @media(min-width:960px){.sg{grid-template-columns:.75fr 1.25fr}}
+  .rl h2{font-size:clamp(38px,5.4vw,78px);text-transform:uppercase;margin-top:12px}
+  .rl h2 em{font-style:italic;text-transform:none;color:var(--am)}
+  .sst{margin-top:26px;min-height:120px}
+  .sst b{font-family:'Cormorant Garamond',serif;font-weight:400;font-style:italic;color:var(--am);font-size:clamp(34px,4.2vw,56px);display:block;line-height:1.05}
+  .sst span{display:block;max-width:36ch;margin-top:6px;color:rgba(243,235,219,.86)}
+  .bars{display:flex;gap:8px;margin-top:20px}
+  .bars i{width:42px;height:2px;background:var(--line);transition:background .3s}
+  .bars i.on{background:var(--am)}
+  .sroom{width:min(100%,800px);margin:0 auto}
+  body.static .stage{height:auto}
+  body.static .hl{position:relative;min-height:100svh}
+  body.static .rl{position:relative;clip-path:none;visibility:visible;padding:90px 0}
+
+  /* ROOM SVG */
+  .room{display:block;width:100%;height:auto;--wall:#8a6a4a;--floor:#5A3E2B;--sofa:#87A96B;--c1:#F3EBDB;--c2:#DD851F;--rug:#6f5238;--art:#DD851F;--pot:#87A96B;--leaf:#87A96B;--lamp:#FFE3A8;--glass:#FBEFD0;--ln:#F3EBDB}
+  .room .ln{stroke:var(--ln);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0;fill-opacity:1}
+  .room .glow{opacity:0}
+
+  /* DAY */
+  .day{position:relative;height:100svh;overflow:hidden;display:flex;align-items:center;padding-top:70px;background:#7a5a40}
+  .dg{display:grid;gap:20px;align-items:center}
+  @media(min-width:960px){.dg{grid-template-columns:.7fr 1.3fr}}
+  .tl{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(76px,13vw,190px);line-height:.85;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .tp{font-style:italic;color:var(--am);font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,52px);margin-top:10px}
+  .td{max-width:34ch;margin-top:10px;color:rgba(243,235,219,.88)}
+  body.static .day{height:auto;padding:90px 0}
+
+  /* GALLERY */
+  .gal{position:relative;overflow:hidden;background:var(--mo2)}
+  .gh{padding:clamp(100px,12vw,130px) 22px 20px}
+  .gal .h2{font-size:clamp(36px,5.2vw,72px);margin-top:8px}
+  .gal .note{margin-top:10px}
+  .gt{display:flex;gap:30px;width:max-content;padding:0 28px 40px;align-items:flex-end}
+  .ar{width:min(70vw,clamp(200px,calc((100svh - 500px)*.7),360px));flex:none}
+  .ar:nth-child(even){margin-bottom:34px}
+  .ar .fr{position:relative;aspect-ratio:3/4.3;border-radius:999px 999px 8px 8px;overflow:hidden;border:1px solid var(--line)}
+  .ar .ph{position:absolute;inset:0 -14% 0 -14%;background:var(--bg);background-size:cover}
+  .ar .ph::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,240,205,.45),transparent 50%)}
+  .ar .meta{margin-top:16px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .ar h3{font-size:clamp(28px,3vw,38px);text-transform:uppercase}
+  .ar .m{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+  .ar .dots{display:flex;gap:6px;margin-top:8px}
+  .ar .dots i{width:14px;height:14px;border-radius:50%;border:1px solid #f3ebdb66}
+  body.static .gt{flex-wrap:wrap;width:auto}
+
+  /* TRY */
+  .try{display:grid;gap:30px;margin-top:44px}
+  @media(min-width:960px){.try{grid-template-columns:1.25fr .75fr;align-items:start}}
+  .tr{border:1px solid var(--lineD);border-radius:28px;padding:clamp(12px,2vw,24px);background:#FAF5EA}
+  .ctl{border:1px solid var(--lineD);border-radius:28px;padding:clamp(22px,3vw,34px)}
+  .grp{margin-bottom:24px}
+  .grp .cap{display:block;margin-bottom:12px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid var(--mo);background:transparent;border-radius:99px;padding:10px 16px;cursor:pointer;font-weight:500;font-size:13px;display:inline-flex;align-items:center;gap:8px;transition:background .25s,color .25s}
+  .chip i{display:flex;gap:2px}
+  .chip i b{width:10px;height:10px;border-radius:50%;display:block;border:1px solid #5a3e2b55}
+  .chip.on{background:var(--mo);color:var(--gd)}
+  input[type=range]{width:100%;accent-color:var(--am);height:26px}
+  .est{padding-top:20px;border-top:1px solid var(--lineD)}
+  .est b{display:block;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3.4vw,44px);line-height:1.05;margin:6px 0}
+  .est small{display:block;color:#7a6045}
+  .ba{position:relative;margin-top:50px;border-radius:28px;overflow:hidden;border:1px solid var(--lineD);background:#FAF5EA;user-select:none}
+  .ba .top{position:absolute;inset:0;clip-path:inset(0 50% 0 0);background:#EFE6D2}
+  .ba .lab{position:absolute;top:16px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;background:var(--mo2);color:var(--gd);padding:6px 12px;border-radius:99px;z-index:3}
+  .ba .l1{left:16px}.ba .l2{right:16px}
+  .ba .hd{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--mo2);z-index:2;pointer-events:none}
+  .ba .hd::after{content:'↔';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--am);color:var(--mo3);display:grid;place-items:center;font-size:20px;border:2px solid var(--mo2)}
+  .ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:4;margin:0}
+
+  /* DOORS (process) */
+  .doors{display:flex;gap:12px;margin-top:44px;height:min(70vh,520px)}
+  .dr{flex:1;min-width:0;border:1px solid var(--line);border-radius:999px 999px 10px 10px;padding:26px 18px;cursor:pointer;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;transition:flex .7s cubic-bezier(.2,.8,.2,1),background .5s;background:transparent}
+  .dr .n{position:absolute;top:34px;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',serif;font-size:38px;color:var(--am)}
+  .dr h3{font-size:clamp(22px,2.6vw,36px);text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg);margin:0 auto;transition:all .4s}
+  .dr p{max-width:28ch;font-size:14px;color:rgba(243,235,219,.88);opacity:0;height:0;overflow:hidden;transition:opacity .5s .2s}
+  .dr.on{flex:4;background:linear-gradient(180deg,rgba(135,169,107,.3),rgba(90,62,43,0))}
+  .dr.on h3{writing-mode:horizontal-tb;transform:none;margin:0 0 10px}
+  .dr.on p{opacity:1;height:auto}
+  @media(max-width:700px){.doors{flex-direction:column;height:auto}.dr{border-radius:26px;flex:none;min-height:70px;padding:16px 18px}.dr .n{position:static;transform:none;font-size:24px}.dr h3,.dr.on h3{writing-mode:horizontal-tb;transform:none;margin:0}.dr.on{min-height:190px}}
+
+  /* CONTACT */
+  .ct{position:relative;overflow:hidden;background:var(--mo2)}
+  .ct::before{content:'';position:absolute;inset:0;background:radial-gradient(520px circle at var(--sx,70%) var(--sy,30%),rgba(221,133,31,.3),transparent 60%);pointer-events:none}
+  .cg{display:grid;gap:40px;position:relative}
+  @media(min-width:900px){.cg{grid-template-columns:1fr 1fr;align-items:start}}
+  .ct h2{font-size:clamp(46px,7vw,104px);text-transform:uppercase}
+  .ct p.sub{max-width:40ch;margin-top:18px;color:rgba(243,235,219,.88)}
+  form{display:grid;gap:14px}
+  label{display:grid;gap:6px;font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;opacity:.9}
+  select,input[type=text],textarea{background:rgba(42,30,19,.45);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:16px;outline:none;width:100%;color:var(--gd)}
+  select option{color:#2e2015}
+  select:focus,input:focus,textarea:focus{border-color:var(--am)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+  footer{padding:70px 0 50px;overflow:hidden;font-size:14px;color:var(--gd);background:var(--mo3)}
+  footer .giant{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;letter-spacing:-.02em;line-height:.85;font-size:clamp(70px,17vw,270px);color:var(--am);white-space:nowrap}
+  footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;margin-top:30px;opacity:.75}
+
+  .wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em}
+  .wd .in{display:inline-block}
+</style>
+</head>
+<body>
+<div id="cg"></div>
+<div class="strip">Concept demo by Edit Theory · Fictional studio · Sample projects and numbers</div>
+<header id="hdr">
+  <a href="#top" class="logo">ember <i>&amp;</i> ash</a>
+  <nav><a href="#top">Method</a><a href="#day">Light</a><a href="#work">Work</a><a href="#try">Try it</a><a href="#process">Process</a></nav>
+  <a href="#contact" class="btn am sm">Book a walkthrough</a>
+</header>
+
+<section class="stage" id="top">
+  <div class="hl" id="hl">
+    <div class="ray r1"></div><div class="ray r2"></div><div class="ray r3"></div>
+    <div class="wrap hg">
+      <div id="htx">
+        <div class="cap" id="h0">Interiors and spatial design</div>
+        <h1 id="h1">Spaces that<br>feel <em>alive.</em></h1>
+        <p class="lead" id="hp">We design homes around how you actually live: light first, then material, then everything else.</p>
+        <div class="cta" id="hc"><a class="btn am" href="#contact">Book a walkthrough</a><a class="btn" href="#day">Follow the light</a></div>
+      </div>
+      <div class="hv" aria-hidden="true">
+        <div class="arch" id="arch">
+          <svg viewBox="0 0 300 430" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F9ECC9"/><stop offset=".6" stop-color="#F0C27A"/><stop offset="1" stop-color="#E49A3C"/></linearGradient><radialGradient id="sun"><stop offset="0" stop-color="#FFF3D0"/><stop offset="1" stop-color="#FFE3A8" stop-opacity="0"/></radialGradient></defs>
+            <rect width="300" height="430" fill="url(#sky)"/>
+            <circle cx="205" cy="200" r="90" fill="url(#sun)"/>
+            <path d="M0 250 L50 205 L100 240 L160 190 L230 245 L300 210 L300 430 L0 430Z" fill="#c9d4ad"/>
+            <path d="M0 290 L70 240 L130 280 L200 230 L300 285 L300 430 L0 430Z" fill="#a3bd86"/>
+            <path d="M0 330 L90 290 L170 325 L250 285 L300 310 L300 430 L0 430Z" fill="#87A96B"/>
+            <path d="M0 375 Q80 340 160 370 T300 360 L300 430 L0 430Z" fill="#6c8a52"/>
+            <g stroke="#43301f" stroke-width="3" fill="none" stroke-linecap="round"><path d="M300 20 Q230 40 190 95 Q170 120 150 125"/><path d="M230 55 Q215 85 190 100"/><path d="M262 32 Q250 60 232 74"/></g>
+            <g fill="#6c8a52"><ellipse cx="190" cy="98" rx="18" ry="7" transform="rotate(-30 190 98)"/><ellipse cx="168" cy="116" rx="18" ry="7" transform="rotate(20 168 116)"/><ellipse cx="214" cy="80" rx="17" ry="7" transform="rotate(-50 214 80)"/><ellipse cx="236" cy="62" rx="17" ry="7" transform="rotate(-20 236 62)"/><ellipse cx="258" cy="48" rx="16" ry="6" transform="rotate(-40 258 48)"/><ellipse cx="282" cy="30" rx="16" ry="6" transform="rotate(-15 282 30)"/><ellipse cx="206" cy="108" rx="16" ry="6" transform="rotate(30 206 108)"/><ellipse cx="226" cy="84" rx="15" ry="6" transform="rotate(25 226 84)"/><ellipse cx="150" cy="128" rx="15" ry="6" transform="rotate(10 150 128)"/></g>
+          </svg>
+        </div>
+        <svg class="furn" id="furn" viewBox="0 0 420 240"><ellipse cx="200" cy="222" rx="190" ry="12" fill="#2e2015" opacity=".18"/>
+          <path d="M26 178 Q22 98 100 92 L262 92 Q340 98 336 178 L336 206 Q336 214 326 214 L36 214 Q26 214 26 206Z" fill="#87A96B" stroke="#43301f" stroke-width="3"/>
+          <ellipse cx="62" cy="150" rx="40" ry="62" fill="#9cba82" stroke="#43301f" stroke-width="3"/><ellipse cx="300" cy="150" rx="40" ry="62" fill="#9cba82" stroke="#43301f" stroke-width="3"/>
+          <path d="M92 142 Q180 120 270 142 L276 190 Q180 206 86 190Z" fill="#a9c48f" stroke="#43301f" stroke-width="3"/>
+          <path d="M262 98 Q300 100 322 150 Q330 200 300 214 Q290 160 262 150Z" fill="#DD851F" stroke="#43301f" stroke-width="3"/>
+          <ellipse cx="360" cy="198" rx="54" ry="16" fill="#8a6a4a" stroke="#43301f" stroke-width="3"/><path d="M306 198 L306 222 Q360 236 414 222 L414 198" fill="#5A3E2B" stroke="#43301f" stroke-width="3"/><ellipse cx="360" cy="198" rx="30" ry="8" fill="none" stroke="#43301f" stroke-width="2" opacity=".6"/><ellipse cx="360" cy="198" rx="14" ry="4" fill="none" stroke="#43301f" stroke-width="2" opacity=".5"/>
+        </svg>
+      </div>
+    </div>
+    <div class="sidev">Sample studio · Est. 2026</div>
+    <div class="scrollh"><i></i>Scroll to enter</div>
+  </div>
+  <div class="rl" id="rl">
+    <div class="wrap sg">
+      <div>
+        <div class="cap">Our method</div>
+        <h2>From sketch to <em>space.</em></h2>
+        <div class="sst" id="ss"><b>Sketch</b><span>We start with walls, windows and light. Where the sun falls decides everything else.</span></div>
+        <div class="bars" id="bars"><i class="on"></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="sroom" id="sroom"></div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <section class="day" id="day">
+    <div class="wrap dg">
+      <div>
+        <div class="cap">A day in the room</div>
+        <div class="tl" id="tl">07:00</div>
+        <div class="tp" id="tp">Morning</div>
+        <p class="td" id="td">Low sun slides across the floor. This is the light we design for first.</p>
+      </div>
+      <div class="sroom" id="droom"></div>
+    </div>
+  </section>
+
+  <section class="gal" id="work">
+    <div class="gh wrap">
+      <div class="cap">Selected work</div>
+      <h2 class="serif h2 split">Homes we have drawn</h2>
+      <span class="note">Fictional projects · sample details</span>
+    </div>
+    <div class="gt" id="gt"></div>
+  </section>
+
+  <section class="sec light" id="try">
+    <div class="wrap">
+      <div class="cap">Try it yourself</div>
+      <h2 class="serif h2 split">Pick a mood</h2>
+      <span class="note">Illustrative room and estimates, not a quote</span>
+      <div class="try">
+        <div class="tr" id="tr"></div>
+        <div class="ctl">
+          <div class="grp"><span class="cap">Palette</span><div class="chips" id="cP"></div></div>
+          <div class="grp"><span class="cap">Home size: <output id="oA"></output></span><input id="rA" type="range" min="400" max="3500" step="50" value="1200"></div>
+          <div class="grp"><span class="cap">Finish level</span><div class="chips" id="cL"></div></div>
+          <div class="est"><span class="cap">Sample estimate</span><b id="eT">₹0</b><small id="eN"></small></div>
+          <button class="btn dk" id="bB" type="button" style="margin-top:20px">Send this to the studio</button>
+        </div>
+      </div>
+      <div class="ba" id="baw">
+        <div id="baA"></div>
+        <div class="top" id="baT"></div>
+        <span class="lab l1">Before</span><span class="lab l2">After</span>
+        <div class="hd" id="baH"></div>
+        <input id="baR" type="range" min="0" max="100" value="50" aria-label="Compare before and after">
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="process">
+    <div class="wrap">
+      <div class="cap">How we work</div>
+      <h2 class="serif h2 split">Five doors</h2>
+      <span class="note">Tap a door to open it</span>
+      <div class="doors" id="doors">
+        <div class="dr on"><span class="n">01</span><div><h3>Walkthrough</h3><p>We visit, measure and note how light moves through each room across the day.</p></div></div>
+        <div class="dr"><span class="n">02</span><div><h3>Concept</h3><p>A mood, a palette and a plan for the space, shared as a short visual brief.</p></div></div>
+        <div class="dr"><span class="n">03</span><div><h3>Detail</h3><p>Layouts, joinery, lighting and materials drawn so every vendor works from the same page.</p></div></div>
+        <div class="dr"><span class="n">04</span><div><h3>Build</h3><p>We manage the site, check each stage and send photos, not jargon.</p></div></div>
+        <div class="dr"><span class="n">05</span><div><h3>Handover</h3><p>Styling, final touches and a walkthrough so the home feels finished on day one.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec ct" id="contact">
+    <div class="wrap cg">
+      <div>
+        <div class="cap">Start a project</div>
+        <h2>Tell us about your home.</h2>
+        <p class="sub">Fill this in and it opens a WhatsApp message to the studio, ready to send. We reply with a walkthrough slot.</p>
+        <span class="note">Demo · uses a sample WhatsApp number</span>
+      </div>
+      <form id="cf">
+        <label>Your name<input id="fN" type="text" placeholder="Name" required></label>
+        <div class="two">
+          <label>Space<select id="fS"><option>Apartment</option><option>Villa or independent house</option><option>Office or studio</option><option>Shop or café</option></select></label>
+          <label>City<input id="fC" type="text" placeholder="City"></label>
+        </div>
+        <div class="two">
+          <label>Budget<select id="fB"><option>Under ₹10L</option><option>₹10L to ₹25L</option><option>₹25L to ₹60L</option><option>Above ₹60L</option></select></label>
+          <label>Start<select id="fW"><option>This month</option><option>In 1 to 3 months</option><option>Just exploring</option></select></label>
+        </div>
+        <label>Anything else<textarea id="fX" rows="2" placeholder="Rooms, style, timeline"></textarea></label>
+        <button class="btn am" type="submit">Send on WhatsApp</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="giant" id="giant">ember &amp; ash</div>
+    <div class="row"><span>Ember &amp; Ash Interiors is a fictional studio. A concept demo by Edit Theory. All projects, prices and numbers are samples.</span><span>© 2026 Edit Theory</span></div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)};
+  var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasG=!!window.gsap,lenis=null,WA='910000000000';
+  function inr(n){return '₹'+Math.round(n).toLocaleString('en-IN');}
+  function lakh(n){return '₹'+(n/100000).toFixed(1).replace('.0','')+'L';}
+  function sm(p,a,b){var x=Math.min(1,Math.max(0,(p-a)/(b-a)));return x*x*(3-2*x);}
+  function cl(x){return Math.min(1,Math.max(0,x));}
+  function wa(m){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(m),'_blank');}
+  function hx(c){return [parseInt(c.slice(1,3),16),parseInt(c.slice(3,5),16),parseInt(c.slice(5,7),16)];}
+  function mix(a,b,t){var A=hx(a),B=hx(b);return 'rgb('+A.map(function(v,i){return Math.round(v+(B[i]-v)*t);}).join(',')+')';}
+  function stops(arr,t,isNum){var n=arr.length-1,x=cl(t)*n,i=Math.min(n-1,Math.floor(x)),f=x-i;return isNum?arr[i]+(arr[i+1]-arr[i])*f:mix(arr[i],arr[i+1],f);}
+
+  window.addEventListener('scroll',function(){$('#hdr').classList.toggle('solid',window.scrollY>80);},{passive:true});
+
+  /* ---- line-art room ---- */
+  var THEMES={
+    'Sage':{wall:'#EDE6D3',floor:'#C9B592',sofa:'#87A96B',c1:'#F3EBDB',c2:'#5A3E2B',rug:'#D9CBA8',art:'#DD851F',pot:'#5A3E2B',leaf:'#6f8f55',lamp:'#FFE3A8',glass:'#FBEFD0',ln:'#2e2015'},
+    'Walnut':{wall:'#8a6a4a',floor:'#5A3E2B',sofa:'#87A96B',c1:'#F3EBDB',c2:'#DD851F',rug:'#6f5238',art:'#DD851F',pot:'#87A96B',leaf:'#87A96B',lamp:'#FFE3A8',glass:'#FBEFD0',ln:'#F3EBDB'},
+    'Amber':{wall:'#F4DDB0',floor:'#D9A25E',sofa:'#DD851F',c1:'#F3EBDB',c2:'#5A3E2B',rug:'#E8C98F',art:'#87A96B',pot:'#5A3E2B',leaf:'#6f8f55',lamp:'#FFE3A8',glass:'#FFF3D6',ln:'#2e2015'},
+    'Dusk':{wall:'#43301f',floor:'#2e2015',sofa:'#87A96B',c1:'#DD851F',c2:'#F3EBDB',rug:'#5A3E2B',art:'#F3EBDB',pot:'#DD851F',leaf:'#87A96B',lamp:'#FFE3A8',glass:'#8a6d47',ln:'#F3EBDB'},
+    'Bare':{wall:'#d8cdbd',floor:'#c2b6a4',sofa:'#cbbfae',c1:'#cbbfae',c2:'#cbbfae',rug:'#cbbfae',art:'#cbbfae',pot:'#cbbfae',leaf:'#cbbfae',lamp:'#cbbfae',glass:'#ece4d4',ln:'#7a6a58'}
+  };
+  var rid=0;
+  function E(tag,a,f){return '<'+tag+' class="ln fl" pathLength="1" style="fill:var(--'+f+')" '+a+'/>';}
+  function L(a){return '<line class="ln" pathLength="1" '+a+'/>';}
+  function Room(host,withGlow){
+    var id='r'+(++rid);
+    var s1=E('rect','x="60" y="40" width="680" height="300"','wall')+E('polygon','points="60,340 740,340 790,470 10,470"','floor')+E('rect','x="120" y="90" width="170" height="175" rx="4"','glass')+L('x1="205" y1="90" x2="205" y2="265"')+L('x1="120" y1="178" x2="290" y2="178"');
+    var s2='<polygon class="beam" points="290,100 290,262 400,468 540,345" fill="url(#'+id+'b)" style="opacity:0;pointer-events:none"/>'+E('ellipse','cx="480" cy="425" rx="235" ry="36"','rug')+E('rect','x="296" y="248" width="368" height="92" rx="18"','sofa')+E('rect','x="286" y="300" width="388" height="60" rx="16"','sofa')+E('rect','x="276" y="272" width="38" height="88" rx="16"','sofa')+E('rect','x="646" y="272" width="38" height="88" rx="16"','sofa')+E('rect','x="332" y="262" width="76" height="62" rx="12"','c1')+E('rect','x="548" y="262" width="76" height="62" rx="12"','c2')+L('x1="310" y1="360" x2="304" y2="384"')+L('x1="650" y1="360" x2="656" y2="384"');
+    var s3=E('rect','x="470" y="96" width="92" height="124" rx="3"','art')+E('rect','x="578" y="96" width="92" height="70" rx="3"','c1')+L('x1="400" y1="40" x2="400" y2="104"')+E('path','d="M352 140 Q400 84 448 140 Z"','lamp')+L('x1="712" y1="165" x2="712" y2="338"')+E('polygon','points="684,108 740,108 752,166 672,166"','lamp')+E('rect','x="84" y="296" width="56" height="46" rx="8"','pot')+E('ellipse','cx="112" cy="250" rx="14" ry="44" transform="rotate(-24 112 250)"','leaf')+E('ellipse','cx="112" cy="252" rx="13" ry="42" transform="rotate(26 112 252)"','leaf')+E('ellipse','cx="112" cy="236" rx="12" ry="40"','leaf');
+    host.innerHTML='<svg class="room" viewBox="0 0 800 490" aria-hidden="true"><defs><radialGradient id="'+id+'g"><stop offset="0" stop-color="var(--lamp)" stop-opacity=".8"/><stop offset="1" stop-color="var(--lamp)" stop-opacity="0"/></radialGradient><linearGradient id="'+id+'b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE3A3" stop-opacity=".75"/><stop offset="1" stop-color="#FFE3A3" stop-opacity=".05"/></linearGradient></defs><g class="s1">'+s1+'</g><g class="s2">'+s2+'</g><g class="s3">'+s3+'</g><rect class="ov" width="800" height="490" fill="#1b130b" style="opacity:0;pointer-events:none"/>'+(withGlow?'<circle class="glow" cx="712" cy="150" r="170" fill="url(#'+id+'g)" style="pointer-events:none"/><circle class="glow" cx="400" cy="130" r="150" fill="url(#'+id+'g)" style="pointer-events:none"/>':'')+'</svg>';
+    var svg=host.querySelector('svg'),gs=[svg.querySelector('.s1'),svg.querySelector('.s2'),svg.querySelector('.s3')],fl=Array.prototype.slice.call(svg.querySelectorAll('.fl')),gl=Array.prototype.slice.call(svg.querySelectorAll('.glow')),bm=svg.querySelector('.beam'),ov=svg.querySelector('.ov');
+    var api={
+      theme:function(n){var t=THEMES[n];for(var k in t){svg.style.setProperty('--'+k,t[k]);}},
+      hide:function(i,v){gs[i].style.display=v?'none':'';},
+      draw:function(p){
+        var r=[[0,.3],[.22,.52],[.45,.74]];
+        gs.forEach(function(g,i){var k=sm(p,r[i][0],r[i][1]);Array.prototype.forEach.call(g.querySelectorAll('.ln'),function(e){e.style.strokeDashoffset=1-k;});});
+        var f=sm(p,.68,.92);fl.forEach(function(e){e.style.fillOpacity=f;});
+        var gw=sm(p,.9,1);gl.forEach(function(e){e.style.opacity=gw;});
+      },
+      day:function(t){
+        svg.style.setProperty('--glass',stops(['#F6DFAE','#FBEFD0','#FBEFD0','#DD851F','#2e2015'],t));
+        ov.style.opacity=stops([.04,0,0,.16,.6],t,true);
+        var u=t/.8,up=t<.8,d=120+260*(1-Math.sin(Math.PI*cl(u)));
+        bm.setAttribute('points','290,100 290,262 '+(290+d*.55).toFixed(0)+',468 '+(290+d+120).toFixed(0)+',345');
+        bm.style.opacity=up?Math.min(1,cl(u)*6,(1-cl(u))*6)*.8:0;
+        var g=sm(t,.55,.9);gl.forEach(function(e){e.style.opacity=g;});
+      }};
+    api.theme('Walnut');api.draw(1);return api;
+  }
+
+  var scene=Room($('#sroom'),true);scene.draw(0);
+  var stepsT=[['Sketch','We start with walls, windows and light. Where the sun falls decides everything else.'],['Furnish','Seating, rugs and tables are placed for how you move, not for how a catalogue looks.'],['Layer','Art, plants and lamps add the small things that make a room feel like yours.'],['Light','Warm evening light ties it together. The room is ready to be lived in.']];
+  var lastS=-1;
+  function caption(p){
+    var k=p<.28?0:p<.52?1:p<.78?2:3;
+    if(k!==lastS){lastS=k;$('#ss').innerHTML='<b>'+stepsT[k][0]+'</b><span>'+stepsT[k][1]+'</span>';$$('#bars i').forEach(function(d,j){d.classList.toggle('on',j<=k);});
+      if(hasG&&!reduce&&document.body.className.indexOf('static')<0){gsap.fromTo('#ss',{y:14,opacity:0},{y:0,opacity:1,duration:.5,ease:'power2.out'});}}
+  }
+
+  /* hero -> door -> room */
+  var stage=$('#top'),arch=$('#arch'),rl=$('#rl');
+  function stageP(p){
+    var sc=stage.getBoundingClientRect(),rc=arch.getBoundingClientRect();
+    var k=sm(p,.14,.44),inv=1-k;
+    var t=(rc.top-sc.top)*inv,r=(sc.right-rc.right)*inv,b=(sc.bottom-rc.bottom)*inv,l=(rc.left-sc.left)*inv,rad=(rc.width/2)*inv;
+    rl.style.visibility=p>.1?'visible':'hidden';
+    rl.style.opacity=sm(p,.12,.22);
+    rl.style.clipPath='inset('+t.toFixed(1)+'px '+r.toFixed(1)+'px '+b.toFixed(1)+'px '+l.toFixed(1)+'px round '+rad.toFixed(1)+'px '+rad.toFixed(1)+'px 0px 0px)';
+    var o=1-sm(p,.04,.3);
+    $('#htx').style.opacity=o;$('#htx').style.transform='translateX('+(-80*sm(p,.04,.34))+'px)';
+    $$('.ray').forEach(function(e,i){e.style.transform='rotate('+(-30+p*40*(i+1)*.5)+'deg) translateX('+(p*160*(i+1))+'px)';});
+    arch.style.transform='scale('+(1+.08*sm(p,0,.2))+')';$('#furn').style.opacity=1-sm(p,.06,.22);
+    var rp=cl((p-.42)/.5);scene.draw(rp);caption(rp);
+  }
+
+  /* day */
+  var dayR=Room($('#droom'),true);dayR.draw(1);
+  var DB=[['Morning','Low sun slides across the floor. This is the light we design for first.'],['Midday','High, clean light. Colours read true, which is when we check every material.'],['Evening','The beam stretches long and turns amber. Warm walls and timber glow.'],['Night','Lamps take over. We plan layers of soft light so the room never feels flat.']];
+  var DAYBG=['#7a5a40','#9a7a58','#8a6a4a','#4d3626','#1f150d'],lastD=-1;
+  function dayP(t){
+    dayR.day(t);
+    $('#day').style.background=stops(DAYBG,t);
+    var hrs=6+17*t,h=Math.floor(hrs),m=Math.floor((hrs-h)*60/5)*5;
+    $('#tl').textContent=('0'+h).slice(-2)+':'+('0'+m).slice(-2);
+    var k=hrs<10?0:hrs<16?1:hrs<20?2:3;
+    if(k!==lastD){lastD=k;$('#tp').textContent=DB[k][0];$('#td').textContent=DB[k][1];}
+  }
+  dayP(.3);
+
+  /* gallery */
+  var PJ=[
+    ['The Quiet Flat','1,100 sq ft · 2025','linear-gradient(160deg,#F6E3B8,#87A96B 58%,#43301f)',['#F3EBDB','#87A96B','#5A3E2B']],
+    ['Courtyard House','3,400 sq ft · 2025','linear-gradient(160deg,#f0c27a,#DD851F 52%,#43301f)',['#DD851F','#5A3E2B','#2e2015']],
+    ['Loft in Linen','1,800 sq ft · 2024','linear-gradient(160deg,#FAF5EA,#cbbf9f 55%,#8a6a4a)',['#FAF5EA','#cbbf9f','#8a6a4a']],
+    ['Café Marigold','900 sq ft · 2024','linear-gradient(160deg,#ffd98a,#DD851F 50%,#5A3E2B)',['#FFD98A','#DD851F','#5A3E2B']],
+    ['Studio Nine','2,100 sq ft · 2023','linear-gradient(160deg,#a9c48f,#5f7f4a 50%,#2e2015)',['#a9c48f','#5f7f4a','#2e2015']]
+  ];
+  $('#gt').innerHTML=PJ.map(function(p,k){return '<article class="ar"><div class="fr"><div class="ph" style="--bg:'+p[2]+'"></div></div><div class="meta"><h3>'+p[0]+'</h3><span class="m">0'+(k+1)+'</span></div><div class="m" style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin-top:2px">'+p[1]+'</div><div class="dots">'+p[3].map(function(c){return '<i style="background:'+c+'"></i>';}).join('')+'</div></article>';}).join('');
+
+  /* try it */
+  var tryR=Room($('#tr'),true);tryR.draw(1);
+  var PAL=['Sage','Walnut','Amber','Dusk'],LVL=[['Essential',1450],['Refined',2300],['Signature',3600]],S={p:0,l:1};
+  function dots(n){var t=THEMES[n];return '<i><b style="background:'+t.wall+'"></b><b style="background:'+t.sofa+'"></b><b style="background:'+t.art+'"></b></i>';}
+  $('#cP').innerHTML=PAL.map(function(n,k){return '<button type="button" class="chip" data-k="'+k+'">'+dots(n)+n+'</button>';}).join('');
+  $('#cL').innerHTML=LVL.map(function(n,k){return '<button type="button" class="chip" data-k="'+k+'">'+n[0]+'</button>';}).join('');
+  function tUp(){
+    $$('#cP .chip').forEach(function(c,k){c.classList.toggle('on',k===S.p);});
+    $$('#cL .chip').forEach(function(c,k){c.classList.toggle('on',k===S.l);});
+    tryR.theme(PAL[S.p]);
+    var a=+$('#rA').value,rate=LVL[S.l][1];
+    $('#oA').textContent=a.toLocaleString('en-IN')+' sq ft';
+    $('#eT').textContent=lakh(a*rate*.9)+' to '+lakh(a*rate*1.15);
+    $('#eN').textContent=LVL[S.l][0]+' finish at about '+inr(rate)+' per sq ft (sample rate). Real quotes need a site visit.';
+  }
+  $('#cP').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;S.p=+b.dataset.k;tUp();});
+  $('#cL').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;S.l=+b.dataset.k;tUp();});
+  $('#rA').addEventListener('input',tUp);
+  $('#bB').addEventListener('click',function(){wa('Hi Ember & Ash, I tried the room builder: '+PAL[S.p]+' palette, '+$('#rA').value+' sq ft, '+LVL[S.l][0]+' finish. Estimate shown: '+$('#eT').textContent+'. I would like to talk.');});
+  tUp();
+
+  var baA=Room($('#baA'),true);baA.draw(1);baA.theme('Sage');
+  var baB=Room($('#baT'),false);baB.theme('Bare');baB.hide(1,true);baB.hide(2,true);baB.draw(1);
+  function baSet(v){$('#baT').style.clipPath='inset(0 '+(100-v)+'% 0 0)';$('#baH').style.left=v+'%';}
+  $('#baR').addEventListener('input',function(){baSet(+this.value);});baSet(50);
+
+  /* doors */
+  $('#doors').addEventListener('click',function(e){var d=e.target.closest('.dr');if(!d)return;$$('#doors .dr').forEach(function(x){x.classList.toggle('on',x===d);});});
+  $('#doors').addEventListener('mouseover',function(e){var d=e.target.closest('.dr');if(!d||d.classList.contains('on'))return;if(window.matchMedia('(hover:hover)').matches){$$('#doors .dr').forEach(function(x){x.classList.toggle('on',x===d);});}});
+
+  /* form */
+  $('#cf').addEventListener('submit',function(e){
+    e.preventDefault();
+    wa('Hi Ember & Ash, I am '+$('#fN').value+($('#fC').value?' from '+$('#fC').value:'')+'. Space: '+$('#fS').value+'. Budget: '+$('#fB').value+'. Start: '+$('#fW').value+'.'+($('#fX').value?' '+$('#fX').value:''));
+  });
+  var ctS=$('#contact');
+  ctS.addEventListener('mousemove',function(e){var r=ctS.getBoundingClientRect();ctS.style.setProperty('--sx',(e.clientX-r.left)+'px');ctS.style.setProperty('--sy',(e.clientY-r.top)+'px');});
+
+  /* cursor light (desktop only) */
+  var cg=$('#cg');
+  if(window.matchMedia('(hover:hover)').matches){
+    window.addEventListener('mousemove',function(e){cg.classList.add('on');cg.style.setProperty('--mx',e.clientX+'px');cg.style.setProperty('--my',e.clientY+'px');},{passive:true});
+  }
+
+  if(!hasG||reduce){
+    document.body.classList.add('static');
+    scene.draw(1);$('#ss').innerHTML='<b>Light</b><span>'+stepsT[3][1]+'</span>';
+    dayP(.45);
+    if(reduce){document.body.classList.add('reduce');}
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+
+  if(window.Lenis){
+    lenis=new Lenis({lerp:0.08});
+    lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(function(t){lenis.raf(t*1000);});
+    gsap.ticker.lagSmoothing(0);
+  }
+  $$('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href'),el=id.length>1?$(id):null;if(!el)return;
+      e.preventDefault();
+      if(lenis){lenis.scrollTo(el,{offset:-50});}else{el.scrollIntoView({behavior:'smooth'});}
+    });
+  });
+
+  gsap.from('#h0,#h1,#hp,#hc',{y:60,opacity:0,duration:1.3,stagger:.14,ease:'power4.out',delay:.2});
+  gsap.from('#arch',{clipPath:'inset(100% 0 0 0)',duration:1.6,ease:'power4.inOut',delay:.2});gsap.from('#furn',{y:60,opacity:0,duration:1.4,ease:'power3.out',delay:.9});
+  gsap.to('#furn',{y:-6,repeat:-1,yoyo:true,duration:3,ease:'sine.inOut'});
+
+  ScrollTrigger.create({trigger:'#top',start:'top top',end:'+=480%',pin:true,scrub:true,onUpdate:function(s){stageP(s.progress);},onRefresh:function(s){stageP(s.progress);}});
+  stageP(0);
+
+  $$('.split').forEach(function(el){
+    var w=el.textContent.trim().split(/\s+/);
+    el.innerHTML=w.map(function(x){return '<span class="wd"><span class="in">'+x+'</span></span>';}).join(' ');
+    gsap.from(el.querySelectorAll('.in'),{yPercent:115,duration:1.2,stagger:.09,ease:'power4.out',scrollTrigger:{trigger:el,start:'top 88%'}});
+  });
+
+  ScrollTrigger.create({trigger:'#day',start:'top top',end:'+=300%',pin:true,scrub:true,onUpdate:function(s){dayP(s.progress);}});
+
+  /* horizontal gallery with inner parallax */
+  var gt=$('#gt');
+  function dist(){return Math.max(0,gt.scrollWidth-window.innerWidth);}
+  var tw=gsap.to(gt,{x:function(){return -dist();},ease:'none',scrollTrigger:{trigger:'#work',start:'top top',end:function(){return '+='+(dist()+window.innerHeight*.3);},pin:true,scrub:true,invalidateOnRefresh:true}});
+  $$('.ar .ph').forEach(function(ph){
+    gsap.fromTo(ph,{xPercent:-9},{xPercent:9,ease:'none',scrollTrigger:{trigger:ph.parentNode,containerAnimation:tw,start:'left right',end:'right left',scrub:true}});
+  });
+
+  gsap.from('.try > *',{y:60,opacity:0,duration:1,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'.try',start:'top 85%'}});
+  gsap.from('#baw',{y:60,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:'#baw',start:'top 90%'}});
+  gsap.from('.dr',{y:80,opacity:0,duration:1,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:'#doors',start:'top 85%'}});
+  gsap.from('.cg > *',{y:60,opacity:0,duration:1,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'#contact',start:'top 70%'}});
+  gsap.fromTo('#giant',{x:'10%'},{x:'-18%',ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:true}});
+  window.addEventListener('load',function(){ScrollTrigger.refresh();});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Offbeat Supply — Streetwear (Concept Demo)</title>
+<meta name="description" content="Concept demo streetwear store by Edit Theory. Fictional brand, sample products and prices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Shrikhand&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bk:#101010;--pk:#D5360C;--ch:#E6D5BD;--wh:#E6D5BD;--gr:#a39683;--line:#e6d5bd2b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:auto}
+  body{background:var(--bk);color:var(--wh);font-family:'Space Grotesk',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.55}
+  a{color:inherit;text-decoration:none}
+  button,input,select{font:inherit;color:inherit}
+  h1,h2,h3,.disp{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.005em;line-height:.92}
+  .cap{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 22px}
+  .sec{padding:clamp(80px,12vw,140px) 0}
+  .h2{font-size:clamp(48px,9vw,130px);margin-top:12px}
+  .note{display:inline-block;margin-top:14px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px dashed currentColor;padding:6px 12px;border-radius:99px;opacity:.8;font-weight:700}
+
+  /* top: ticker + header */
+  .tick{position:fixed;top:0;left:0;right:0;height:30px;z-index:90;background:var(--ch);color:var(--bk);overflow:hidden;white-space:nowrap;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;display:flex;align-items:center}
+  .tick div{display:inline-flex;gap:40px;padding-left:40px;will-change:transform}
+  header{position:fixed;top:30px;left:0;right:0;z-index:80;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:background .3s}
+  header.solid{background:#101010ee;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .logo{font-family:'Anton',sans-serif;font-size:28px;letter-spacing:.02em;text-transform:uppercase}
+  .logo b{color:var(--pk);font-weight:400}
+  nav{display:none;gap:28px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+  nav a:hover{color:var(--ch)}
+  @media(min-width:900px){nav{display:flex}}
+  .cartb{background:var(--ch);color:var(--bk);border:0;border-radius:99px;padding:11px 18px;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:2px solid var(--wh);border-radius:99px;padding:15px 28px;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--wh);transition:transform .2s,background .2s,color .2s}
+  .btn:hover{transform:translateY(-3px)}
+  .btn.pk{background:var(--pk);border-color:var(--pk);color:var(--bk)}
+  .btn.ch{background:var(--ch);border-color:var(--ch);color:var(--bk)}
+  .btn.sm{padding:10px 18px;font-size:12px}
+
+  /* hero (poster style) */
+  .hero{position:relative;height:100svh;min-height:640px;background:var(--pk);overflow:hidden;color:var(--ch)}
+  .words{position:absolute;inset:0;font-family:'Shrikhand','Anton',serif;color:var(--ch);line-height:.8;text-shadow:5px 6px 0 rgba(16,16,16,.22);z-index:1;pointer-events:none}
+  .w{position:absolute;white-space:nowrap}
+  .w1{left:6%;top:16%;font-size:clamp(60px,12.5vw,200px)}
+  .w2{left:3%;top:31%;font-size:clamp(60px,14.6vw,250px)}
+  .w3{right:5%;bottom:9%;font-size:clamp(60px,13.5vw,220px)}
+  .wl{display:inline-block;transform-origin:50% 80%}
+  .li{display:inline-block}
+  .fig{position:absolute;left:46%;translate:-50% 0;bottom:-2%;height:84%;z-index:2;pointer-events:none}
+  .fig svg{height:100%;width:auto;display:block;overflow:visible}
+  .smalls{position:absolute;left:3%;top:62%;z-index:3;font-size:10px;line-height:2;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+  .rp{position:absolute;right:4%;top:40%;width:min(290px,22vw);z-index:3;font-size:13.5px;line-height:1.6}
+  .rp .btn{margin-top:16px;background:var(--bk);border-color:var(--bk);color:var(--ch)}
+  .burst{position:absolute;right:9%;top:15%;width:clamp(84px,10vw,132px);z-index:3;animation:sp 16s linear infinite}
+  .ringb{position:absolute;left:3%;bottom:6%;width:96px;height:96px;z-index:3}
+  .ringb svg{width:100%;height:100%;animation:sp 14s linear infinite}
+  .ringb b{position:absolute;inset:0;display:grid;place-items:center;font-size:22px;font-weight:400}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  @media(max-width:760px){
+    .w1{left:6%;top:14%;font-size:23vw}.w2{left:2%;top:26%;font-size:19vw}.w3{right:4%;bottom:26%;font-size:20vw}
+    .fig{height:62%;left:50%}.smalls{display:none}
+    .rp{left:6%;right:6%;width:auto;top:auto;bottom:4%;font-size:12.5px}.rp .btn{margin-top:10px;padding:11px 20px}
+    .ringb{display:none}.burst{right:5%;top:12%;width:76px}
+  }
+
+  .trust{display:grid;grid-template-columns:repeat(2,1fr);border-block:1px solid var(--line)}
+  @media(min-width:800px){.trust{grid-template-columns:repeat(4,1fr)}}
+  .trust div{padding:22px;border-right:1px solid var(--line)}
+  .trust b{display:block;font-family:'Anton';text-transform:uppercase;font-weight:400;font-size:22px;color:var(--ch)}
+  .trust span{font-size:13px;color:var(--gr)}
+
+  /* categories (horizontal) */
+  .cats{position:relative;overflow:hidden}
+  .chd{padding:clamp(70px,10vw,120px) 22px 30px}
+  .ctrack{display:flex;gap:18px;width:max-content;padding:0 22px 70px}
+  .cp{width:min(76vw,400px);height:min(62vh,500px);border-radius:28px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;flex:none;color:var(--bk);cursor:pointer;transition:transform .3s}
+  .cp:hover{transform:translateY(-8px) rotate(-1deg)}
+  .cp .gar{width:78%;margin:0 auto;display:block}
+  .cp h3{font-size:clamp(34px,4vw,50px)}
+  .cp .row{display:flex;justify-content:space-between;align-items:baseline;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+  .k0{background:var(--pk)}.k1{background:var(--ch)}.k2{background:var(--wh)}
+  body.reduce .ctrack{flex-wrap:wrap;width:auto}
+
+  /* shop */
+  .fl{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+  .fl button{border:2px solid var(--wh);background:transparent;border-radius:99px;padding:10px 18px;cursor:pointer;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:all .2s}
+  .fl button.on{background:var(--ch);border-color:var(--ch);color:var(--bk)}
+  .pg{display:grid;gap:18px;margin-top:30px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+  .pc{border-radius:24px;overflow:hidden;background:#161616;border:1px solid var(--line);display:flex;flex-direction:column}
+  .pc .im{position:relative;aspect-ratio:1;display:grid;place-items:center;padding:12%}
+  .pc .im .gar{width:100%}
+  .bdg{position:absolute;left:12px;top:12px;background:var(--bk);color:var(--ch);font-size:10px;letter-spacing:.14em;font-weight:700;padding:5px 10px;border-radius:99px;text-transform:uppercase}
+  .hrt{position:absolute;right:12px;top:12px;width:38px;height:38px;border-radius:50%;border:0;background:var(--bk);color:var(--wh);cursor:pointer;font-size:18px}
+  .hrt.on{color:var(--pk)}
+  .pc .bd{padding:16px 18px 18px;display:grid;gap:12px}
+  .pc h3{font-size:24px;line-height:1}
+  .pr{display:flex;gap:10px;align-items:baseline;font-weight:700}
+  .pr s{color:var(--gr);font-weight:400;font-size:14px}
+  .sz{display:flex;gap:6px}
+  .sz button{flex:1;border:1px solid var(--line);background:transparent;border-radius:10px;padding:8px 0;cursor:pointer;font-size:13px;font-weight:700}
+  .sz button.on{background:var(--wh);color:var(--bk);border-color:var(--wh)}
+  .pc .btn{width:100%}
+
+  /* lookbook stack */
+  .look{background:var(--pk);color:var(--bk)}
+  .look .cap,.look .h2{color:var(--bk)}
+  .stack{margin-top:46px}
+  .lk{position:sticky;top:calc(100px + var(--k)*18px);margin-bottom:34px;border-radius:30px;border:2px solid var(--bk);padding:clamp(22px,4vw,44px);min-height:380px;display:grid;gap:22px;align-content:space-between;overflow:hidden}
+  @media(min-width:800px){.lk{grid-template-columns:1fr 1fr;align-items:center}}
+  .lk .big{font-family:'Anton';font-size:clamp(70px,13vw,170px);line-height:.85;text-transform:uppercase}
+  .lk p{max-width:36ch;margin:8px 0 18px}
+  .lk .ps{display:flex;gap:10px;justify-content:center}
+  .lk .ps svg{width:30%;max-width:130px}
+  .lk:nth-child(1){background:var(--bk);color:var(--wh)}
+  .lk:nth-child(2){background:var(--ch);color:var(--bk)}
+  .lk:nth-child(3){background:var(--wh);color:var(--bk)}
+
+  /* drop + fit */
+  .two{display:grid;gap:24px;margin-top:40px}
+  @media(min-width:900px){.two{grid-template-columns:1fr 1fr}}
+  .box{border:1px solid var(--line);border-radius:28px;padding:clamp(24px,4vw,40px)}
+  .box.ch{background:var(--ch);color:var(--bk);border-color:var(--ch)}
+  .cd{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0}
+  .cd div{background:var(--bk);color:var(--ch);border-radius:16px;padding:14px 4px;text-align:center}
+  .cd b{display:block;font-family:'Anton';font-weight:400;font-size:clamp(34px,6vw,56px);line-height:1}
+  .cd span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+  .grp{margin-top:16px}
+  .grp .cap{display:block;margin-bottom:10px;color:var(--gr)}
+  .chp{display:flex;flex-wrap:wrap;gap:8px}
+  .chp button{border:1.5px solid var(--wh);background:transparent;border-radius:99px;padding:9px 16px;cursor:pointer;font-weight:700;font-size:13px}
+  .chp button.on{background:var(--pk);border-color:var(--pk);color:var(--bk)}
+  .fres{margin-top:22px;font-family:'Anton';font-size:clamp(46px,7vw,84px);color:var(--ch);line-height:1;text-transform:uppercase}
+  .fres small{display:block;font-family:'Space Grotesk';font-size:14px;color:var(--gr);text-transform:none;margin-top:6px}
+
+  /* voices */
+  .vg{display:grid;gap:16px;margin-top:36px}
+  @media(min-width:800px){.vg{grid-template-columns:repeat(3,1fr)}}
+  .vc{border:1px solid var(--line);border-radius:24px;padding:24px;display:grid;gap:14px}
+  .vc .st{color:var(--ch);letter-spacing:.2em}
+  .vc .who{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gr);font-weight:700}
+
+  /* contact */
+  .nl{background:var(--ch);color:var(--bk)}
+  .nl h2{font-size:clamp(50px,10vw,150px)}
+  .nl form{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+  .nl input{flex:1;min-width:220px;background:transparent;border:2px solid var(--bk);border-radius:99px;padding:15px 22px;font-size:16px;outline:none}
+  .nl input::placeholder{color:#0B0B0B99}
+
+  footer{padding:70px 0 50px;overflow:hidden;font-size:14px;color:var(--gr)}
+  footer .giant{font-family:'Anton';text-transform:uppercase;line-height:.85;font-size:clamp(90px,25vw,400px);color:var(--pk);white-space:nowrap}
+  footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;margin-top:30px}
+
+  /* cart drawer */
+  .ov{position:fixed;inset:0;background:#000a;z-index:95;opacity:0;pointer-events:none;transition:opacity .3s}
+  .ov.on{opacity:1;pointer-events:auto}
+  .dr{position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:#141414;border-left:1px solid var(--line);z-index:96;transform:translateX(100%);transition:transform .4s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+  .dr.on{transform:none}
+  .dr .hd{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid var(--line)}
+  .dr .hd h3{font-size:30px}
+  .dr .x{background:transparent;border:0;font-size:28px;cursor:pointer}
+  .ship{padding:16px 22px;border-bottom:1px solid var(--line);font-size:13px}
+  .ship i{display:block;height:8px;border-radius:8px;background:#ffffff1f;margin-top:8px;overflow:hidden}
+  .ship i b{display:block;height:100%;background:var(--ch);width:0;transition:width .4s}
+  .items{flex:1;overflow:auto;padding:10px 22px}
+  .it{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+  .it .th{width:64px;height:64px;border-radius:14px;display:grid;place-items:center;padding:8px}
+  .it .th svg{width:100%}
+  .it h4{font-size:14px}
+  .it span{font-size:12px;color:var(--gr)}
+  .q{display:flex;align-items:center;gap:8px}
+  .q button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer}
+  .empty{padding:40px 0;text-align:center;color:var(--gr)}
+  .ft{padding:20px 22px;border-top:1px solid var(--line);display:grid;gap:12px}
+  .ft .tt{display:flex;justify-content:space-between;font-weight:700;font-size:18px}
+
+  .wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em}
+  .wd .in{display:inline-block}
+</style>
+</head>
+<body>
+
+<div class="tick" aria-label="Concept demo notice"><div id="tk"></div></div>
+<header id="hdr">
+  <a href="#top" class="logo">offbeat<b>.</b>supply</a>
+  <nav><a href="#cats">Shop</a><a href="#shop">Best sellers</a><a href="#look">Lookbook</a><a href="#drop">Drop</a></nav>
+  <button class="cartb" id="cartb" type="button">Bag (0)</button>
+</header>
+
+<section class="hero" id="top">
+  <div class="words" id="words" aria-label="The Offbeat Edit"><div class="w w1">THE</div><div class="w w2">OFFBEAT</div><div class="w w3">EDIT</div></div>
+  <div class="fig" id="fig" aria-hidden="true">
+    <svg viewBox="0 0 420 540">
+      <polygon points="104,504 300,504 700,566 470,566" fill="#101010" opacity=".3"/>
+      <g stroke="#E6D5BD" stroke-width="6" stroke-linecap="round" fill="none"><rect x="262" y="184" width="30" height="148" rx="10"/><path d="M118 338 L296 338"/><path d="M136 340 L120 506"/><path d="M282 340 L300 506"/><path d="M196 340 L186 500" opacity=".55"/></g>
+      <path d="M228 318 L100 324" stroke="#101010" stroke-width="50" stroke-linecap="round"/>
+      <path d="M96 326 L90 462" stroke="#101010" stroke-width="42" stroke-linecap="round"/>
+      <path d="M48 458 Q48 444 72 444 L118 444 Q136 450 136 474 L136 488 L48 488Z" fill="#101010"/><rect x="44" y="486" width="96" height="10" rx="5" fill="#E6D5BD"/>
+      <path d="M178 150 Q206 138 242 150 L270 262 Q274 330 264 342 L172 342 Q166 300 168 250Z" fill="#101010"/>
+      <path d="M216 152 L222 340" stroke="#E6D5BD" stroke-width="2" opacity=".5"/><path d="M198 150 L214 178 L232 150" fill="none" stroke="#E6D5BD" stroke-width="2.5" opacity=".7"/>
+      <path d="M214 164 Q240 216 234 264 Q208 300 168 304" stroke="#101010" stroke-width="32" stroke-linecap="round" fill="none"/><circle cx="160" cy="306" r="13" fill="#D8A883"/>
+      <rect x="198" y="124" width="16" height="30" rx="6" fill="#D8A883"/><ellipse cx="204" cy="94" rx="30" ry="36" fill="#D8A883"/><path d="M175 100 L165 114 L177 117Z" fill="#D8A883"/>
+      <path d="M170 98 Q166 52 206 50 Q248 52 243 106 Q246 142 228 154 L224 120 Q214 84 190 86 Q176 88 170 98Z" fill="#101010"/><circle cx="214" cy="110" r="3.5" fill="#E6D5BD"/>
+    </svg>
+  </div>
+  <div class="smalls" id="sm">SS26<br>Offbeat<br>Supply<br>Issue 07</div>
+  <div class="rp" id="rp"><p>Oversized fits, heavy cotton and colour that does not whisper. A fictional label, new pieces every Friday.</p><a class="btn" href="#shop">Shop the drop</a></div>
+  <svg class="burst" id="burst" viewBox="0 0 120 120" aria-hidden="true"><polygon id="bp" fill="#101010" points=""/></svg>
+  <a class="ringb" href="#shop" aria-label="Shop the drop"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="rc" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs><circle cx="60" cy="60" r="58" fill="none" stroke="#E6D5BD" stroke-width="1.5"/><text font-family="Space Grotesk" font-weight="700" font-size="11" letter-spacing="2.6" fill="#E6D5BD"><textPath href="#rc">SHOP THE DROP · SHOP THE DROP ·</textPath></text></svg><b>↓</b></a>
+</section>
+
+<div class="trust">
+  <div><b>Free shipping</b><span>Over ₹1,999 (sample)</span></div>
+  <div><b>Easy returns</b><span>7 days (sample)</span></div>
+  <div><b>Heavy cotton</b><span>240 GSM tees (sample)</span></div>
+  <div><b>New drops</b><span>Every Friday (sample)</span></div>
+</div>
+
+<main>
+  <section class="cats" id="cats">
+    <div class="wrap chd">
+      <div class="cap" style="color:var(--pk)">Shop by</div>
+      <h2 class="disp h2 split">Pick your piece</h2>
+      <span class="note">Sample catalogue</span>
+    </div>
+    <div class="ctrack" id="ct"></div>
+  </section>
+
+  <section class="sec" id="shop">
+    <div class="wrap">
+      <div class="cap" style="color:var(--ch)">Best sellers</div>
+      <h2 class="disp h2 split">The drop</h2>
+      <span class="note">Sample products and prices</span>
+      <div class="fl" id="fl"></div>
+      <div class="pg" id="pg"></div>
+    </div>
+  </section>
+
+  <section class="sec look" id="look">
+    <div class="wrap">
+      <div class="cap">The lookbook</div>
+      <h2 class="disp h2 split">Three ways to wear it</h2>
+      <div class="stack" id="stack"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="drop">
+    <div class="wrap">
+      <div class="cap" style="color:var(--pk)">Before you buy</div>
+      <h2 class="disp h2 split">Next drop. Your size.</h2>
+      <div class="two">
+        <div class="box ch">
+          <div class="cap">Next drop goes live in</div>
+          <div class="cd" id="cd"><div><b>00</b><span>Days</span></div><div><b>00</b><span>Hrs</span></div><div><b>00</b><span>Min</span></div><div><b>00</b><span>Sec</span></div></div>
+          <p>Every Friday, 7 pm. Get a nudge on WhatsApp before it sells out.</p>
+          <div style="margin-top:18px"><button class="btn" style="border-color:var(--bk);color:var(--bk)" id="notify" type="button">Remind me on WhatsApp</button></div>
+        </div>
+        <div class="box">
+          <div class="cap" style="color:var(--ch)">Fit finder (sample rules)</div>
+          <div class="grp"><span class="cap">Height</span><div class="chp" id="fH"></div></div>
+          <div class="grp"><span class="cap">Build</span><div class="chp" id="fB"></div></div>
+          <div class="grp"><span class="cap">Fit</span><div class="chp" id="fF"></div></div>
+          <div class="fres" id="fr">M<small>Pick your height, build and fit</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="cap" style="color:var(--ch)">Customer voices</div>
+      <h2 class="disp h2 split">Sample reviews</h2>
+      <span class="note">Placeholder text, not real customers</span>
+      <div class="vg">
+        <div class="vc"><div class="st">★★★★★</div><p>Sample review: the tee fits boxy and heavy, exactly how an oversized tee should.</p><div class="who">Sample buyer</div></div>
+        <div class="vc"><div class="st">★★★★★</div><p>Sample review: the hoodie feels thick without being stiff. Colour stays after washing.</p><div class="who">Sample buyer</div></div>
+        <div class="vc"><div class="st">★★★★☆</div><p>Sample review: cargo pockets are actually usable. Size up if you like a relaxed fit.</p><div class="who">Sample buyer</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec nl" id="join">
+    <div class="wrap">
+      <div class="cap">Drop alerts</div>
+      <h2 class="disp">Be first. Not sorry.</h2>
+      <form id="nf"><input id="nE" type="text" placeholder="Your name or WhatsApp number" required><button class="btn" style="background:var(--bk);border-color:var(--bk);color:var(--ch)" type="submit">Notify me</button></form>
+      <span class="note">Demo · opens WhatsApp with a sample number</span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="giant" id="giant">offbeat.</div>
+    <div class="row"><span>Offbeat Supply is a fictional label. A concept demo by Edit Theory. All products, prices and reviews are samples.</span><span>© 2026 Edit Theory</span></div>
+  </div>
+</footer>
+
+<div class="ov" id="ov"></div>
+<aside class="dr" id="dr" aria-label="Shopping bag">
+  <div class="hd"><h3>Your bag</h3><button class="x" id="dx" type="button" aria-label="Close bag">×</button></div>
+  <div class="ship" id="shp"></div>
+  <div class="items" id="its"></div>
+  <div class="ft"><div class="tt"><span>Total</span><span id="ct2">₹0</span></div><button class="btn pk" id="co" type="button">Checkout on WhatsApp</button></div>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)};
+  var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasG=!!window.gsap,lenis=null,WA='910000000000';
+  var BK='#101010',PK='#D5360C',CH='#E6D5BD',WH='#F2E8D6';
+  function inr(n){return '₹'+Math.round(n).toLocaleString('en-IN');}
+  function wa(m){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(m),'_blank');}
+
+  window.addEventListener('scroll',function(){$('#hdr').classList.toggle('solid',window.scrollY>80);},{passive:true});
+
+  /* ticker */
+  (function(){var w=['Concept demo by Edit Theory','Fictional label','Free shipping over ₹1,999 (sample)','New drop every Friday (sample)','Flash sale up to 40% (sample)'],h='';for(var k=0;k<4;k++){h+=w.map(function(x){return '<span>'+x+'</span><span>✦</span>';}).join('');}$('#tk').innerHTML=h;})();
+
+  /* garment illustrations: body in black, details in the card colour */
+  function garment(type,det,body){
+    body=body||BK;var d=det,s='';
+    var st=' stroke="'+body+'" stroke-width="3" stroke-linejoin="round"';
+    if(type==='tee'){
+      s='<path d="M62 30 L88 22 Q100 40 112 22 L138 30 L174 66 L150 90 L138 78 L138 176 L62 176 L62 78 L50 90 L26 66 Z" fill="'+body+'"'+st+'/>'+
+        '<path d="M88 22 Q100 42 112 22" fill="none" stroke="'+d+'" stroke-width="4"/>'+
+        '<path d="M100 96 l5 12 13 1 -10 8 4 13 -12 -7 -12 7 4 -13 -10 -8 13 -1z" fill="'+d+'"/>';
+    }else if(type==='hoodie'){
+      s='<path d="M56 56 L144 56 L176 118 L154 130 L142 108 L142 180 L58 180 L58 108 L46 130 L24 118 Z" fill="'+body+'"'+st+'/>'+
+        '<path d="M70 56 Q100 6 130 56 Q100 76 70 56 Z" fill="'+body+'" stroke="'+d+'" stroke-width="3"/>'+
+        '<path d="M92 62 L90 96 M108 62 L110 96" stroke="'+d+'" stroke-width="3" stroke-linecap="round"/>'+
+        '<path d="M76 132 L124 132 L132 160 L68 160 Z" fill="none" stroke="'+d+'" stroke-width="3" stroke-linejoin="round"/>';
+    }else if(type==='jacket'){
+      s='<path d="M56 40 L88 30 L100 44 L112 30 L144 40 L178 108 L156 122 L144 102 L144 180 L56 180 L56 102 L44 122 L22 108 Z" fill="'+body+'"'+st+'/>'+
+        '<path d="M100 44 L100 180" stroke="'+d+'" stroke-width="4" stroke-dasharray="6 5"/>'+
+        '<path d="M70 130 L90 130 M110 130 L130 130" stroke="'+d+'" stroke-width="4" stroke-linecap="round"/>';
+    }else if(type==='pants'){
+      s='<path d="M60 20 L140 20 L150 182 L110 182 L100 76 L90 182 L50 182 Z" fill="'+body+'"'+st+'/>'+
+        '<path d="M60 20 L140 20 L140 36 L60 36 Z" fill="'+d+'"/>'+
+        '<path d="M60 96 L82 96 L82 124 L58 124 Z M118 96 L140 96 L142 124 L118 124 Z" fill="none" stroke="'+d+'" stroke-width="3"/>';
+    }else if(type==='sneaker'){
+      s='<path d="M18 128 Q18 98 54 94 L82 88 Q98 110 124 106 L160 112 Q186 122 186 146 L186 152 L18 152 Z" fill="'+body+'"'+st+'/>'+
+        '<rect x="18" y="146" width="168" height="14" rx="7" fill="'+d+'"/>'+
+        '<path d="M92 98 l10 10 M104 102 l10 10 M116 106 l10 10" stroke="'+d+'" stroke-width="4" stroke-linecap="round"/>'+
+        '<path d="M52 118 Q70 130 96 126" fill="none" stroke="'+d+'" stroke-width="4" stroke-linecap="round"/>';
+    }else{ /* cap */
+      s='<path d="M42 122 Q42 54 104 54 Q164 54 164 122 Z" fill="'+body+'"'+st+'/>'+
+        '<path d="M150 112 Q198 116 194 134 L128 130 Z" fill="'+body+'" stroke="'+d+'" stroke-width="3"/>'+
+        '<circle cx="104" cy="54" r="6" fill="'+d+'"/>'+
+        '<path d="M104 60 L104 122 M72 70 Q76 100 78 122 M136 70 Q132 100 130 122" stroke="'+d+'" stroke-width="2.5" fill="none" opacity=".7"/>';
+    }
+    return '<svg class="gar" viewBox="0 0 200 200" aria-hidden="true">'+s+'</svg>';
+  }
+  /* hero lettering */
+  (function(){var pts=[],n=18,R1=58,R2=42,k;for(k=0;k<n*2;k++){var a=k*Math.PI/n,r=k%2?R2:R1;pts.push((60+r*Math.cos(a)).toFixed(1)+','+(60+r*Math.sin(a)).toFixed(1));}$('#bp').setAttribute('points',pts.join(' '));})();
+  $$('.w').forEach(function(w){w.innerHTML=w.textContent.split('').map(function(c){return '<span class="wl"><span class="li">'+c+'</span></span>';}).join('');});
+  var WL=$$('.wl');
+  function wave(t){WL.forEach(function(l,i){var big=l.parentNode.className.indexOf('w2')>0?1:.7,a=i*.9+t*1.8;l.style.transform='translateY('+(Math.sin(a)*big*1.5).toFixed(2)+'vw) rotate('+(Math.cos(a)*4*big).toFixed(2)+'deg)';});}
+  wave(0);
+
+  /* data */
+  var P=[
+    {id:1,n:'Static Oversized Tee',t:'tee',c:'tees',p:1299,o:1799,b:'Bestseller',bg:PK},
+    {id:2,n:'Acid Box Tee',t:'tee',c:'tees',p:1199,b:'New',bg:CH},
+    {id:3,n:'Night Shift Hoodie',t:'hoodie',c:'hoodies',p:2499,o:2999,b:'Sale',bg:WH},
+    {id:4,n:'Cargo Zero Pant',t:'pants',c:'bottoms',p:2199,b:'Bestseller',bg:CH},
+    {id:5,n:'Cloud Runner Sneaker',t:'sneaker',c:'kicks',p:3299,b:'New',bg:PK},
+    {id:6,n:'Dad Cap Club',t:'cap',c:'kicks',p:799,bg:WH},
+    {id:7,n:'Shell Jacket',t:'jacket',c:'hoodies',p:3499,b:'New',bg:PK},
+    {id:8,n:'Mono Hoodie',t:'hoodie',c:'hoodies',p:2299,bg:CH}
+  ];
+  var CATS=[['Oversized tees','tees','tee',PK,'k0'],['Hoodies and jackets','hoodies','hoodie',CH,'k1'],['Cargos and bottoms','bottoms','pants',WH,'k2'],['Sneakers','kicks','sneaker',PK,'k0'],['Caps','kicks','cap',CH,'k1']];
+  function byId(i){for(var k=0;k<P.length;k++){if(P[k].id===i)return P[k];}}
+
+  /* categories */
+  $('#ct').innerHTML=CATS.map(function(c,k){
+    var n=P.filter(function(p){return p.c===c[1];}).length,det=c[3]===PK?WH:PK;
+    return '<article class="cp '+c[4]+'" data-c="'+c[1]+'"><div class="row"><span>0'+(k+1)+'</span><span>'+n+(n===1?' style':' styles')+'</span></div>'+garment(c[2],det,BK)+'<h3>'+c[0]+'</h3></article>';
+  }).join('');
+  $('#ct').addEventListener('click',function(e){var a=e.target.closest('.cp');if(!a)return;setFilter(a.dataset.c);var t=$('#shop');if(lenis){lenis.scrollTo(t,{offset:-60});}else{t.scrollIntoView({behavior:'smooth'});}});
+
+  /* shop */
+  var FILT=[['all','All'],['tees','Tees'],['hoodies','Hoodies and jackets'],['bottoms','Bottoms'],['kicks','Kicks and caps']];
+  var cur='all',sizeSel={},wish={};
+  $('#fl').innerHTML=FILT.map(function(f){return '<button type="button" data-f="'+f[0]+'"'+(f[0]==='all'?' class="on"':'')+'>'+f[1]+'</button>';}).join('');
+  function setFilter(f){cur=f;$$('#fl button').forEach(function(b){b.classList.toggle('on',b.dataset.f===f);});renderShop();}
+  $('#fl').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;setFilter(b.dataset.f);});
+  function renderShop(){
+    var list=P.filter(function(p){return cur==='all'||p.c===cur;});
+    $('#pg').innerHTML=list.map(function(p){
+      var sz=sizeSel[p.id]||'M',sizes=(p.t==='sneaker')?['7','8','9','10']:(p.t==='cap'?['One']:['S','M','L','XL']);
+      if(sizes.indexOf(sz)<0){sz=sizes[Math.min(1,sizes.length-1)];}
+      return '<article class="pc" data-id="'+p.id+'"><div class="im" style="background:'+p.bg+'">'+(p.b?'<span class="bdg">'+p.b+'</span>':'')+'<button class="hrt'+(wish[p.id]?' on':'')+'" type="button" aria-label="Save">'+(wish[p.id]?'♥':'♡')+'</button>'+garment(p.t,p.bg===PK?WH:PK,BK)+'</div><div class="bd"><h3>'+p.n+'</h3><div class="pr"><span>'+inr(p.p)+'</span>'+(p.o?'<s>'+inr(p.o)+'</s>':'')+'</div><div class="sz">'+sizes.map(function(s){return '<button type="button" data-s="'+s+'"'+(s===sz?' class="on"':'')+'>'+s+'</button>';}).join('')+'</div><button class="btn pk add" type="button">Add to bag</button></div></article>';
+    }).join('');
+    if(hasG&&!reduce&&window.gsap){gsap.from('#pg .pc',{y:40,opacity:0,duration:.5,stagger:.06,ease:'power3.out'});}
+  }
+  $('#pg').addEventListener('click',function(e){
+    var card=e.target.closest('.pc');if(!card)return;var id=+card.dataset.id;
+    var sb=e.target.closest('.sz button');
+    if(sb){sizeSel[id]=sb.dataset.s;Array.prototype.forEach.call(card.querySelectorAll('.sz button'),function(x){x.classList.toggle('on',x===sb);});return;}
+    if(e.target.closest('.hrt')){wish[id]=!wish[id];var h=card.querySelector('.hrt');h.classList.toggle('on',wish[id]);h.textContent=wish[id]?'♥':'♡';return;}
+    if(e.target.closest('.add')){var on=card.querySelector('.sz button.on');addCart(id,on?on.dataset.s:'M',1);openCart();}
+  });
+
+  /* cart */
+  var cart=[];
+  function addCart(id,size,q){
+    for(var k=0;k<cart.length;k++){if(cart[k].id===id&&cart[k].s===size){cart[k].q+=q;cartUI();return;}}
+    cart.push({id:id,s:size,q:q});cartUI();
+  }
+  function cartUI(){
+    var n=0,t=0;
+    cart.forEach(function(c){n+=c.q;t+=c.q*byId(c.id).p;});
+    $('#cartb').textContent='Bag ('+n+')';$('#ct2').textContent=inr(t);
+    var left=1999-t;
+    $('#shp').innerHTML=(left>0?'You are '+inr(left)+' away from free shipping':'Free shipping unlocked')+'<i><b style="width:'+Math.min(100,t/1999*100)+'%"></b></i>';
+    $('#its').innerHTML=cart.length?cart.map(function(c,k){var p=byId(c.id);
+      return '<div class="it"><div class="th" style="background:'+p.bg+'">'+garment(p.t,p.bg===PK?WH:PK,BK)+'</div><div><h4>'+p.n+'</h4><span>Size '+c.s+' · '+inr(p.p)+'</span></div><div class="q"><button type="button" data-k="'+k+'" data-a="-">−</button><b>'+c.q+'</b><button type="button" data-k="'+k+'" data-a="+">+</button></div></div>';
+    }).join(''):'<div class="empty">Your bag is empty.<br>Add something loud.</div>';
+  }
+  $('#its').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var k=+b.dataset.k;cart[k].q+=b.dataset.a==='+'?1:-1;if(cart[k].q<1){cart.splice(k,1);}cartUI();});
+  function openCart(){$('#dr').classList.add('on');$('#ov').classList.add('on');}
+  function closeCart(){$('#dr').classList.remove('on');$('#ov').classList.remove('on');}
+  $('#cartb').addEventListener('click',openCart);$('#dx').addEventListener('click',closeCart);$('#ov').addEventListener('click',closeCart);
+  $('#co').addEventListener('click',function(){
+    if(!cart.length){return;}
+    var t=0,l=cart.map(function(c){var p=byId(c.id);t+=c.q*p.p;return c.q+' x '+p.n+' (size '+c.s+')';});
+    wa('Hi Offbeat Supply, I would like to order: '+l.join(', ')+'. Total '+inr(t)+'.');
+  });
+  cartUI();renderShop();
+
+  /* lookbook */
+  var LOOKS=[
+    ['01','Night shift','Black on black, one loud detail. Built for after dark.',[5,7,6]],
+    ['02','Acid rush','Chartreuse tee, cargo pocket, clean sneaker. Daylight energy.',[2,4,5]],
+    ['03','Sunday loud','Oversized tee and hoodie layered, cap on, no plans.',[1,3,6]]
+  ];
+  $('#stack').innerHTML=LOOKS.map(function(l,k){
+    var ps=l[3].map(function(i){var p=byId(i);return garment(p.t,PK,k===0?WH:BK);}).join('');
+    var tot=l[3].reduce(function(a,i){return a+byId(i).p;},0);
+    return '<article class="lk" style="--k:'+k+'"><div><div class="big">'+l[0]+'</div><h3 style="font-size:clamp(30px,4vw,48px)">'+l[1]+'</h3><p>'+l[2]+'</p><button class="btn '+(k===0?'ch':'')+'" style="'+(k>0?'border-color:var(--bk);color:var(--bk)':'')+'" type="button" data-l="'+k+'">Add look · '+inr(tot)+'</button></div><div class="ps">'+ps+'</div></article>';
+  }).join('');
+  $('#stack').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;LOOKS[+b.dataset.l][3].forEach(function(i){addCart(i,byId(i).t==='sneaker'?'9':(byId(i).t==='cap'?'One':'M'),1);});openCart();});
+
+  /* countdown to next Friday 7 pm */
+  function nextDrop(){var n=new Date(),d=new Date(n);d.setHours(19,0,0,0);var add=(5-n.getDay()+7)%7;d.setDate(n.getDate()+add);if(d<=n){d.setDate(d.getDate()+7);}return d;}
+  function tickCd(){
+    var ms=Math.max(0,nextDrop()-new Date()),s=Math.floor(ms/1000),
+      v=[Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60];
+    Array.prototype.forEach.call($$('#cd b'),function(b,k){b.textContent=('0'+v[k]).slice(-2);});
+  }
+  tickCd();setInterval(tickCd,1000);
+  $('#notify').addEventListener('click',function(){wa('Hi Offbeat Supply, please remind me before the next drop (Friday, 7 pm).');});
+
+  /* fit finder (sample rules) */
+  var FH=['Under 5\'5"','5\'5" to 5\'9"','5\'9" to 6\'0"','Over 6\'0"'],FB=['Slim','Average','Broad'],FF=['Regular','Oversized'];
+  var F={h:1,b:1,f:1};
+  function chpR(id,arr,key){$(id).innerHTML=arr.map(function(a,k){return '<button type="button" data-k="'+k+'"'+(F[key]===k?' class="on"':'')+'>'+a+'</button>';}).join('');}
+  function fit(){
+    chpR('#fH',FH,'h');chpR('#fB',FB,'b');chpR('#fF',FF,'f');
+    var sc=F.h+F.b;if(sc<=1){sc=0;}else if(sc<=3){sc=sc-1;}else{sc=3;}
+    var order=['S','M','L','XL'],i=Math.max(0,Math.min(3,sc));
+    var r=order[i],note=F.f===1?'Oversized cut: this is your usual size, sized for a boxy fit.':'Regular cut: size up one if you want it relaxed.';
+    $('#fr').innerHTML=r+'<small>'+note+' Sample rules, not a measurement.</small>';
+  }
+  [['#fH','h'],['#fB','b'],['#fF','f']].forEach(function(x){$(x[0]).addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;F[x[1]]=+b.dataset.k;fit();});});
+  fit();
+
+  $('#nf').addEventListener('submit',function(e){e.preventDefault();wa('Hi Offbeat Supply, add me to the drop alerts: '+$('#nE').value);});
+
+  if(!hasG||reduce){if(reduce){document.body.classList.add('reduce');}}
+  if(!hasG){return;}
+  gsap.registerPlugin(ScrollTrigger);
+  if(reduce){return;}
+
+  if(window.Lenis){
+    lenis=new Lenis({lerp:0.09});
+    lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(function(t){lenis.raf(t*1000);});
+    gsap.ticker.lagSmoothing(0);
+  }
+  $$('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href'),el=id.length>1?$(id):null;if(!el)return;
+      e.preventDefault();
+      if(lenis){lenis.scrollTo(el,{offset:-60});}else{el.scrollIntoView({behavior:'smooth'});}
+    });
+  });
+
+  /* ticker scroll */
+  gsap.to('#tk',{xPercent:-25,ease:'none',scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:true}});
+
+  /* hero */
+  var wt=0;
+  gsap.ticker.add(function(time,dt){wt+=dt/1000;wave(wt+window.scrollY*.003);});
+  gsap.from('.li',{yPercent:130,opacity:0,duration:1,stagger:.045,ease:'back.out(1.5)',delay:.2});
+  gsap.from('#fig',{y:110,opacity:0,duration:1.3,ease:'power3.out',delay:.5});
+  gsap.from('#sm,#rp,#burst,.ringb',{opacity:0,y:30,duration:1,stagger:.12,ease:'power3.out',delay:1});
+  gsap.to('#fig',{yPercent:-7,ease:'none',scrollTrigger:{trigger:'#top',start:'top top',end:'bottom top',scrub:true}});
+  gsap.to('.w1',{xPercent:-12,ease:'none',scrollTrigger:{trigger:'#top',start:'top top',end:'bottom top',scrub:true}});
+  gsap.to('.w3',{xPercent:14,ease:'none',scrollTrigger:{trigger:'#top',start:'top top',end:'bottom top',scrub:true}});
+
+  $$('.split').forEach(function(el){
+    var w=el.textContent.trim().split(/\s+/);
+    el.innerHTML=w.map(function(x){return '<span class="wd"><span class="in">'+x+'</span></span>';}).join(' ');
+    gsap.from(el.querySelectorAll('.in'),{yPercent:115,duration:1,stagger:.08,ease:'power4.out',scrollTrigger:{trigger:el,start:'top 88%'}});
+  });
+
+  /* horizontal categories */
+  var ct=$('#ct');
+  function dist(){return Math.max(0,ct.scrollWidth-window.innerWidth);}
+  gsap.to(ct,{x:function(){return -dist();},ease:'none',scrollTrigger:{trigger:'#cats',start:'top top',end:function(){return '+='+(dist()+window.innerHeight*.3);},pin:true,scrub:true,invalidateOnRefresh:true}});
+
+  /* lookbook cards shrink back as the next arrives */
+  var lk=$$('.lk');
+  lk.forEach(function(c,k){if(k<lk.length-1){gsap.to(c,{scale:.93,ease:'none',scrollTrigger:{trigger:lk[k+1],start:'top 85%',end:'top 25%',scrub:true}});}});
+
+  gsap.from('.two > *',{y:60,opacity:0,duration:1,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'.two',start:'top 85%'}});
+  gsap.from('.vg > *',{y:50,opacity:0,duration:.9,stagger:.12,ease:'power3.out',scrollTrigger:{trigger:'.vg',start:'top 88%'}});
+  gsap.fromTo('#giant',{x:'8%'},{x:'-14%',ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:true}});
+  window.addEventListener('load',function(){ScrollTrigger.refresh();});
+})();
+</script>
+</body>
+</html>

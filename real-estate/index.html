@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Realty — Homes &amp; Plots (Concept Demo)</title>
+<meta name="description" content="Concept demo real estate website by Edit Theory. Fictional brand, sample listings.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0d1b2a;--paper:#f6f3ee;--sand:#e8dfd0;--teal:#1f6f6b;--brass:#c08a3e;--muted:#5f6b76;--line:#0d1b2a22}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:auto}
+  body{background:var(--paper);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;font-weight:400;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
+  a{color:inherit;text-decoration:none}
+  button,input,select,textarea{font:inherit;color:inherit}
+  .serif,h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.02em;line-height:1.05}
+  .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);font-weight:700}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 22px}
+  .sec{padding:clamp(80px,12vw,140px) 0}
+  .h2{font-size:clamp(36px,6.4vw,76px);margin-top:12px}
+  .note{display:inline-block;margin-top:14px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px dashed var(--brass);color:var(--brass);padding:6px 12px;border-radius:99px;font-weight:700}
+
+  .strip{position:fixed;top:0;left:0;right:0;height:26px;z-index:70;background:var(--brass);color:#1b1206;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;font-weight:700;padding:0 10px;text-align:center}
+  header{position:fixed;top:26px;left:0;right:0;z-index:60;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;gap:14px;color:#fff;transition:background .4s,color .4s,padding .4s}
+  header.solid{background:#f6f3eef0;color:var(--ink);backdrop-filter:blur(10px);padding:10px 22px;box-shadow:0 1px 0 var(--line)}
+  .logo{font-family:'Fraunces';font-weight:700;font-size:24px;letter-spacing:-.03em}
+  .logo b{color:var(--brass)}
+  nav{display:none;gap:30px;font-size:14px;font-weight:500}
+  nav a:hover{color:var(--brass)}
+  .hr{display:flex;gap:10px;align-items:center}
+  .pill{border:1px solid currentColor;border-radius:99px;padding:9px 16px;font-size:13px;font-weight:700;white-space:nowrap}
+  .pill.fill{background:var(--brass);border-color:var(--brass);color:#1b1206}
+  @media(min-width:900px){nav{display:flex}}
+
+  .ph{position:absolute;inset:0;background-size:cover;background-position:center;background-image:var(--img),linear-gradient(160deg,var(--c1,#38566b),var(--c2,#0d1b2a))}
+
+  /* HERO */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;color:#fff;padding:140px 0 60px}
+  .hero .ph{--img:url('images/hero.jpg');--c1:#4b6f86;--c2:#0d1b2a}
+  .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,#0d1b2a99,#0d1b2a33 40%,#0d1b2aee)}
+  .hero .in{position:relative;z-index:2;width:100%}
+  .hero h1{font-size:clamp(46px,10.5vw,148px);max-width:12ch;margin:14px 0 26px}
+  .hero .eyebrow{color:#e9c88f}
+  .hero p{max-width:46ch;color:#dfe6ec;font-size:clamp(16px,2vw,19px)}
+  .search{margin-top:34px;background:var(--paper);color:var(--ink);border-radius:20px;padding:18px;display:grid;gap:12px;max-width:880px;box-shadow:0 30px 70px -20px #000}
+  .search label{display:grid;gap:4px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+  select,input,textarea{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 14px;font-size:16px;font-weight:500;outline:none;width:100%}
+  select:focus,input:focus,textarea:focus{border-color:var(--teal)}
+  .btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;background:var(--ink);color:#fff;border:0;border-radius:12px;padding:15px 24px;font-weight:700;font-size:15px;cursor:pointer;transition:transform .25s,background .25s}
+  .btn:hover{background:var(--teal);transform:translateY(-2px)}
+  .btn.brass{background:var(--brass);color:#1b1206}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+  @media(min-width:720px){.search{grid-template-columns:1fr 1fr auto;align-items:end}}
+
+  /* NUMBERS */
+  .nums{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-block:1px solid var(--ink)}
+  .num{padding:34px 22px;border-right:1px solid var(--line)}
+  .num:nth-child(2n){border-right:0}
+  .num:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .num b{display:block;font-family:'Fraunces';font-weight:700;font-size:clamp(44px,8vw,96px);letter-spacing:-.04em;line-height:1}
+  .num span{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-weight:700}
+  @media(min-width:800px){.nums{grid-template-columns:repeat(4,1fr)}.num{border-bottom:0!important;border-right:1px solid var(--line)!important}.num:last-child{border-right:0!important}}
+
+  /* LISTINGS */
+  .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:30px}
+  .chip{border:1px solid var(--ink);background:transparent;border-radius:99px;padding:10px 18px;font-weight:700;font-size:14px;cursor:pointer;transition:all .25s}
+  .chip.on{background:var(--ink);color:#fff}
+  .bar select{width:auto;border-radius:99px;padding:10px 16px}
+  .count{margin-left:auto;color:var(--muted);font-size:14px;font-weight:500}
+  .grid{display:grid;gap:22px;margin-top:34px}
+  @media(min-width:680px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1020px){.grid{grid-template-columns:repeat(3,1fr)}}
+  .card{background:#fff;border-radius:22px;overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .4s,box-shadow .4s}
+  .card:hover{transform:translateY(-6px);box-shadow:0 26px 50px -24px #0d1b2a66}
+  .cm{position:relative;aspect-ratio:4/3;overflow:hidden}
+  .cm .ph{inset:-8% 0}
+  .badge{position:absolute;left:14px;top:14px;z-index:2;background:#fff;color:var(--ink);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:99px}
+  .save{position:absolute;right:12px;top:12px;z-index:2;width:42px;height:42px;border-radius:50%;border:0;background:#ffffffee;cursor:pointer;display:grid;place-items:center;font-size:20px;line-height:1;transition:transform .25s}
+  .save:hover{transform:scale(1.1)}
+  .save.on{color:#d1344a}
+  .cb{padding:20px 22px 22px;display:grid;gap:8px}
+  .cb .pr{font-family:'Fraunces';font-weight:700;font-size:30px;letter-spacing:-.03em}
+  .cb h3{font-size:21px;font-weight:600}
+  .cb .meta{display:flex;flex-wrap:wrap;gap:6px 16px;color:var(--muted);font-size:14px}
+  .cb .row{display:flex;gap:10px;margin-top:8px}
+  .cb .row .btn{flex:1;padding:12px;font-size:14px}
+  .empty{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted)}
+
+  /* SHOW HOME (pinned, horizontal) */
+  .show{position:relative;height:100svh;background:var(--ink);color:#fff;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+  .show .head{padding:0 clamp(22px,6vw,80px);margin-bottom:26px}
+  .show .eyebrow{color:#e9c88f}
+  .track{display:flex;gap:18px;width:max-content;padding:0 clamp(22px,6vw,80px)}
+  .pan{position:relative;width:clamp(280px,72vw,640px);height:clamp(260px,50svh,460px);border-radius:22px;overflow:hidden;flex:none}
+  .pan .ph{inset:-6% -6%}
+  .pan::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,#000000b0)}
+  .pan div.c{position:absolute;left:22px;bottom:18px;z-index:2;font-family:'Fraunces';font-size:clamp(26px,4vw,40px);font-weight:600}
+  .pan small{display:block;font-family:'Manrope';font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#e9c88f;font-weight:700}
+
+  /* EMI */
+  .emi{display:grid;gap:34px;margin-top:44px}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:clamp(22px,4vw,40px)}
+  .ctl{display:grid;gap:8px;margin-bottom:24px}
+  .ctl div{display:flex;justify-content:space-between;font-weight:700;font-size:14px}
+  .ctl output{color:var(--teal)}
+  input[type=range]{padding:0;border:0;background:none;accent-color:var(--teal);height:28px}
+  .res{background:var(--ink);color:#fff;border-radius:24px;padding:clamp(24px,4vw,44px);display:grid;gap:18px;align-content:center}
+  .res .big{font-family:'Fraunces';font-weight:700;font-size:clamp(48px,8vw,96px);letter-spacing:-.04em;line-height:1;color:#e9c88f}
+  .res .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#9fb0bd;font-weight:700}
+  .res .two{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding-top:18px;border-top:1px solid #ffffff22}
+  .res .two b{display:block;font-size:20px;font-weight:700}
+  .bartrack{height:10px;border-radius:99px;background:#ffffff22;overflow:hidden}
+  .bartrack i{display:block;height:100%;background:linear-gradient(90deg,var(--brass),#e9c88f);width:50%;transition:width .4s}
+  @media(min-width:900px){.emi{grid-template-columns:1.1fr 1fr}}
+
+  /* PROCESS (vertical timeline) */
+  .proc{background:var(--sand)}
+  .tl{position:relative;margin-top:50px;padding-left:44px}
+  .tl::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:2px;background:#0d1b2a22}
+  .tl .fill{position:absolute;left:11px;top:6px;width:2px;height:0;background:var(--teal)}
+  .st{position:relative;padding:0 0 46px;opacity:.35;transition:opacity .5s}
+  .st.on{opacity:1}
+  .st::before{content:"";position:absolute;left:-41px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--paper);border:2px solid var(--ink);transition:background .4s,border-color .4s}
+  .st.on::before{background:var(--teal);border-color:var(--teal)}
+  .st h3{font-size:clamp(26px,4vw,40px)}
+  .st p{color:var(--muted);max-width:52ch;margin-top:8px}
+  .st .n{font-size:12px;letter-spacing:.2em;font-weight:700;color:var(--teal)}
+
+  /* AREA */
+  .chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+  .ach{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 20px;min-width:170px}
+  .ach b{display:block;font-family:'Fraunces';font-size:30px;font-weight:700}
+  .ach span{font-size:13px;color:var(--muted)}
+
+  /* ENQUIRY */
+  .enq{background:var(--ink);color:#fff}
+  .eg{display:grid;gap:40px}
+  .enq .eyebrow{color:#e9c88f}
+  .enq h2{font-size:clamp(40px,7.4vw,96px);margin-top:14px}
+  .enq p{color:#b9c6d1;max-width:38ch;margin-top:18px}
+  .enq form{display:grid;gap:14px}
+  .enq label{display:grid;gap:6px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#9fb0bd}
+  .enq select,.enq input,.enq textarea{background:#14283b;border-color:#ffffff26;color:#fff}
+  @media(min-width:900px){.eg{grid-template-columns:1fr 1fr;align-items:start}}
+
+  footer{background:#08121c;color:#9fb0bd;padding:60px 0 50px;font-size:14px}
+  footer .fg{display:grid;gap:30px}
+  footer .logo{color:#fff;font-size:30px}
+  footer h4{color:#fff;font-size:13px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px}
+  footer a{display:block;padding:4px 0}
+  footer .cp{border-top:1px solid #ffffff1a;margin-top:34px;padding-top:22px}
+  @media(min-width:800px){footer .fg{grid-template-columns:1.4fr 1fr 1fr}}
+
+  .wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em}
+  .wd .in{display:inline-block}
+  body.reduce .show{height:auto;padding:70px 0}
+  body.reduce .track{width:auto;overflow-x:auto}
+</style>
+</head>
+<body>
+
+<div class="strip">Concept demo by Edit Theory · Fictional real estate brand · Sample listings</div>
+<header id="hdr">
+  <a href="#top" class="logo">Kestrel<b>.</b></a>
+  <nav><a href="#homes">Homes</a><a href="#emi">EMI calculator</a><a href="#process">How it works</a><a href="#contact">Contact</a></nav>
+  <div class="hr"><span class="pill" id="savedPill">Saved (0)</span><a href="#contact" class="pill fill">Enquire</a></div>
+</header>
+
+<section class="hero" id="top">
+  <div class="ph" id="heroBg"></div>
+  <div class="wrap in">
+    <div class="eyebrow" id="h1a">Homes · Villas · Plots</div>
+    <h1 id="ht">Find the home that fits your life.</h1>
+    <p id="hp">Verified listings, honest advice and a clear process from first visit to handover.</p>
+    <form class="search" id="hs">
+      <label>Property type<select id="hType"><option value="any">Any type</option><option value="apartment">Apartment</option><option value="villa">Villa</option><option value="plot">Plot</option></select></label>
+      <label>Budget<select id="hBudget"><option value="any">Any budget</option><option value="low">Up to ₹50 L</option><option value="mid">₹50 L to ₹1 Cr</option><option value="high">Above ₹1 Cr</option></select></label>
+      <button class="btn brass" type="submit">Search homes</button>
+    </form>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="nums" id="nums">
+    <div class="num"><b data-to="12">0</b><span>Localities</span></div>
+    <div class="num"><b data-to="300" data-suf="+">0</b><span>Families helped</span></div>
+    <div class="num"><b data-to="8" data-suf=" yrs">0</b><span>In the market</span></div>
+    <div class="num"><b data-to="98" data-suf="%">0</b><span>Would recommend</span></div>
+  </div>
+  <span class="note" style="margin:12px 0 0">Sample figures · replace with real ones</span>
+</div>
+
+<main>
+  <section class="sec" id="homes">
+    <div class="wrap">
+      <div class="eyebrow">Featured listings</div>
+      <h2 class="h2 split">Homes worth a visit</h2>
+      <span class="note">Sample listings · prices are placeholders</span>
+      <div class="bar">
+        <button class="chip on" data-type="any">All</button>
+        <button class="chip" data-type="apartment">Apartments</button>
+        <button class="chip" data-type="villa">Villas</button>
+        <button class="chip" data-type="plot">Plots</button>
+        <select id="lBeds" aria-label="Bedrooms"><option value="any">Any BHK</option><option value="2">2 BHK</option><option value="3">3 BHK</option><option value="4">4 BHK</option></select>
+        <span class="count" id="count"></span>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="show" id="show">
+    <div class="head"><div class="eyebrow">Inside the show home</div><h2 class="h2" style="color:#fff">Walk through, scroll by scroll.</h2></div>
+    <div class="track" id="track">
+      <div class="pan"><div class="ph" style="--img:url('images/room1.jpg');--c1:#7b8f9c;--c2:#1c2f40"></div><div class="c"><small>01</small>Living room</div></div>
+      <div class="pan"><div class="ph" style="--img:url('images/room2.jpg');--c1:#c9a679;--c2:#4a3320"></div><div class="c"><small>02</small>Open kitchen</div></div>
+      <div class="pan"><div class="ph" style="--img:url('images/room3.jpg');--c1:#6fa39f;--c2:#163a3a"></div><div class="c"><small>03</small>Master bedroom</div></div>
+      <div class="pan"><div class="ph" style="--img:url('images/room4.jpg');--c1:#e0b78a;--c2:#7a4b2b"></div><div class="c"><small>04</small>Balcony</div></div>
+    </div>
+  </section>
+
+  <section class="sec" id="emi">
+    <div class="wrap">
+      <div class="eyebrow">Plan your budget</div>
+      <h2 class="h2 split">EMI calculator</h2>
+      <div class="emi">
+        <div class="panel">
+          <div class="ctl"><div><span>Property price</span><output id="oP"></output></div><input id="rP" type="range" min="2000000" max="50000000" step="100000" value="8500000"></div>
+          <div class="ctl"><div><span>Down payment</span><output id="oD"></output></div><input id="rD" type="range" min="10" max="60" step="1" value="20"></div>
+          <div class="ctl"><div><span>Interest rate (p.a.)</span><output id="oR"></output></div><input id="rR" type="range" min="6" max="12" step="0.1" value="8.5"></div>
+          <div class="ctl" style="margin-bottom:0"><div><span>Loan tenure</span><output id="oT"></output></div><input id="rT" type="range" min="5" max="30" step="1" value="20"></div>
+        </div>
+        <div class="res">
+          <div class="lbl">Monthly EMI</div>
+          <div class="big" id="emiV">₹0</div>
+          <div class="bartrack"><i id="bt"></i></div>
+          <div class="two"><div><div class="lbl">Loan amount</div><b id="lA">0</b></div><div><div class="lbl">Total interest</div><b id="tI">0</b></div></div>
+          <div class="lbl" style="text-transform:none;letter-spacing:.02em;font-weight:500">Estimate only. Actual rates and eligibility depend on the lender.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec proc" id="process">
+    <div class="wrap">
+      <div class="eyebrow">How it works</div>
+      <h2 class="h2 split">Five clear steps</h2>
+      <div class="tl" id="tl">
+        <div class="fill" id="tlf"></div>
+        <div class="st"><div class="n">STEP 01</div><h3>Tell us what you need</h3><p>Budget, locality, size, timeline. A short call or a form, no pressure.</p></div>
+        <div class="st"><div class="n">STEP 02</div><h3>Shortlist and visit</h3><p>We pick a few homes that fit and book site visits around your schedule.</p></div>
+        <div class="st"><div class="n">STEP 03</div><h3>Check the paperwork</h3><p>We help you collect and review the documents, and point you to the right professionals.</p></div>
+        <div class="st"><div class="n">STEP 04</div><h3>Loan and booking</h3><p>Compare offers, finalise the price and book with a clear payment schedule.</p></div>
+        <div class="st"><div class="n">STEP 05</div><h3>Handover</h3><p>Final walkthrough, keys in hand, and we stay reachable after you move in.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="area">
+    <div class="wrap">
+      <div class="eyebrow">Neighbourhood</div>
+      <h2 class="h2 split">Know the area</h2>
+      <span class="note">Sample distances · replace per project</span>
+      <div class="chips">
+        <div class="ach"><b>5 min</b><span>Nearest school</span></div>
+        <div class="ach"><b>10 min</b><span>Hospital</span></div>
+        <div class="ach"><b>8 min</b><span>Market and groceries</span></div>
+        <div class="ach"><b>15 min</b><span>Bus or metro</span></div>
+        <div class="ach"><b>20 min</b><span>Business district</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec enq" id="contact">
+    <div class="wrap eg">
+      <div>
+        <div class="eyebrow">Talk to us</div>
+        <h2>Ready to see a home?</h2>
+        <p>Send your details and it opens a WhatsApp message to us, ready to send. We reply with the nearest visit slots.</p>
+        <span class="note">Demo · uses a sample WhatsApp number</span>
+        <p style="margin-top:24px">Call: +91 00000 00000 (sample)<br>Office: Street Name, Your City (sample)</p>
+      </div>
+      <form id="enq">
+        <label>Your name<input id="eN" type="text" placeholder="Name" required></label>
+        <label>Looking for<select id="eT"><option>Apartment</option><option>Villa</option><option>Plot</option><option>Not sure yet</option></select></label>
+        <label>Budget<input id="eB" type="text" placeholder="e.g. 60 L to 80 L"></label>
+        <label>Message<textarea id="eM" rows="3" placeholder="Locality, timeline, anything else"></textarea></label>
+        <button class="btn brass" type="submit">Send on WhatsApp</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div><div class="logo">Kestrel<b style="color:var(--brass)">.</b></div><p style="margin-top:10px;max-width:34ch">Homes, villas and plots with honest advice. A concept demo by Edit Theory.</p></div>
+      <div><h4>Explore</h4><a href="#homes">Homes</a><a href="#emi">EMI calculator</a><a href="#process">How it works</a></div>
+      <div><h4>Contact</h4><a href="#contact">Enquire</a><a href="#">hello@yourrealty.com (sample)</a></div>
+    </div>
+    <div class="cp">Kestrel Realty is a fictional business. All listings, figures and prices are samples. © 2026 Edit Theory</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)};
+  var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasG=!!window.gsap, lenis=null;
+  var WA='910000000000';
+
+  /* ---------- data ---------- */
+  var homes=[
+    {id:1,name:'Kestrel Heights, 3 BHK',type:'apartment',beds:3,price:8500000,area:1480,loc:'Sample Locality A',tag:'New launch',c1:'#7fa3b8',c2:'#1c3347'},
+    {id:2,name:'Garden Villa, 4 BHK',type:'villa',beds:4,price:21000000,area:3200,loc:'Sample Locality B',tag:'Ready to move',c1:'#c3a47a',c2:'#4a3320'},
+    {id:3,name:'Skyline Residency, 2 BHK',type:'apartment',beds:2,price:4200000,area:1050,loc:'Sample Locality C',tag:'Popular',c1:'#8fb4aa',c2:'#1d3b38'},
+    {id:4,name:'East-facing Plot',type:'plot',beds:0,price:6400000,area:2400,loc:'Sample Locality D',tag:'Plot',c1:'#b8c48f',c2:'#3b4524'},
+    {id:5,name:'Lakeview Villa, 3 BHK',type:'villa',beds:3,price:12500000,area:2200,loc:'Sample Locality E',tag:'',c1:'#8aa6c9',c2:'#22344d'},
+    {id:6,name:'Park Court, 2 BHK',type:'apartment',beds:2,price:5600000,area:1120,loc:'Sample Locality A',tag:'',c1:'#d0a98c',c2:'#583a28'}
+  ];
+  var F={type:'any',budget:'any',beds:'any'};
+  var saved=[];
+  try{saved=JSON.parse(localStorage.getItem('kestrel_saved')||'[]');}catch(e){saved=[];}
+
+  function fmt(p){return p>=1e7?'₹'+(p/1e7).toFixed(2).replace(/\.?0+$/,'')+' Cr':'₹'+Math.round(p/1e5)+' L';}
+  function inBudget(p){return F.budget==='any'||(F.budget==='low'&&p<=5e6)||(F.budget==='mid'&&p>5e6&&p<=1e7)||(F.budget==='high'&&p>1e7);}
+
+  function render(){
+    var list=homes.filter(function(h){
+      return (F.type==='any'||h.type===F.type)&&inBudget(h.price)&&(F.beds==='any'||h.beds===parseInt(F.beds,10));
+    });
+    $('#count').textContent=list.length+(list.length===1?' home':' homes');
+    $('#grid').innerHTML=list.length?list.map(function(h,i){
+      var on=saved.indexOf(h.id)>-1;
+      return '<article class="card" data-id="'+h.id+'"><div class="cm">'+(h.tag?'<span class="badge">'+h.tag+'</span>':'')+
+        '<button class="save'+(on?' on':'')+'" data-save="'+h.id+'" aria-label="Save">'+(on?'♥':'♡')+'</button>'+
+        '<div class="ph" style="--img:url(\'images/home'+h.id+'.jpg\');--c1:'+h.c1+';--c2:'+h.c2+'"></div></div>'+
+        '<div class="cb"><div class="pr">'+fmt(h.price)+'</div><h3>'+h.name+'</h3>'+
+        '<div class="meta"><span>'+h.area.toLocaleString('en-IN')+' sq ft</span><span>'+(h.beds?h.beds+' BHK':'Plot')+'</span><span>'+h.loc+'</span></div>'+
+        '<div class="row"><button class="btn" data-enq="'+h.id+'">Enquire</button><button class="btn ghost" data-enq="'+h.id+'">Book a visit</button></div></div></article>';
+    }).join(''):'<div class="empty">No homes match these filters. Try widening your budget.</div>';
+    $('#savedPill').textContent='Saved ('+saved.length+')';
+    $('#hType').value=F.type;$('#hBudget').value=F.budget;$('#lBeds').value=F.beds;
+    $$('.chip').forEach(function(c){c.classList.toggle('on',c.dataset.type===F.type);});
+    if(hasG&&!reduce){
+      gsap.from('#grid .card',{y:40,opacity:0,duration:.6,stagger:.07,ease:'power3.out',clearProps:'transform,opacity'});
+      attachParallax();
+    }
+  }
+  var pTweens=[];
+  function attachParallax(){
+    pTweens.forEach(function(t){t.scrollTrigger&&t.scrollTrigger.kill();t.kill();});pTweens=[];
+    $$('#grid .cm .ph').forEach(function(p){
+      pTweens.push(gsap.fromTo(p,{yPercent:-6},{yPercent:6,ease:'none',scrollTrigger:{trigger:p.parentNode,start:'top bottom',end:'bottom top',scrub:true}}));
+    });
+  }
+  function toContact(msg){
+    var t=$('#contact');
+    if(msg){$('#eM').value=msg;}
+    if(lenis){lenis.scrollTo(t,{offset:-60});}else{t.scrollIntoView({behavior:'smooth'});}
+  }
+
+  $('#grid').addEventListener('click',function(e){
+    var s=e.target.closest('[data-save]'),q=e.target.closest('[data-enq]');
+    if(s){
+      var id=parseInt(s.dataset.save,10),i=saved.indexOf(id);
+      if(i>-1){saved.splice(i,1);}else{saved.push(id);}
+      try{localStorage.setItem('kestrel_saved',JSON.stringify(saved));}catch(err){}
+      s.classList.toggle('on',i<0);s.textContent=i<0?'♥':'♡';
+      $('#savedPill').textContent='Saved ('+saved.length+')';
+      if(hasG&&!reduce){gsap.fromTo(s,{scale:1.4},{scale:1,duration:.4,ease:'back.out(3)'});}
+    }
+    if(q){
+      var h=homes.filter(function(x){return x.id===parseInt(q.dataset.enq,10);})[0];
+      toContact('I am interested in: '+h.name+' ('+fmt(h.price)+'). Please share visit slots.');
+    }
+  });
+  $$('.chip').forEach(function(c){c.addEventListener('click',function(){F.type=c.dataset.type;render();});});
+  $('#lBeds').addEventListener('change',function(){F.beds=this.value;render();});
+  $('#hs').addEventListener('submit',function(e){
+    e.preventDefault();F.type=$('#hType').value;F.budget=$('#hBudget').value;render();
+    var t=$('#homes');if(lenis){lenis.scrollTo(t,{offset:-60});}else{t.scrollIntoView({behavior:'smooth'});}
+  });
+  $('#savedPill').addEventListener('click',function(){
+    if(!saved.length)return;
+    F={type:'any',budget:'any',beds:'any'};render();
+    $$('#grid .card').forEach(function(c){if(saved.indexOf(parseInt(c.dataset.id,10))<0){c.style.display='none';}});
+    $('#count').textContent=saved.length+' saved';
+    var t=$('#homes');if(lenis){lenis.scrollTo(t,{offset:-60});}else{t.scrollIntoView({behavior:'smooth'});}
+  });
+  render();
+
+  /* enquiry -> WhatsApp */
+  $('#enq').addEventListener('submit',function(e){
+    e.preventDefault();
+    var m='Hi Kestrel Realty, I am '+$('#eN').value+'. Looking for: '+$('#eT').value+
+      ($('#eB').value?'. Budget: '+$('#eB').value:'')+($('#eM').value?'. '+$('#eM').value:'');
+    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(m),'_blank');
+  });
+
+  /* ---------- EMI calculator ---------- */
+  function inr(n){return '₹'+Math.round(n).toLocaleString('en-IN');}
+  function calc(){
+    var P=+$('#rP').value,dp=+$('#rD').value,r=+$('#rR').value,y=+$('#rT').value;
+    var loan=P*(1-dp/100),i=r/12/100,n=y*12;
+    var emi=i===0?loan/n:loan*i*Math.pow(1+i,n)/(Math.pow(1+i,n)-1);
+    var total=emi*n;
+    $('#oP').textContent=fmt(P);$('#oD').textContent=dp+'% ('+fmt(P*dp/100)+')';$('#oR').textContent=r.toFixed(1)+'%';$('#oT').textContent=y+' years';
+    $('#emiV').textContent=inr(emi);$('#lA').textContent=inr(loan);$('#tI').textContent=inr(total-loan);
+    $('#bt').style.width=Math.min(100,loan/total*100)+'%';
+  }
+  ['#rP','#rD','#rR','#rT'].forEach(function(s){$(s).addEventListener('input',calc);});
+  calc();
+
+  /* header turns solid */
+  window.addEventListener('scroll',function(){$('#hdr').classList.toggle('solid',window.scrollY>80);},{passive:true});
+
+  if(!hasG){return;}
+  gsap.registerPlugin(ScrollTrigger);
+  if(reduce){document.body.classList.add('reduce');return;}
+
+  if(window.Lenis){
+    lenis=new Lenis({lerp:0.09});
+    lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(function(t){lenis.raf(t*1000);});
+    gsap.ticker.lagSmoothing(0);
+  }
+  $$('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href'),el=id.length>1?$(id):null;
+      if(!el)return;
+      e.preventDefault();
+      if(lenis){lenis.scrollTo(el,{offset:-60});}else{el.scrollIntoView({behavior:'smooth'});}
+    });
+  });
+
+  /* hero */
+  gsap.from('#heroBg',{scale:1.18,duration:2.6,ease:'power3.out'});
+  gsap.timeline({delay:.2})
+    .from('#h1a',{y:20,opacity:0,duration:.8})
+    .from('#ht',{y:70,opacity:0,duration:1.1,ease:'power4.out'},'-=.5')
+    .from('#hp',{y:30,opacity:0,duration:.9},'-=.7')
+    .from('#hs',{y:50,opacity:0,duration:1,ease:'power3.out'},'-=.6');
+  gsap.to('#heroBg',{yPercent:16,ease:'none',scrollTrigger:{trigger:'#top',start:'top top',end:'bottom top',scrub:true}});
+
+  /* counters */
+  $$('#nums b').forEach(function(b){
+    var to=+b.dataset.to,suf=b.dataset.suf||'',o={v:0};
+    ScrollTrigger.create({trigger:b,start:'top 90%',once:true,onEnter:function(){
+      gsap.to(o,{v:to,duration:1.8,ease:'power2.out',onUpdate:function(){b.textContent=Math.round(o.v)+suf;}});
+    }});
+  });
+
+  /* headings */
+  $$('.split').forEach(function(el){
+    var words=el.textContent.trim().split(/\s+/);
+    el.innerHTML=words.map(function(w){return '<span class="wd"><span class="in">'+w+'</span></span>';}).join(' ');
+    gsap.from(el.querySelectorAll('.in'),{yPercent:115,duration:1.1,stagger:.1,ease:'power4.out',scrollTrigger:{trigger:el,start:'top 88%'}});
+  });
+
+  /* show home: pinned, panels slide sideways with inner parallax */
+  var tr=$('#track');
+  gsap.to(tr,{x:function(){return -Math.max(0,tr.scrollWidth-window.innerWidth);},ease:'none',
+    scrollTrigger:{trigger:'#show',start:'top top',end:function(){return '+='+Math.max(500,tr.scrollWidth);},pin:true,scrub:true,invalidateOnRefresh:true}});
+  $$('.pan .ph').forEach(function(p){
+    gsap.fromTo(p,{xPercent:-5},{xPercent:5,ease:'none',scrollTrigger:{trigger:'#show',start:'top top',end:function(){return '+='+Math.max(500,tr.scrollWidth);},scrub:true,invalidateOnRefresh:true}});
+  });
+
+  /* EMI panels */
+  gsap.from('.emi > *',{y:60,opacity:0,duration:1,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'.emi',start:'top 85%'}});
+
+  /* timeline: line fills, steps light up */
+  var tl=$('#tl'),steps=$$('.st');
+  ScrollTrigger.create({trigger:tl,start:'top 70%',end:'bottom 60%',scrub:true,onUpdate:function(s){
+    $('#tlf').style.height=(s.progress*(tl.offsetHeight-12))+'px';
+  }});
+  steps.forEach(function(st){
+    ScrollTrigger.create({trigger:st,start:'top 68%',onEnter:function(){st.classList.add('on');},onLeaveBack:function(){st.classList.remove('on');}});
+  });
+
+  /* neighbourhood + enquiry */
+  gsap.from('.ach',{y:40,opacity:0,duration:.8,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:'.chips',start:'top 88%'}});
+  gsap.from('.eg > *',{y:60,opacity:0,duration:1,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'.enq',start:'top 70%'}});
+
+  window.addEventListener('load',function(){ScrollTrigger.refresh();});
+})();
+</script>
+</body>
+</html>

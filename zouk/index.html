@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zouk Club and Kitchen — Concept Demo</title>
+<meta name="description" content="Concept demo website for Zouk Club and Kitchen, Pondicherry. Made by Edit Theory.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070508; --ink:#f5ede4; --muted:#a79c92;
+    --amber:#ffb23e; --red:#ff2d55; --violet:#8a2be2;
+    --glow:#ff7a1a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:auto}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.display{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;letter-spacing:.02em;line-height:.95}
+  a{color:inherit;text-decoration:none}
+
+  #ambient{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(60% 50% at 50% 30%, var(--glow) 0%, transparent 70%);opacity:.22}
+  main,header,footer{position:relative;z-index:1}
+
+  .banner{position:fixed;top:0;left:0;right:0;z-index:50;background:#000c;backdrop-filter:blur(8px);
+    text-align:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:8px 12px;color:var(--muted);border-bottom:1px solid #ffffff14}
+  .banner b{color:var(--amber);font-weight:600}
+
+  /* HERO */
+  .hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:90px 20px 60px;position:relative;overflow:hidden}
+  .lights{position:absolute;inset:0;opacity:.55;
+    background-image:radial-gradient(circle, var(--red) 0 2px, transparent 3px);
+    background-size:26px 34px;
+    -webkit-mask-image:radial-gradient(70% 60% at 50% 0%, #000, transparent 75%);
+            mask-image:radial-gradient(70% 60% at 50% 0%, #000, transparent 75%);
+    animation:twinkle 3.2s ease-in-out infinite alternate}
+  @keyframes twinkle{from{opacity:.25;filter:hue-rotate(0)}to{opacity:.65;filter:hue-rotate(40deg)}}
+  .title{display:flex;justify-content:center;gap:.02em;font-size:clamp(110px,32vw,380px)}
+  .title span{display:inline-block;--on:1;
+    color:rgba(255,255,255,calc(.14 + .86*var(--on)));
+    text-shadow:0 0 calc(12px*var(--on)) rgba(255,255,255,var(--on)),0 0 calc(30px*var(--on)) rgba(255,178,62,var(--on)),0 0 calc(70px*var(--on)) rgba(255,122,26,var(--on)),0 0 calc(140px*var(--on)) rgba(255,45,85,calc(var(--on)*.9))}
+  .tag{margin-top:10px;font-size:clamp(13px,2.4vw,18px);letter-spacing:.5em;text-transform:uppercase;color:var(--amber)}
+  .sub{margin:22px auto 0;max-width:34ch;color:var(--muted);font-weight:300;line-height:1.6}
+  .cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+  .cue::after{content:"";display:block;width:1px;height:38px;margin:10px auto 0;background:linear-gradient(var(--amber),transparent);animation:drip 1.6s infinite}
+  @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+  /* MARQUEE */
+  .marquee{overflow:hidden;border-block:1px solid #ffffff18;padding:18px 0;white-space:nowrap}
+  .marquee .track{display:inline-flex;gap:48px;font-family:'Bebas Neue';font-size:clamp(34px,7vw,76px);color:transparent;-webkit-text-stroke:1px #ffffff55}
+  .marquee .track i{font-style:normal;color:var(--amber);-webkit-text-stroke:0}
+
+  /* INTRO */
+  .intro{padding:16vh 20px;max-width:980px;margin:auto}
+  .intro p{font-size:clamp(24px,4.6vw,48px);line-height:1.25;font-weight:300}
+  .intro .w{display:inline-block;opacity:.15}
+  .intro em{font-style:normal;color:var(--amber)}
+
+  /* SPACES (pinned) */
+  #spaces{height:100svh;position:relative;overflow:hidden;background:#000}
+  .space{position:absolute;inset:0;display:flex;align-items:flex-end;padding:0 clamp(20px,6vw,80px) 14vh;background-size:cover;background-position:center}
+  .space::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.15) 40%,rgba(0,0,0,.85) 100%)}
+  .space .cap{position:relative;max-width:560px}
+  .space .num{font-size:12px;letter-spacing:.4em;color:var(--amber)}
+  .space h2{font-size:clamp(64px,13vw,170px);margin:8px 0 10px}
+  .space p{color:#e9dfd5;font-weight:300;line-height:1.6;max-width:40ch}
+  .s1{background-image:url('images/bar.jpg'),radial-gradient(80% 70% at 60% 40%,#7a3a10,#1a0c05 70%)}
+  .s2{background-image:url('images/terrace.jpg'),linear-gradient(180deg,#27406e,#0b1020 80%)}
+  .s3{background-image:url('images/dancefloor.jpg'),radial-gradient(80% 70% at 50% 30%,#a3123a,#2a0a52 60%,#07020f)}
+  .progress{position:absolute;left:0;bottom:0;height:3px;width:100%;background:linear-gradient(90deg,var(--amber),var(--red),var(--violet));transform-origin:left;transform:scaleX(0);z-index:5}
+
+  /* MENU */
+  .section{padding:16vh clamp(20px,6vw,80px)}
+  .section h2{font-size:clamp(56px,11vw,150px);margin-bottom:14px}
+  .section .lead{color:var(--muted);max-width:46ch;line-height:1.6;font-weight:300}
+  .note{display:inline-block;margin-top:14px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px dashed #ffb23e88;color:var(--amber);padding:6px 10px;border-radius:99px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:48px}
+  .card{background:linear-gradient(160deg,#ffffff0d,#ffffff03);border:1px solid #ffffff1c;border-radius:18px;padding:26px 22px;min-height:190px;
+    display:flex;flex-direction:column;justify-content:space-between;transition:border-color .3s,box-shadow .3s,transform .3s;will-change:transform}
+  .card:hover{border-color:var(--amber);box-shadow:0 0 40px -10px var(--glow)}
+  .card .k{font-size:11px;letter-spacing:.3em;color:var(--amber);text-transform:uppercase}
+  .card h3{font-size:34px;margin:10px 0 6px}
+  .card p{color:var(--muted);font-size:14px;line-height:1.5}
+  .card .pr{font-family:'Bebas Neue';font-size:24px;color:#ffffff66;margin-top:14px}
+
+  /* NIGHTS */
+  .nights{padding:14vh 20px;text-align:center;border-block:1px solid #ffffff14;overflow:hidden}
+  .big{font-family:'Bebas Neue';font-size:clamp(70px,20vw,280px);line-height:.9;
+    background:linear-gradient(90deg,var(--amber),var(--red),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .nights p{color:var(--muted);margin-top:18px}
+
+  /* VISIT */
+  .visit .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px;margin-top:44px}
+  .visit h3{font-size:30px;color:var(--amber);margin-bottom:10px}
+  .visit p{color:#d9cfc5;line-height:1.7;font-weight:300}
+  .btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:48px}
+  .btn{display:inline-block;padding:16px 28px;border-radius:99px;font-weight:600;font-size:14px;letter-spacing:.06em;transition:box-shadow .25s}
+  .btn.p{background:linear-gradient(90deg,var(--amber),var(--red));color:#160904}
+  .btn.g{border:1px solid #ffffff44}
+  .btn:hover{box-shadow:0 12px 40px -12px var(--glow)}
+
+  .wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em}
+  .wd .in{display:inline-block}
+
+  footer{padding:50px 20px 70px;text-align:center;color:var(--muted);font-size:13px;line-height:1.8;border-top:1px solid #ffffff14}
+  footer b{color:var(--amber)}
+
+  @media (prefers-reduced-motion:reduce){.lights{animation:none}.cue::after{animation:none}}
+</style>
+</head>
+<body>
+
+<div class="banner"><b>Concept demo</b> by Edit Theory · Not the official Zouk website</div>
+<div id="ambient"></div>
+
+<header class="hero" id="top">
+  <div class="lights"></div>
+  <div class="heroInner">
+    <h1 class="title" aria-label="Zouk"><span>Z</span><span>O</span><span>U</span><span>K</span></h1>
+    <div class="tag">Club &amp; Kitchen</div>
+    <p class="sub">Pondicherry after dark. Good food, loud music, warm lights.</p>
+  </div>
+  <div class="cue">Scroll</div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track" id="track">
+    <span>BAR</span><i>✦</i><span>TERRACE</span><i>✦</i><span>DANCE FLOOR</span><i>✦</i><span>KITCHEN</span><i>✦</i>
+    <span>BAR</span><i>✦</i><span>TERRACE</span><i>✦</i><span>DANCE FLOOR</span><i>✦</i><span>KITCHEN</span><i>✦</i>
+  </div>
+</div>
+
+<main>
+  <section class="intro">
+    <p id="introText">Three moods under one roof. A glowing bar, an open sky terrace, and a floor that <em>lights up</em> when the night begins.</p>
+  </section>
+
+  <section id="spaces" aria-label="Spaces">
+    <div class="space s1">
+      <div class="cap"><div class="num">01 / 03</div><h2>The Bar</h2><p>Warm amber glow, polished wood and glass. Where the night starts.</p></div>
+    </div>
+    <div class="space s2">
+      <div class="cap"><div class="num">02 / 03</div><h2>The Terrace</h2><p>Open air and a Pondicherry sky. Come for the food, stay for the breeze.</p></div>
+    </div>
+    <div class="space s3">
+      <div class="cap"><div class="num">03 / 03</div><h2>The Floor</h2><p>Rows of light, a mirror ball and a wall of colour. This is where it gets loud.</p></div>
+    </div>
+    <div class="progress" id="progress"></div>
+  </section>
+
+  <section class="section" id="menu">
+    <h2 class="split">From the Kitchen</h2>
+    <p class="lead">Food that keeps up with the music.</p>
+    <span class="note">Sample menu · replace with real items and prices</span>
+    <div class="grid">
+      <article class="card"><div><div class="k">Starters</div><h3>Tikka Platter</h3><p>Smoky, charred, made for sharing.</p></div><div class="pr">₹ —</div></article>
+      <article class="card"><div><div class="k">Bites</div><h3>Loaded Fries</h3><p>The late-night favourite.</p></div><div class="pr">₹ —</div></article>
+      <article class="card"><div><div class="k">Mains</div><h3>Chef's Special</h3><p>Ask your server what's fresh today.</p></div><div class="pr">₹ —</div></article>
+      <article class="card"><div><div class="k">Drinks</div><h3>Signature Cocktail</h3><p>Shaken at the glowing bar.</p></div><div class="pr">₹ —</div></article>
+      <article class="card"><div><div class="k">Zero proof</div><h3>Mocktails</h3><p>All the colour, none of the proof.</p></div><div class="pr">₹ —</div></article>
+    </div>
+  </section>
+
+  <section class="nights">
+    <div class="big" id="bigText">NIGHTS</div>
+    <p>DJ and event schedule goes here · <span style="color:var(--amber)">add real dates</span></p>
+  </section>
+
+  <section class="section visit" id="visit">
+    <h2 class="split">Find Us</h2>
+    <div class="cols">
+      <div><h3>Where</h3><p>Pondicherry<br>Open the exact pin on Google Maps below.</p></div>
+      <div><h3>When</h3><p>Opening hours go here.<br><span style="color:var(--muted)">Add from their Google listing.</span></p></div>
+      <div><h3>Book</h3><p>Tables and group bookings by WhatsApp.<br><span style="color:var(--muted)">Add their number.</span></p></div>
+    </div>
+    <div class="btns">
+      <a class="btn p mag" href="https://maps.app.goo.gl/iWwgcwLsaGXnxZEX7" target="_blank" rel="noopener">Open in Google Maps</a>
+      <a class="btn g mag" href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener">Reserve on WhatsApp</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <b>Concept demo</b> built by Edit Theory to show what a Zouk website could feel like.<br>
+  Not affiliated with or approved by Zouk Club and Kitchen. Photos and details are samples.<br>
+  Edit Theory · [your WhatsApp / email here]
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)};
+  var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+  if(!window.gsap){return;}
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  gsap.registerPlugin(ScrollTrigger);
+
+  if(!reduce && window.Lenis){
+    var lenis=new Lenis({lerp:0.09});
+    lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(function(t){lenis.raf(t*1000);});
+    gsap.ticker.lagSmoothing(0);
+  }
+  if(reduce){$$('.intro').forEach(function(){});document.querySelectorAll('#introText').forEach(function(p){p.style.opacity=1});return;}
+
+  /* hero: letters rise in */
+  gsap.timeline()
+    .from('.title span',{y:120,opacity:0,duration:1,ease:'power4.out',stagger:.12})
+    .from('.tag,.sub',{y:20,opacity:0,duration:.8,stagger:.15},'-=.4');
+  gsap.to('.heroInner',{yPercent:-25,opacity:.15,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+  gsap.to('.lights',{yPercent:30,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+
+  /* marquee moves with scroll */
+  gsap.to('#track',{xPercent:-35,ease:'none',scrollTrigger:{trigger:'.marquee',start:'top bottom',end:'bottom top',scrub:true}});
+
+  /* intro: words light up as you scroll */
+  function wrapWords(node){
+    Array.prototype.slice.call(node.childNodes).forEach(function(n){
+      if(n.nodeType===3){
+        var f=document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(function(t){
+          if(!t)return;
+          if(/^\s+$/.test(t)){f.appendChild(document.createTextNode(' '));}
+          else{var s=document.createElement('span');s.className='w';s.textContent=t;f.appendChild(s);}
+        });
+        node.replaceChild(f,n);
+      }else if(n.nodeType===1){wrapWords(n);}
+    });
+  }
+  wrapWords($('#introText'));
+  gsap.to('.intro .w',{opacity:1,stagger:.1,ease:'none',scrollTrigger:{trigger:'.intro',start:'top 75%',end:'bottom 55%',scrub:true}});
+
+  /* headings reveal word by word */
+  $$('.split').forEach(function(el){
+    var words=el.textContent.trim().split(/\s+/);
+    el.innerHTML=words.map(function(w){return '<span class="wd"><span class="in">'+w+'</span></span>';}).join(' ');
+    gsap.from(el.querySelectorAll('.in'),{yPercent:115,duration:1,stagger:.09,ease:'power4.out',scrollTrigger:{trigger:el,start:'top 88%'}});
+  });
+
+  /* spaces: pinned, each panel wipes up over the last */
+  var panels=gsap.utils.toArray('.space');
+  var st=gsap.timeline({scrollTrigger:{trigger:'#spaces',start:'top top',end:'+=300%',scrub:.6,pin:true,anticipatePin:1}});
+  panels.forEach(function(panel,i){
+    gsap.set(panel,{zIndex:i+1});
+    if(i===0){return;}
+    st.fromTo(panel,{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:1,ease:'none'})
+      .fromTo(panel.querySelector('.cap'),{y:60,opacity:0},{y:0,opacity:1,duration:.6,ease:'none'},'<.4');
+  });
+  st.fromTo('#progress',{scaleX:0},{scaleX:1,duration:panels.length-1,ease:'none'},0);
+
+  /* menu cards rise in */
+  gsap.from('#menu .lead,#menu .note',{y:50,opacity:0,duration:.9,stagger:.12,ease:'power3.out',scrollTrigger:{trigger:'#menu',start:'top 75%'}});
+  gsap.from('.card',{y:80,opacity:0,duration:.9,stagger:.12,ease:'power3.out',scrollTrigger:{trigger:'.grid',start:'top 85%'}});
+
+  /* cards tilt toward the cursor (laptops) */
+  if(window.matchMedia('(hover:hover)').matches){
+    $$('.card').forEach(function(c){
+      c.addEventListener('mousemove',function(e){
+        var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+        gsap.to(c,{rotateY:x*10,rotateX:-y*10,transformPerspective:700,duration:.3});
+      });
+      c.addEventListener('mouseleave',function(){gsap.to(c,{rotateX:0,rotateY:0,duration:.5});});
+    });
+    $$('.mag').forEach(function(b){
+      b.addEventListener('mousemove',function(e){
+        var r=b.getBoundingClientRect();
+        gsap.to(b,{x:(e.clientX-r.left-r.width/2)*.3,y:(e.clientY-r.top-r.height/2)*.4,duration:.3});
+      });
+      b.addEventListener('mouseleave',function(){gsap.to(b,{x:0,y:0,duration:.5,ease:'elastic.out(1,.4)'});});
+    });
+  }
+
+  /* big NIGHTS text slides sideways with scroll */
+  gsap.fromTo('#bigText',{xPercent:25},{xPercent:-25,ease:'none',scrollTrigger:{trigger:'.nights',start:'top bottom',end:'bottom top',scrub:true}});
+
+  /* visit */
+  gsap.from('.visit .cols > div,.btns',{y:50,opacity:0,duration:.9,stagger:.12,ease:'power3.out',scrollTrigger:{trigger:'#visit',start:'top 75%'}});
+
+  /* ambient colour changes by section */
+  var colours=[['.hero','#ff7a1a'],['.intro','#ff2d55'],['#spaces','#8a2be2'],['#menu','#ffb23e'],['.nights','#ff2d55'],['#visit','#ff7a1a']];
+  colours.forEach(function(c){
+    ScrollTrigger.create({trigger:c[0],start:'top 55%',end:'bottom 55%',
+      onToggle:function(self){if(self.isActive){gsap.to(document.documentElement,{'--glow':c[1],duration:1,ease:'power2.out'});}}});
+  });
+
+  window.addEventListener('load',function(){ScrollTrigger.refresh();});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twirl Café — Shakes &amp; Kitchen (Concept Demo)</title>
+<meta name="description" content="Concept demo cafe website by Edit Theory. Fictional brand, sample menu and prices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--lav:#FFF4E4;--lavd:#7FD8BE;--lavl:#FFFBF3;--chart:#FFC93C;--tom:#FF5C8A;--ink:#3B1F14;--sh:4px 4px 0 var(--ink)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:auto}
+  body{background:var(--lav);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
+  a{color:inherit;text-decoration:none}
+  button,input,select,textarea{font:inherit;color:inherit}
+  h1,h2,h3,.serif{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;letter-spacing:-.045em;line-height:.95}
+  .cap{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 22px}
+  .sec{padding:clamp(80px,12vw,140px) 0}
+  .h2{font-size:clamp(38px,7vw,96px);margin-top:14px}
+  .note{display:inline-block;margin-top:16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px dashed currentColor;padding:6px 12px;border-radius:99px;opacity:.85;font-weight:700}
+
+  .strip{position:fixed;top:0;left:0;right:0;height:26px;z-index:90;background:var(--ink);color:var(--chart);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;font-weight:700;padding:0 10px;text-align:center}
+  header{position:fixed;top:26px;left:0;right:0;z-index:80;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:background .4s,padding .4s}
+  header.solid{background:#FFF4E4ee;backdrop-filter:blur(10px);padding:10px 22px;border-bottom:2px solid var(--ink)}
+  .logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:28px;letter-spacing:-.05em}
+  nav{display:none;gap:30px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+  nav a:hover{text-decoration:underline;text-underline-offset:6px}
+  @media(min-width:900px){nav{display:flex}}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:2px solid var(--ink);border-radius:99px;padding:15px 26px;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:var(--ink);color:var(--chart);box-shadow:var(--sh);transition:transform .2s,box-shadow .2s}
+  .btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+  .btn.line{background:var(--lavl);color:var(--ink)}
+  .btn.tom{background:var(--tom);color:var(--ink)}
+  .btn.chart{background:var(--chart);color:var(--ink)}
+  .btn.sm{padding:10px 18px;font-size:12px}
+
+  /* HERO */
+  .hero{position:relative;min-height:100svh;padding:120px 0 60px;display:flex;align-items:center;overflow:hidden}
+  .hg{display:grid;gap:30px;align-items:center;width:100%}
+  @media(min-width:900px){.hg{grid-template-columns:1.1fr .9fr}}
+  .hero h1{font-size:clamp(46px,7.2vw,100px);margin:20px 0 22px}
+  .hero h1 em{font-style:normal;color:var(--tom);background:linear-gradient(transparent 78%,var(--chart) 78% 94%,transparent 94%)}
+  .hero p.lead{max-width:40ch;font-size:clamp(16px,2vw,19px)}
+  .hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+  .side{display:none;position:absolute;right:22px;bottom:70px;text-align:right;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;border-right:1px solid var(--ink);padding-right:14px;line-height:1.9}
+  .side b{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:30px;letter-spacing:0;font-weight:400}
+  @media(min-width:1100px){.side{display:block}}
+  .stats{display:flex;gap:30px;margin-top:34px;flex-wrap:wrap}
+  .stats b{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:34px;font-weight:400}
+  .stats span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+  .glass{display:block;width:100%;height:auto;overflow:visible}
+  .gw{width:min(86vw,470px);margin:0 auto;position:relative}
+  .gw::before{content:'';position:absolute;left:50%;top:52%;width:92%;aspect-ratio:1;transform:translate(-50%,-50%);background:var(--chart);border:2px solid var(--ink);border-radius:50%;box-shadow:8px 8px 0 var(--ink);z-index:0}
+  .gw .glass{position:relative;z-index:1}
+  .badge{position:absolute;right:-2%;top:2%;width:112px;height:112px;z-index:2;animation:spin 14s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .mq{overflow:hidden;white-space:nowrap;background:var(--tom);color:var(--ink);padding:16px 0;border-block:2px solid var(--ink)}
+  .mq div{display:inline-flex;gap:34px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-.04em;font-size:clamp(34px,6vw,70px);line-height:1}
+
+  /* PINNED MAKING SCENE */
+  .make{position:relative;height:100svh;background:var(--ink);color:var(--lavl);overflow:hidden;display:flex;align-items:center;padding-top:60px}
+  .mg{display:grid;gap:10px;align-items:center;width:100%}
+  @media(min-width:900px){.mg{grid-template-columns:1fr 1fr}}
+  .make h2{font-size:clamp(36px,6vw,80px);margin-top:12px;color:var(--lavl)}
+  .make h2 em{color:var(--chart)}
+  .mstep{margin-top:26px;min-height:120px}
+  .mstep b{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:var(--chart);font-size:clamp(28px,4vw,48px);display:block;letter-spacing:-.02em}
+  .mstep span{display:block;max-width:38ch;margin-top:6px}
+  .dots{display:flex;gap:8px;margin-top:20px}
+  .dots i{width:34px;height:4px;border-radius:4px;background:#FFFBF344;transition:background .3s}
+  .dots i.on{background:var(--tom)}
+  .mgl{width:min(70vw,360px);margin:0 auto}
+
+  /* BUILDER */
+  .build{background:var(--chart)}
+  .bg2{display:grid;gap:30px;margin-top:44px;align-items:start}
+  @media(min-width:900px){.bg2{grid-template-columns:1.1fr .9fr}}
+  .bp{background:var(--lav);box-shadow:8px 8px 0 var(--ink);border:2px solid var(--ink);border-radius:28px;padding:clamp(22px,4vw,38px)}
+  .grp{margin-bottom:26px}
+  .grp .cap{display:block;margin-bottom:12px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{border:2px solid var(--ink);background:transparent;border-radius:99px;padding:10px 16px;cursor:pointer;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:8px;transition:background .25s,color .25s}
+  .chip i{width:14px;height:14px;border-radius:50%;border:2px solid var(--ink);display:block}
+  .chip.on{background:var(--ink);color:var(--chart)}
+  .chip.on i{border-color:var(--chart)}
+  .bres{background:var(--ink);color:var(--lavl);border-radius:28px;padding:clamp(22px,4vw,38px);text-align:center;position:sticky;top:110px}
+  .bres .tot{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(46px,7vw,84px);color:var(--chart);line-height:1;margin:6px 0 10px}
+  .bres .sum{font-size:14px;min-height:44px}
+  .bres .gwb{width:min(60vw,250px);margin:0 auto 6px}
+  .bres .btn{margin-top:16px}
+
+  /* MENU */
+  .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-top:34px}
+  .tabs button{border:2px solid var(--ink);background:transparent;border-radius:99px;padding:12px 20px;cursor:pointer;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;transition:all .25s}
+  .tabs button.on{background:var(--ink);color:var(--chart)}
+  .mgrid{display:grid;gap:16px;margin-top:30px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+  .mc{box-shadow:6px 6px 0 var(--ink);border:2px solid var(--ink);border-radius:26px;padding:22px;display:grid;gap:14px;min-height:250px;align-content:space-between;position:relative;overflow:hidden}
+  .mc .n{font-family:'Bricolage Grotesque',sans-serif;font-size:30px;line-height:1.02;letter-spacing:-.03em}
+  .mc .ph{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:92px;line-height:.8;opacity:.9}
+  .mc .bt{display:flex;justify-content:space-between;align-items:center}
+  .mc .pr{font-weight:700;font-size:18px}
+  .qty{display:flex;align-items:center;gap:8px}
+  .qty button{width:34px;height:34px;border-radius:50%;border:2px solid var(--ink);background:transparent;cursor:pointer;font-size:18px;font-weight:700;line-height:1}
+  .qty button:hover{background:var(--ink);color:var(--chart)}
+  .qty span{min-width:18px;text-align:center;font-weight:700}
+  .c0{background:var(--tom)}.c1{background:var(--lavl)}.c2{background:var(--chart)}.c3{background:var(--lavd)}
+  .fab{position:fixed;right:18px;bottom:18px;z-index:85;background:var(--tom);color:var(--ink);border:2px solid var(--ink);border-radius:99px;padding:14px 22px;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;display:none;box-shadow:0 8px 24px #3B1F1455}
+
+  /* DAY TRACK */
+  .day{position:relative;background:var(--lavl);overflow:hidden}
+  .dh{padding:clamp(70px,10vw,120px) 0 30px}
+  .dtrack{display:flex;width:max-content;padding:0 22px 70px;gap:20px}
+  .dp{width:min(82vw,520px);min-height:min(66vh,520px);border:2px solid var(--ink);border-radius:30px;padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;justify-content:space-between;flex:none}
+  .dp .tm{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(64px,10vw,130px);line-height:.85;letter-spacing:-.05em}
+  .dp h3{font-size:clamp(26px,3.4vw,40px);margin-bottom:8px}
+  .dp p{max-width:34ch}
+  .dp:nth-child(1){background:var(--lav)}.dp:nth-child(2){background:var(--chart)}.dp:nth-child(3){background:var(--tom)}.dp:nth-child(4){background:var(--ink);color:var(--lavl)}
+  body.reduce .dtrack{flex-direction:column;width:auto}
+
+  /* STORY */
+  .story{display:grid;gap:34px;margin-top:40px}
+  @media(min-width:900px){.story{grid-template-columns:1.2fr .8fr}}
+  .story p.big{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(24px,3.4vw,40px);line-height:1.18;letter-spacing:-.02em}
+  .cnt{display:grid;gap:14px}
+  .cnt div{border:2px solid var(--ink);border-radius:20px;padding:16px 20px;display:flex;justify-content:space-between;align-items:baseline}
+  .cnt b{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:42px}
+  .cnt span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+
+  /* VISIT */
+  .visit{background:var(--tom);position:relative;overflow:hidden}
+  .vg{display:grid;gap:40px}
+  @media(min-width:900px){.vg{grid-template-columns:1fr 1fr;align-items:start}}
+  .visit h2{font-size:clamp(40px,7vw,100px)}
+  .vi{margin-top:26px;display:grid;gap:12px;font-size:16px}
+  .vi b{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+  .mapph{margin-top:22px;border:2px solid var(--ink);border-radius:22px;height:170px;display:grid;place-items:center;background:repeating-linear-gradient(45deg,#FFFBF3 0 14px,#FFC93C55 14px 28px);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;text-align:center;padding:10px}
+  form{display:grid;gap:14px;box-shadow:8px 8px 0 var(--ink);background:var(--lav);border:2px solid var(--ink);border-radius:28px;padding:clamp(22px,4vw,38px)}
+  label{display:grid;gap:6px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+  select,input[type=text],textarea{background:transparent;border:2px solid var(--ink);border-radius:14px;padding:13px 15px;font-size:16px;outline:none;width:100%}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+  footer{background:var(--ink);color:var(--lavd);padding:70px 0 50px;overflow:hidden;font-size:14px}
+  footer .giant{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-.07em;line-height:.85;font-size:clamp(90px,24vw,360px);color:var(--lav);white-space:nowrap}
+  footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;margin-top:30px}
+
+  .wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em}
+  .wd .in{display:inline-block}
+  body.reduce .make{height:auto;padding:90px 0}
+</style>
+</head>
+<body>
+
+<div class="strip">Concept demo by Edit Theory · Fictional café · Sample menu and prices</div>
+<header id="hdr">
+  <a href="#top" class="logo">twirl.</a>
+  <nav><a href="#make">How</a><a href="#build">Build</a><a href="#menu">Menu</a><a href="#visit">Visit</a></nav>
+  <a href="#build" class="btn chart sm">Build a shake</a>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hg">
+    <div>
+      <div class="cap" id="h0">Shakes · Coffee · Kitchen</div>
+      <h1 id="h1">Thick shakes,<br>spun <em>slow.</em></h1>
+      <p class="lead" id="hp">A small corner café with a big blender. Fresh fruit, real cream and no shortcuts, made when you order.</p>
+      <div class="cta" id="hc"><a class="btn" href="#build">Build your shake</a><a class="btn line" href="#menu">See the menu</a></div>
+      <div class="stats" id="hs"><div><b>24+</b><span>Flavours (sample)</span></div><div><b>₹99</b><span>From (sample)</span></div><div><b>9–11</b><span>Open daily (sample)</span></div></div>
+    </div>
+    <div class="gw"><div id="hg"></div><svg class="badge" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="bc" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0"/></defs><circle cx="60" cy="60" r="58" fill="#FF5C8A" stroke="#3B1F14" stroke-width="2.5"/><text font-family="DM Sans" font-weight="700" font-size="11.5" letter-spacing="2.4" fill="#3B1F14"><textPath href="#bc">FRESH · THICK · COLD · FRESH · THICK · COLD ·</textPath></text><circle cx="60" cy="60" r="12" fill="#FFC93C" stroke="#3B1F14" stroke-width="2.5"/></svg></div>
+  </div>
+  <div class="side">People<br>Shakes<br>Slow mornings<b>Est. 2026</b>Fictional</div>
+</section>
+
+<div class="mq" aria-hidden="true"><div id="mq"></div></div>
+
+<main>
+  <section class="make" id="make">
+    <div class="wrap mg">
+      <div>
+        <div class="cap" style="color:var(--chart)">How we make it</div>
+        <h2>Scroll to <em>pour.</em></h2>
+        <div class="mstep" id="ms"><b>Pick a base</b><span>Cold milk, real fruit and ice, measured by eye and by taste.</span></div>
+        <div class="dots" id="dots"><i class="on"></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="mgl" id="mgl"></div>
+    </div>
+  </section>
+
+  <section class="sec build" id="build">
+    <div class="wrap">
+      <div class="cap">Your way</div>
+      <h2 class="serif h2 split">Build a shake</h2>
+      <span class="note">Demo builder · sample prices</span>
+      <div class="bg2">
+        <div class="bp">
+          <div class="grp"><span class="cap">1 · Flavour</span><div class="chips" id="cF"></div></div>
+          <div class="grp"><span class="cap">2 · Size</span><div class="chips" id="cS"></div></div>
+          <div class="grp" style="margin-bottom:0"><span class="cap">3 · Toppings</span><div class="chips" id="cT"></div></div>
+        </div>
+        <div class="bres">
+          <div class="gwb" id="gb"></div>
+          <div class="cap" style="color:var(--chart)">Your total</div>
+          <div class="tot" id="tot">₹0</div>
+          <div class="sum" id="sum"></div>
+          <button class="btn chart" id="bOrd" type="button">Order on WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="menu">
+    <div class="wrap">
+      <div class="cap">The menu</div>
+      <h2 class="serif h2 split">Pick your pour</h2>
+      <span class="note">Sample items and prices</span>
+      <div class="tabs" id="tabs"></div>
+      <div class="mgrid" id="mgrid"></div>
+    </div>
+  </section>
+
+  <section class="day" id="day">
+    <div class="wrap dh">
+      <div class="cap">One day at Twirl</div>
+      <h2 class="serif h2 split">Slow mornings, late nights.</h2>
+      <span class="note">Sample hours and stories</span>
+    </div>
+    <div class="dtrack" id="dt">
+      <article class="dp"><div class="tm">9am</div><div><h3>The fruit arrives</h3><p>Crates of mango, strawberry and banana get sorted before the shutters go up.</p></div></article>
+      <article class="dp"><div class="tm">1pm</div><div><h3>Kitchen rush</h3><p>Sandwiches, fries and bowls, with a cold shake on every second tray.</p></div></article>
+      <article class="dp"><div class="tm">5pm</div><div><h3>Shake o’clock</h3><p>The blender never stops. Thick shakes, crumbled cookies and extra cream.</p></div></article>
+      <article class="dp"><div class="tm">10pm</div><div><h3>Last pour</h3><p>Quiet tables, cold brew and one more thick shake before we close.</p></div></article>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="cap">Our story</div>
+      <h2 class="serif h2 split">A little café, a big blender.</h2>
+      <div class="story">
+        <p class="big">Twirl started as a neighbourhood counter with one blender and one rule: if it is not fresh, it does not go in the cup. This is a concept demo, so the story, numbers and people here are all samples.</p>
+        <div class="cnt"><div><b data-n="24">0</b><span>Flavours</span></div><div><b data-n="100">0</b><span>% made to order</span></div><div><b data-n="0">0</b><span>Syrups</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec visit" id="visit">
+    <div class="wrap vg">
+      <div>
+        <div class="cap">Visit us</div>
+        <h2 class="serif">Find the café.</h2>
+        <div class="vi">
+          <div><b>Address (sample)</b>12 Sample Street, Your Town, 605001</div>
+          <div><b>Hours (sample)</b>Every day, 9:00 AM to 11:00 PM</div>
+          <div><b>WhatsApp (sample)</b>+91 00000 00000</div>
+        </div>
+        <div class="mapph">Map goes here<br>(replace with a real map embed)</div>
+        <span class="note">Demo · uses a sample WhatsApp number</span>
+      </div>
+      <form id="cf">
+        <label>Your name<input id="fN" type="text" placeholder="Name" required></label>
+        <div class="two">
+          <label>People<select id="fP"><option>2</option><option>3</option><option>4</option><option>5 to 8</option><option>9+</option></select></label>
+          <label>When<select id="fW"><option>Today</option><option>Tomorrow</option><option>This weekend</option></select></label>
+        </div>
+        <label>Note<textarea id="fX" rows="2" placeholder="Birthday, allergies, anything we should know"></textarea></label>
+        <button class="btn" type="submit">Reserve a table on WhatsApp</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="giant" id="giant">twirl.</div>
+    <div class="row"><span>Twirl Café is a fictional brand. A concept demo by Edit Theory. All menu items, prices and details are samples.</span><span>© 2026 Edit Theory</span></div>
+  </div>
+</footer>
+
+<button class="fab" id="fab" type="button"></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)};
+  var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasG=!!window.gsap,lenis=null,WA='910000000000';
+  var TOM='#FF5C8A',LAVD='#7FD8BE',CHART='#FFC93C',CHOC='#8a4b2c';
+  function inr(n){return '₹'+Math.round(n).toLocaleString('en-IN');}
+  function sm(p,a,b){var x=Math.min(1,Math.max(0,(p-a)/(b-a)));return x*x*(3-2*x);}
+  function wa(m){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(m),'_blank');}
+
+  window.addEventListener('scroll',function(){$('#hdr').classList.toggle('solid',window.scrollY>80);},{passive:true});
+
+  /* marquee */
+  (function(){var w=['Thick shakes','✦','Cold brew','✦','Fresh juice','✦','Kitchen','✦','Real cream','✦'],h='';for(var k=0;k<3;k++){h+=w.map(function(x){return '<span>'+x+'</span>';}).join('');}$('#mq').innerHTML=h;})();
+
+  /* glass illustration */
+  var uid=0;
+  function makeGlass(host){
+    var id='g'+(++uid);
+    host.innerHTML=
+    '<svg viewBox="0 0 400 560" class="glass" aria-hidden="true"><defs>'+
+    '<clipPath id="'+id+'c"><path d="M92 130 L308 130 L282 478 Q280 504 254 504 L146 504 Q120 504 118 478 Z"/></clipPath>'+
+    '<linearGradient id="'+id+'o" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".6"/><stop offset=".45" stop-color="#fff" stop-opacity=".08"/><stop offset="1" stop-color="#fff" stop-opacity=".35"/></linearGradient>'+
+    '<radialGradient id="'+id+'s" cx=".32" cy=".28" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".3" stop-color="#fff" stop-opacity="0"/></radialGradient>'+
+    '<pattern id="'+id+'p" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><rect width="13" height="26" fill="#FFFBF3"/><rect x="13" width="13" height="26" fill="'+TOM+'"/></pattern>'+
+    '</defs>'+
+            '<path d="M92 130 L308 130 L282 478 Q280 504 254 504 L146 504 Q120 504 118 478 Z" fill="#FFFBF3" fill-opacity=".45"/>'+
+    '<g clip-path="url(#'+id+'c)"><rect class="liq" x="70" y="500" width="260" height="440" fill="'+TOM+'"/><ellipse class="liqt" cx="200" cy="500" rx="100" ry="12" fill="#fff" fill-opacity=".35"/></g>'+
+    '<g class="straw"><g transform="rotate(12 250 200)"><rect x="236" y="40" width="26" height="360" rx="9" fill="url(#'+id+'p)" stroke="#3B1F14" stroke-width="2.5"/></g></g>'+
+    '<g class="cream" style="transform-origin:200px 130px"><ellipse cx="200" cy="128" rx="104" ry="20" fill="#FFFBF3" stroke="#3B1F14" stroke-width="2.5"/><ellipse cx="200" cy="104" rx="78" ry="19" fill="#FFFBF3" stroke="#3B1F14" stroke-width="2.5"/><ellipse cx="200" cy="82" rx="52" ry="16" fill="#FFFBF3" stroke="#3B1F14" stroke-width="2.5"/><circle cx="200" cy="58" r="15" fill="'+TOM+'" stroke="#3B1F14" stroke-width="2.5"/></g>'+
+    '<path d="M92 130 L308 130 L282 478 Q280 504 254 504 L146 504 Q120 504 118 478 Z" fill="url(#'+id+'o)" stroke="#3B1F14" stroke-width="3"/>'+
+    '<path d="M120 170 L134 440" stroke="#fff" stroke-opacity=".7" stroke-width="10" stroke-linecap="round" fill="none"/>'+
+            '</svg>';
+    var s=host.querySelector('svg'),liq=s.querySelector('.liq'),lt=s.querySelector('.liqt'),cr=s.querySelector('.cream'),st=s.querySelector('.straw');
+    var api={ang:1.2,
+      level:function(p){var y=500-350*Math.max(0,Math.min(1,p));liq.setAttribute('y',y);lt.setAttribute('cy',y);lt.setAttribute('rx',Math.max(2,108-26*(y-130)/348-6));lt.style.opacity=p>0.02?1:0;},
+      color:function(c){liq.setAttribute('fill',c);},
+      cream:function(p){cr.style.opacity=p;cr.style.transform='translateY('+((1-p)*-26)+'px) scale('+(.7+.3*p)+')';},
+      straw:function(p){st.style.transform='translateY('+((1-p)*-150)+'px)';st.style.opacity=Math.min(1,p*3);},
+      orbit:function(a){api.ang=a;}
+    };
+    api.orbit(1.2);return api;
+  }
+
+  /* hero glass */
+  var hg=makeGlass($('#hg'));hg.level(.8);hg.cream(1);hg.straw(1);
+  var gl=[hg];
+
+  /* pinned making scene glass */
+  var mg=makeGlass($('#mgl'));mg.level(0);mg.cream(0);mg.straw(0);gl.push(mg);
+
+  /* builder */
+  var FL=[['Strawberry',TOM],['Watermelon',TOM],['Mango',CHART],['Banana',CHART],['Pistachio',LAVD],['Chocolate',CHOC]];
+  var SZ=[['Small',129,.6],['Medium',159,.78],['Large',189,.94]];
+  var TP=[['Whipped cream',20],['Choco chips',15],['Crushed nuts',25]];
+  var B={f:0,s:1,t:{}};
+  var bgl=makeGlass($('#gb'));gl.push(bgl);
+  function chips(host,arr,kind){
+    host.innerHTML=arr.map(function(a,k){
+      var dot=kind==='f'?'<i style="background:'+a[1]+'"></i>':'';
+      var pr=kind==='s'?' · '+inr(a[1]):(kind==='t'?' +'+inr(a[1]):'');
+      return '<button type="button" class="chip" data-k="'+k+'">'+dot+a[0]+pr+'</button>';
+    }).join('');
+  }
+  chips($('#cF'),FL,'f');chips($('#cS'),SZ,'s');chips($('#cT'),TP,'t');
+  function bUpdate(){
+    $$('#cF .chip').forEach(function(c,k){c.classList.toggle('on',k===B.f);});
+    $$('#cS .chip').forEach(function(c,k){c.classList.toggle('on',k===B.s);});
+    $$('#cT .chip').forEach(function(c,k){c.classList.toggle('on',!!B.t[k]);});
+    var tot=SZ[B.s][1],tn=[];
+    Object.keys(B.t).forEach(function(k){if(B.t[k]){tot+=TP[k][1];tn.push(TP[k][0].toLowerCase());}});
+    $('#tot').textContent=inr(tot);
+    $('#sum').textContent=SZ[B.s][0]+' '+FL[B.f][0].toLowerCase()+' shake'+(tn.length?' with '+tn.join(', '):'');
+    bgl.color(FL[B.f][1]);bgl.level(SZ[B.s][2]);bgl.cream(B.t[0]?1:0);bgl.straw(1);
+    B.total=tot;
+  }
+  $('#cF').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;B.f=+b.dataset.k;bUpdate();});
+  $('#cS').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;B.s=+b.dataset.k;bUpdate();});
+  $('#cT').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;var k=+b.dataset.k;B.t[k]=!B.t[k];bUpdate();});
+  $('#bOrd').addEventListener('click',function(){wa('Hi Twirl, I would like to order: '+$('#sum').textContent+'. Total '+$('#tot').textContent+'.');});
+  bUpdate();
+
+  /* menu */
+  var MENU={
+    'Milk shakes':[['Strawberry Swirl',119],['Mango Cloud',119],['Chocolate Hug',129],['Cookie Crumble',139]],
+    'Thick shakes':[['Cookies and Cream',149],['Choco Wafer',149],['Dry Fruit Royale',169],['Peanut Butter Pull',159]],
+    'Coffee and tea':[['Filter Coffee',49],['Iced Latte',119],['Masala Chai',39],['Cold Brew',129]],
+    'Juices':[['Watermelon Splash',79],['Pineapple Mint',89],['Orange Zing',89],['Sweet Lime',69]]
+  };
+  var cats=Object.keys(MENU),cur=cats[0],cart={};
+  $('#tabs').innerHTML=cats.map(function(c,k){return '<button type="button" data-c="'+c+'"'+(k===0?' class="on"':'')+'>'+c+'</button>';}).join('');
+  function renderMenu(){
+    $('#mgrid').innerHTML=MENU[cur].map(function(it,k){
+      var key=cur+'|'+it[0],q=cart[key]||0;
+      return '<div class="mc c'+(k%4)+'"><div class="ph">'+it[0].charAt(0)+'</div><div class="n">'+it[0]+'</div><div class="bt"><span class="pr">'+inr(it[1])+'</span><span class="qty"><button type="button" data-a="-" data-k="'+key+'" aria-label="Remove one">−</button><span>'+q+'</span><button type="button" data-a="+" data-k="'+key+'" aria-label="Add one">+</button></span></div></div>';
+    }).join('');
+    if(hasG&&!reduce){gsap.from('#mgrid .mc',{y:30,opacity:0,duration:.5,stagger:.06,ease:'power3.out'});}
+  }
+  function price(key){var p=key.split('|'),l=MENU[p[0]];for(var i=0;i<l.length;i++){if(l[i][0]===p[1])return l[i][1];}return 0;}
+  function cartUpdate(){
+    var n=0,t=0;Object.keys(cart).forEach(function(k){n+=cart[k];t+=cart[k]*price(k);});
+    var f=$('#fab');f.style.display=n?'block':'none';f.textContent='Order ('+n+') · '+inr(t);
+  }
+  $('#tabs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;cur=b.dataset.c;$$('#tabs button').forEach(function(x){x.classList.toggle('on',x===b);});renderMenu();});
+  $('#mgrid').addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b)return;var k=b.dataset.k;
+    cart[k]=Math.max(0,(cart[k]||0)+(b.dataset.a==='+'?1:-1));
+    b.parentNode.querySelector('span').textContent=cart[k];cartUpdate();
+  });
+  $('#fab').addEventListener('click',function(){
+    var lines=Object.keys(cart).filter(function(k){return cart[k]>0;}).map(function(k){return cart[k]+' x '+k.split('|')[1];});
+    var t=0;Object.keys(cart).forEach(function(k){t+=cart[k]*price(k);});
+    wa('Hi Twirl, I would like to order: '+lines.join(', ')+'. Total '+inr(t)+'.');
+  });
+  renderMenu();
+
+  /* reservation form */
+  $('#cf').addEventListener('submit',function(e){
+    e.preventDefault();
+    wa('Hi Twirl, this is '+$('#fN').value+'. Table for '+$('#fP').value+', '+$('#fW').value.toLowerCase()+'.'+($('#fX').value?' '+$('#fX').value:''));
+  });
+
+  /* idle motion + base state */
+  var steps=[['Pick a base','Cold milk, real fruit and ice, measured by eye and by taste.'],['Blend it slow','Thick and cold, never watery. The blender runs until it is right.'],['Top it','Whipped cream, a crumble of something sweet, and the cherry on top.'],['Serve','A straw, a napkin and a table by the window.']];
+  if(!hasG||reduce){
+    mg.level(.8);mg.cream(1);mg.straw(1);
+    $$('[data-n]').forEach(function(c){c.textContent=c.dataset.n;});
+    if(reduce){document.body.classList.add('reduce');}
+  }
+  if(!hasG){return;}
+  gsap.registerPlugin(ScrollTrigger);
+  if(reduce){return;}
+
+  var tt=0;
+  gsap.ticker.add(function(){tt+=.012;gl.forEach(function(g,k){g.orbit(g.ang+.012);});});
+  gsap.to('#hg',{y:-12,repeat:-1,yoyo:true,duration:2.4,ease:'sine.inOut'});
+
+  if(window.Lenis){
+    lenis=new Lenis({lerp:0.09});
+    lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(function(t){lenis.raf(t*1000);});
+    gsap.ticker.lagSmoothing(0);
+  }
+  $$('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href'),el=id.length>1?$(id):null;if(!el)return;
+      e.preventDefault();
+      if(lenis){lenis.scrollTo(el,{offset:-50});}else{el.scrollIntoView({behavior:'smooth'});}
+    });
+  });
+
+  /* hero intro */
+  var h1=$('#h1');
+  gsap.from('#h0,#h1,#hp,#hc,#hs',{y:60,opacity:0,duration:1.1,stagger:.14,ease:'power4.out',delay:.15});
+  gsap.from('.gw',{scale:.8,opacity:0,duration:1.3,ease:'power3.out',delay:.3});
+  gsap.to('#mq',{xPercent:-35,ease:'none',scrollTrigger:{trigger:'.mq',start:'top bottom',end:'bottom top',scrub:true}});
+
+  $$('.split').forEach(function(el){
+    var w=el.textContent.trim().split(/\s+/);
+    el.innerHTML=w.map(function(x){return '<span class="wd"><span class="in">'+x+'</span></span>';}).join(' ');
+    gsap.from(el.querySelectorAll('.in'),{yPercent:115,duration:1.1,stagger:.1,ease:'power4.out',scrollTrigger:{trigger:el,start:'top 88%'}});
+  });
+
+  /* pinned pour scene */
+  var lastS=-1;
+  ScrollTrigger.create({trigger:'#make',start:'top top',end:'+=300%',pin:true,scrub:true,onUpdate:function(s){
+    var p=s.progress;
+    mg.level(sm(p,0,.5)*.82);mg.cream(sm(p,.55,.78));mg.straw(sm(p,.78,.95));
+    var k=p<.25?0:p<.5?1:p<.75?2:3;
+    if(k!==lastS){lastS=k;
+      $('#ms').innerHTML='<b>'+steps[k][0]+'</b><span>'+steps[k][1]+'</span>';
+      $$('#dots i').forEach(function(d,j){d.classList.toggle('on',j<=k);});
+      gsap.fromTo('#ms',{y:14,opacity:0},{y:0,opacity:1,duration:.5,ease:'power2.out'});}
+  }});
+
+  gsap.from('.bg2 > *',{y:60,opacity:0,duration:1,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'.bg2',start:'top 85%'}});
+
+  /* horizontal day track */
+  var dt=$('#dt');
+  function trackDist(){return Math.max(0,dt.scrollWidth-window.innerWidth);}
+  gsap.to(dt,{x:function(){return -trackDist();},ease:'none',scrollTrigger:{trigger:'#day',start:'top top',end:function(){return '+='+(trackDist()+window.innerHeight*.4);},pin:true,scrub:true,invalidateOnRefresh:true}});
+
+  /* counters */
+  $$('[data-n]').forEach(function(c){
+    var o={v:0},n=+c.dataset.n;
+    ScrollTrigger.create({trigger:c,start:'top 88%',once:true,onEnter:function(){gsap.to(o,{v:n,duration:1.6,ease:'power2.out',onUpdate:function(){c.textContent=Math.round(o.v);}});}});
+  });
+  gsap.from('.story > *',{y:50,opacity:0,duration:1,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'.story',start:'top 85%'}});
+  gsap.from('.vg > *',{y:60,opacity:0,duration:1,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'#visit',start:'top 70%'}});
+  gsap.fromTo('#giant',{x:'8%'},{x:'-12%',ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:true}});
+
+  window.addEventListener('load',function(){ScrollTrigger.refresh();});
+})();
+</script>
+</body>
+</html>
