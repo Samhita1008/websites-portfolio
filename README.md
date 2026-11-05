@@ -4,9 +4,9 @@
 
 <br/>
 
-![Sites](https://img.shields.io/badge/concept%20sites-11-0F3D3A?style=for-the-badge&labelColor=6C151E)
-![Stack](https://img.shields.io/badge/stack-HTML%20%C2%B7%20CSS%20%C2%B7%20JS-0F3D3A?style=for-the-badge&labelColor=6C151E)
-![Hosting](https://img.shields.io/badge/hosted%20on-Vercel-0F3D3A?style=for-the-badge&labelColor=6C151E&logo=vercel&logoColor=F5DABF)
+![Sites](https://img.shields.io/badge/concept%20sites-11-6C151E?style=for-the-badge&labelColor=6C151E)
+![Stack](https://img.shields.io/badge/stack-HTML%20%C2%B7%20CSS%20%C2%B7%20JS-6C151E?style=for-the-badge&labelColor=6C151E)
+![Hosting](https://img.shields.io/badge/hosted%20on-Vercel-6C151E?style=for-the-badge&labelColor=6C151E&logo=vercel&logoColor=F5DABF)
 
 </div>
 
