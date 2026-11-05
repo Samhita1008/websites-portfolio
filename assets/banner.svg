@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320" role="img" aria-label="Eleven concept sites for local brands."><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6C151E"/><stop offset="1" stop-color="#34090f"/></linearGradient>
+<pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#F5DABF" fill-opacity=".09"/></pattern>
+<clipPath id="panelclip"><polygon points="840,0 1200,0 1200,320 768,320"/></clipPath><style>
+.k{font-family:'SF Mono',Menlo,Consolas,monospace;fill:#F5DABF;opacity:.75;letter-spacing:4px}
+.t{font-family:Georgia,'Times New Roman',serif;fill:#F5DABF;font-weight:700}
+.s{font-family:'Segoe UI',Helvetica,Arial,sans-serif;fill:#d4b49b}
+.rise{animation:r 1s cubic-bezier(.2,.7,.2,1) both}
+.d1{animation-delay:.15s}.d2{animation-delay:.3s}.d3{animation-delay:.45s}
+@keyframes r{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.flow{stroke-dasharray:6 8;animation:f 2.2s linear infinite}
+@keyframes f{to{stroke-dashoffset:-28}}
+.pulse{transform-box:fill-box;transform-origin:center;animation:p 3.2s ease-in-out infinite}
+@keyframes p{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.14);opacity:1}}
+.blink{animation:b 1.2s steps(1) infinite}@keyframes b{50%{opacity:0}}
+.drift{animation:dr 14s ease-in-out infinite alternate}@keyframes dr{to{transform:translate(-14px,8px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></defs><rect width="1200" height="320" fill="url(#bg)"/><rect width="1200" height="320" fill="url(#dots)"/><g clip-path="url(#panelclip)"><rect width="1200" height="320" fill="#0F3D3A"/><rect width="1200" height="320" fill="url(#dots)" opacity=".7"/></g><polygon points="840,0 843,0 771,320 768,320" fill="#F5DABF" opacity=".5"/><g class="drift"><g transform="translate(882.0,100.0) scale(0.8)" fill="none" stroke="#F5DABF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="0" y="0" width="190" height="124" rx="10"/><path d="M0 26H190"/><circle cx="16" cy="13" r="3.5"/><circle cx="30" cy="13" r="3.5"/><rect x="18" y="44" width="70" height="60" rx="4" fill="#F5DABF" fill-opacity=".14" class="pulse"/><path class="flow" d="M108 52H172M108 72H160M108 92H170" stroke-opacity=".6"/><rect x="150" y="70" width="190" height="124" rx="10" stroke-opacity=".5"/><path d="M150 96H340" stroke-opacity=".5"/></g></g><text x="64" y="70" class="k rise" font-size="15">EDIT THEORY  ·  WEBSITES</text><text x="64" y="146" class="t rise d1" font-size="62">Eleven concept</text><text x="64" y="204" class="t rise d2" font-size="62" font-style="italic" font-weight="400">sites for local brands.</text><text x="64" y="252" class="s rise d3" font-size="21">Working demos of what a small business site can be.</text></svg>
