@@ -12,6 +12,10 @@
 
 Concept websites for the kinds of local businesses [Edit Theory](https://github.com/Samhita1008) works with. Each one is a self-contained static page, built to show a business what its own site could look like. They are demos, not real client sites, and every page is labelled "Concept Demo".
 
+## Homepage
+
+The root [`index.html`](./index.html) is the client-facing homepage. It lists every concept site and links to its folder. The tile order, names and descriptions are set in the `DEMOS` list at the bottom of that file, and the contact details are in `CONFIG` just above it. To show a screenshot on a tile, add `previews/<folder>.jpg` (3:2, about 1200 by 800).
+
 ## The sites
 
 | Folder | Concept |
