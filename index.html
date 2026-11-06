@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edit Theory | Websites that bring customers in</title>
+<meta name="description" content="Concept websites for eleven kinds of local business. Open one to see how yours could look.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500..700&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<noscript><style>.pre{display:none!important}</style></noscript>
+<style>
+  :root{
+    --orange:#E65416;
+    --beige:#D8D6C9;
+    --grey:#52555A;
+    --offwhite:#F5F5F5;
+    --charcoal:#303236;
+    --pad:clamp(20px,3vw,32px);
+    --display:"Bricolage Grotesque","Inter Tight",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  html.lenis,html.lenis body{height:auto}
+  .lenis.lenis-smooth{scroll-behavior:auto!important}
+  .lenis.lenis-stopped{overflow:hidden}
+
+  body{
+    font-family:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+    background:var(--offwhite);
+    color:var(--charcoal);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.4;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3,.group span,.note strong,.cursor,.pre-t,.pre-n,.n,.mega,.statement p,.logo{font-family:var(--display);font-stretch:88%}
+  :focus-visible{outline:3px solid var(--charcoal);outline-offset:-6px}
+  a.t-orange:focus-visible,a.t-grey:focus-visible,a.t-charcoal:focus-visible,.contact :focus-visible{outline-color:var(--offwhite)}
+
+  .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
+  .wi{display:inline-block;will-change:transform}
+
+  .progress{position:fixed;top:0;left:0;width:100%;height:3px;background:var(--orange);transform-origin:0 50%;transform:scaleX(0);z-index:90;pointer-events:none}
+
+  /* ---------- Preloader ---------- */
+  .pre{
+    position:fixed;inset:0;z-index:100;background:var(--orange);color:var(--offwhite);
+    display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad);
+  }
+  .pre-t{font-weight:600;font-size:20px;letter-spacing:-.03em}
+  .pre-n{font-weight:600;font-size:clamp(100px,24vw,340px);line-height:.8;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:16px var(--pad);
+    font-size:17px;font-weight:500;letter-spacing:-.01em;
+    transition:background .3s,backdrop-filter .3s;
+  }
+  .nav.solid{background:rgba(245,245,245,.84);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+  .logo{font-weight:600;font-size:21px;letter-spacing:-.03em}
+  .nav nav{display:flex;gap:clamp(18px,3vw,36px)}
+  .nav nav a{padding:6px 0;border-bottom:1px solid transparent;transition:border-color .2s}
+  .nav nav a:hover{border-color:currentColor}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    min-height:max(680px,min(100vh,940px));
+    padding-top:72px;
+    display:flex;flex-direction:column;
+    background:
+      radial-gradient(ellipse 70% 85% at 8% 100%, var(--orange) 0%, var(--orange) 18%, rgba(230,84,22,.55) 42%, rgba(230,84,22,0) 78%),
+      radial-gradient(ellipse 45% 55% at 85% 0%, rgba(230,84,22,.16) 0%, rgba(230,84,22,0) 70%),
+      var(--beige);
+    overflow:hidden;
+  }
+  .blob{
+    position:absolute;left:0;top:0;z-index:0;pointer-events:none;
+    width:70vmax;height:70vmax;border-radius:50%;
+    background:radial-gradient(circle, rgba(230,84,22,.5) 0%, rgba(230,84,22,.2) 35%, rgba(230,84,22,0) 68%);
+    will-change:transform;
+  }
+  .blob2{
+    position:absolute;left:0;top:0;z-index:0;pointer-events:none;
+    width:48vmax;height:48vmax;border-radius:50%;
+    background:radial-gradient(circle, rgba(245,245,245,.75) 0%, rgba(245,245,245,0) 65%);
+    will-change:transform;
+  }
+  .grain{
+    position:absolute;inset:0;z-index:1;pointer-events:none;
+    opacity:.3;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .guide{position:absolute;inset:0;z-index:1;pointer-events:none}
+  .guide svg{width:100%;height:100%}
+  .sq{position:absolute;width:30px;height:30px;border:1px solid rgba(48,50,54,.35);background:rgba(48,50,54,.06);top:104px;right:var(--pad)}
+
+  .hero-body{
+    position:relative;z-index:2;flex:1;
+    padding:var(--pad);
+    padding-top:clamp(24px,5vw,72px);
+    display:grid;gap:32px;
+    grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);
+    align-items:end;
+  }
+  h1{
+    font-weight:600;
+    font-size:clamp(48px,8.2vw,132px);
+    line-height:.92;
+    letter-spacing:-.04em;
+    max-width:11ch;
+  }
+  .hero-sub{
+    margin-top:28px;
+    font-size:clamp(17px,1.5vw,20px);
+    color:var(--charcoal);
+    max-width:36ch;
+    font-weight:500;
+    letter-spacing:-.01em;
+  }
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+  .cta{
+    display:inline-block;padding:16px 26px;font-size:17px;font-weight:600;letter-spacing:-.01em;
+    background:var(--charcoal);color:var(--offwhite);
+    transition:background .2s,color .2s;will-change:transform;
+  }
+  .cta:hover{background:var(--orange)}
+  .cta:not(.alt):focus-visible{outline-color:var(--offwhite)}
+  .cta.alt{background:transparent;color:var(--charcoal);box-shadow:inset 0 0 0 1px rgba(48,50,54,.55)}
+  .cta.alt:hover{background:var(--charcoal);color:var(--offwhite)}
+
+  .device{perspective:1200px;justify-self:end;width:min(100%,380px)}
+  .device-tilt{will-change:transform}
+  .frame{background:var(--offwhite);box-shadow:0 0 0 1px rgba(48,50,54,.2),0 40px 80px -24px rgba(48,50,54,.5)}
+  .bar{display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--charcoal)}
+  .bar i{width:8px;height:8px;background:rgba(245,245,245,.35)}
+  .bar b{margin-left:10px;flex:1;padding:0 8px;font-size:11px;font-weight:500;line-height:18px;color:rgba(245,245,245,.65);background:rgba(245,245,245,.12)}
+  .screen{height:clamp(300px,32vw,430px);overflow:hidden;position:relative}
+  .pg-hero{
+    height:210px;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;
+    background:radial-gradient(ellipse 80% 90% at 0% 100%, var(--orange) 0%, rgba(230,84,22,.35) 55%, rgba(230,84,22,0) 100%), var(--beige);
+  }
+  .ln{height:9px;background:var(--charcoal)}
+  .pg-hero .ln.big{height:24px;width:72%}
+  .pg-hero .ln.s{width:46%;opacity:.45}
+  .pg-btn{width:88px;height:26px;background:var(--charcoal);margin-top:6px}
+  .pg-text{padding:20px 18px;display:grid;gap:9px;background:var(--offwhite)}
+  .pg-text .ln{background:var(--grey);opacity:.45}
+  .pg-grid{display:grid;grid-template-columns:1fr 1fr}
+  .pg-grid div{height:120px}
+  .pg-foot{height:90px;background:var(--charcoal)}
+
+  .hero-foot{
+    position:relative;z-index:2;
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    margin:0 var(--pad);padding:18px 0 22px;
+    border-top:1px solid rgba(48,50,54,.25);
+    font-size:15px;font-weight:500;
+  }
+  .hero-foot span:last-child{opacity:.75}
+
+  /* ---------- Marquee ---------- */
+  .marquee{background:var(--charcoal);color:var(--offwhite);overflow-x:auto;padding:26px 0}
+  .marquee.is-marquee{overflow:hidden}
+  .track{display:flex;width:max-content}
+  .group{display:flex;align-items:center;gap:36px;padding-right:36px}
+  .group span{font-size:clamp(28px,4vw,56px);letter-spacing:-.035em;font-weight:500;white-space:nowrap}
+  .group i{width:14px;height:14px;background:var(--orange);flex:none}
+
+  /* ---------- Statement ---------- */
+  .statement{background:var(--offwhite);padding:clamp(80px,13vw,200px) var(--pad)}
+  .statement p{font-weight:600;font-size:clamp(34px,6vw,98px);line-height:1;letter-spacing:-.04em;max-width:17ch}
+
+  /* ---------- Work mosaic ---------- */
+  .work{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .work-head{
+    grid-column:1/-1;
+    background:var(--offwhite);
+    padding:0 var(--pad) clamp(28px,4vw,48px);
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:24px;align-items:end;
+  }
+  h2{font-weight:600;font-size:clamp(36px,5vw,76px);letter-spacing:-.04em;line-height:1}
+  .work-head p{color:var(--grey);font-size:18px;max-width:40ch}
+
+  .tile{
+    position:relative;isolation:isolate;overflow:hidden;
+    min-height:clamp(500px,50vw,680px);
+    padding:var(--pad);
+    display:flex;flex-direction:column;
+  }
+  .tile.wide{grid-column:1/-1;min-height:clamp(460px,42vw,620px)}
+  .tile::before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    opacity:0;transition:opacity .4s ease;
+    background:radial-gradient(circle 460px at var(--mx,0%) var(--my,100%), var(--glow) 0%, transparent 70%);
+  }
+  .tile:hover::before,.tile:focus-visible::before{opacity:1}
+  .tile-text{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+  .tile.wide .tile-text{display:block;max-width:40%}
+  .tile h3{font-weight:600;font-size:clamp(32px,3.6vw,54px);letter-spacing:-.035em;line-height:1;max-width:14ch}
+  .tile .what{margin-top:14px;font-size:17px;max-width:30ch;opacity:.88}
+  .tile .tag{margin-top:12px;font-size:14px;font-weight:500;opacity:.65}
+  .open{
+    font-size:15px;font-weight:600;white-space:nowrap;
+    border-bottom:1px solid currentColor;padding-bottom:2px;
+    transition:letter-spacing .25s;
+  }
+  .tile.wide .open{display:inline-block;margin-top:22px}
+  .tile:hover .open{letter-spacing:.02em}
+
+  .tile-mock{position:absolute;z-index:2;left:8%;right:8%;bottom:-17%}
+  .tile.wide .tile-mock{left:auto;right:4%;width:52%;bottom:-16%}
+  .tile-in{
+    transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px));
+    transform-origin:50% 100%;
+    transition:transform .55s cubic-bezier(.2,.7,.2,1);
+  }
+  .tile:hover .tile-in{--ty:-28px}
+  .tile .frame{box-shadow:0 0 0 1px rgba(48,50,54,.18),0 30px 60px -20px rgba(0,0,0,.45)}
+  .mshot{aspect-ratio:3/2;position:relative;overflow:hidden;background:var(--beige)}
+  .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+
+  .t-orange{background:var(--orange);color:var(--offwhite);--glow:rgba(216,214,201,.6)}
+  .t-beige{background:var(--beige);color:var(--charcoal);--glow:rgba(230,84,22,.45)}
+  .t-charcoal{background:var(--charcoal);color:var(--offwhite);--glow:rgba(230,84,22,.55)}
+  .t-offwhite{background:var(--offwhite);color:var(--charcoal);--glow:rgba(216,214,201,.95)}
+  .t-grey{background:var(--grey);color:var(--offwhite);--glow:rgba(230,84,22,.5)}
+
+  .cursor{
+    position:fixed;left:0;top:0;width:88px;height:88px;border-radius:50%;
+    display:grid;place-items:center;
+    background:var(--offwhite);color:var(--charcoal);
+    font-size:14px;font-weight:600;letter-spacing:-.01em;
+    box-shadow:0 0 0 1px rgba(48,50,54,.22),0 12px 32px rgba(0,0,0,.22);
+    pointer-events:none;z-index:60;transform:scale(0);
+  }
+  .has-cursor .tile{cursor:none}
+
+  /* ---------- About ---------- */
+  .about{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+  .about-photo{position:relative;min-height:clamp(480px,54vw,780px);overflow:hidden;margin:0;background:var(--beige)}
+  .ph-fallback{
+    position:absolute;inset:0;display:grid;place-items:center;
+    background:radial-gradient(ellipse 85% 90% at 0% 100%, var(--orange) 0%, rgba(230,84,22,.4) 60%, rgba(230,84,22,0) 100%), var(--beige);
+  }
+  .ph-fallback span{font-family:var(--display);font-weight:600;font-size:clamp(180px,30vw,440px);line-height:1;color:var(--charcoal)}
+  .about-photo img{position:absolute;left:0;top:-6%;width:100%;height:112%;object-fit:cover;object-position:50% 35%}
+  .about-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(48,50,54,.6),rgba(48,50,54,0) 45%);pointer-events:none}
+  .about-photo figcaption{position:absolute;left:var(--pad);bottom:var(--pad);z-index:2;color:var(--offwhite);font-size:17px;font-weight:500}
+  .about-copy{
+    background:var(--beige);
+    padding:clamp(40px,6vw,96px) var(--pad) var(--pad);
+    display:flex;flex-direction:column;justify-content:space-between;gap:48px;
+  }
+  .about-copy h2{font-size:clamp(46px,6.4vw,104px);line-height:.94}
+  .about-body{margin-top:clamp(24px,3vw,40px)}
+  .ap{font-size:clamp(18px,1.6vw,22px);max-width:36ch;letter-spacing:-.01em}
+  .ap + .ap{margin-top:18px}
+  .ap a{border-bottom:1px solid currentColor}
+  .ap a:hover{color:var(--orange)}
+  .about-specs{display:grid;grid-template-columns:auto 1fr;column-gap:28px;row-gap:6px;font-size:16px;border-top:1px solid rgba(48,50,54,.28);padding-top:20px}
+  .about-specs dt{opacity:.6}
+  .about-specs dd{font-weight:500}
+  .about-specs a{border-bottom:1px solid currentColor}
+
+  /* ---------- Services ---------- */
+  .services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .services-head{grid-column:1/-1;background:var(--offwhite);padding:clamp(56px,8vw,120px) var(--pad) 28px}
+  .svc{position:relative;overflow:hidden;padding:var(--pad);min-height:590px;display:flex;flex-direction:column;justify-content:flex-end}
+  .svc > div:first-child{min-height:232px}
+  .svc-link{display:inline-block;margin-top:18px;font-size:15px;font-weight:600;border-bottom:1px solid currentColor;padding-bottom:2px;transition:letter-spacing .25s,color .2s}
+  .svc-link:hover{letter-spacing:.02em;color:var(--orange)}
+  .svc-vis{position:absolute;left:var(--pad);right:var(--pad);top:var(--pad);bottom:252px;display:grid;place-items:center}
+
+  /* shared loop: a piece builds in, holds, then clears */
+  @keyframes build{0%{opacity:0;transform:translateY(14px)}12%,84%{opacity:1;transform:none}95%,100%{opacity:0;transform:translateY(-6px)}}
+
+  /* 1. website: a page assembles itself */
+  .mini{width:min(100%,300px);background:var(--offwhite);box-shadow:0 0 0 1px rgba(48,50,54,.18),0 24px 48px -20px rgba(48,50,54,.45)}
+  .mbar{display:flex;gap:5px;padding:9px 10px;background:var(--charcoal)}
+  .mbar i{width:7px;height:7px;background:rgba(245,245,245,.4)}
+  .mbody{display:grid;gap:8px;padding:10px}
+  .mbody .b{animation:build 7s infinite both}
+  .b.top{height:76px;background:var(--orange);animation-delay:.2s}
+  .b.l1{height:8px;width:82%;background:var(--grey);opacity:.55;animation-delay:.6s}
+  .b.l2{height:8px;width:56%;background:var(--grey);opacity:.55;animation-delay:.85s}
+  .b.row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;height:46px;animation-delay:1.2s}
+  .b.row s{display:block}
+  .b.row s:nth-child(1){background:var(--charcoal)}
+  .b.row s:nth-child(2){background:var(--beige)}
+  .b.row s:nth-child(3){background:var(--orange)}
+
+  /* 2. booking: pick a date, request goes out */
+  .cal{width:min(100%,280px);background:var(--offwhite);color:var(--charcoal);padding:14px;box-shadow:0 24px 48px -20px rgba(0,0,0,.45)}
+  .cal-t{font-family:var(--display);font-stretch:88%;font-weight:600;font-size:17px;letter-spacing:-.02em;margin-bottom:10px}
+  .cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+  .cal-g s{display:block;aspect-ratio:1;background:var(--beige)}
+  .cal-g s:nth-child(10){animation:pick 7s infinite both}
+  @keyframes pick{0%,26%{background:var(--beige)}32%,88%{background:var(--orange)}96%,100%{background:var(--beige)}}
+  .sent{margin-top:12px;padding:10px 12px;background:var(--charcoal);color:var(--offwhite);font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px;animation:toast 7s infinite both}
+  .sent i{width:9px;height:9px;background:var(--orange);flex:none}
+  @keyframes toast{0%,38%{opacity:0;transform:translateY(10px)}46%,86%{opacity:1;transform:none}95%,100%{opacity:0;transform:translateY(4px)}}
+
+  /* 3. automation: a request moves through the steps */
+  .flow{display:flex;align-items:flex-start;width:min(100%,360px)}
+  .nd{display:grid;justify-items:center;gap:9px;font-size:13px;font-weight:500;color:var(--offwhite);width:52px}
+  .nd b{display:block;width:44px;height:44px;border:1px solid var(--orange);background:var(--orange)}
+  .fl{flex:1;height:2px;margin-top:21px;background:rgba(245,245,245,.22);position:relative;overflow:hidden}
+  .fl::after{content:"";position:absolute;inset:0;background:var(--orange);transform-origin:0 50%}
+  .nd:nth-child(1) b{animation:n1 6.5s infinite both}
+  .nd:nth-child(3) b{animation:n2 6.5s infinite both}
+  .nd:nth-child(5) b{animation:n3 6.5s infinite both}
+  .fl:nth-child(2)::after{animation:f1 6.5s infinite both}
+  .fl:nth-child(4)::after{animation:f2 6.5s infinite both}
+  @keyframes n1{0%{background:transparent}6%,88%{background:var(--orange)}96%,100%{background:transparent}}
+  @keyframes n2{0%,26%{background:transparent}32%,88%{background:var(--orange)}96%,100%{background:transparent}}
+  @keyframes n3{0%,56%{background:transparent}62%,88%{background:var(--orange)}96%,100%{background:transparent}}
+  @keyframes f1{0%,8%{transform:scaleX(0)}28%,88%{transform:scaleX(1)}96%,100%{transform:scaleX(0)}}
+  @keyframes f2{0%,34%{transform:scaleX(0)}58%,88%{transform:scaleX(1)}96%,100%{transform:scaleX(0)}}
+  .svc h3{font-weight:600;font-size:clamp(28px,2.8vw,40px);letter-spacing:-.03em;line-height:1.05}
+  .svc p{font-size:17px;max-width:32ch;margin-top:14px;opacity:.9}
+
+  /* ---------- Process ---------- */
+  .process{background:var(--offwhite);padding:clamp(64px,9vw,140px) var(--pad)}
+  .steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--pad);margin-top:clamp(36px,5vw,72px)}
+  .steps li{position:relative;padding-top:26px}
+  .steps li::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--charcoal);transform-origin:0 50%;transform:scaleX(var(--p,1))}
+  .n{display:block;font-weight:600;font-size:clamp(64px,8vw,128px);line-height:.9;letter-spacing:-.04em;color:var(--orange)}
+  .steps h3{margin-top:22px;font-weight:600;font-size:clamp(24px,2.2vw,32px);letter-spacing:-.03em}
+  .steps p{margin-top:10px;font-size:17px;color:var(--grey);max-width:30ch}
+
+  /* ---------- Honest note ---------- */
+  .note{
+    background:var(--beige);
+    padding:clamp(40px,5vw,72px) var(--pad);
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,560px);gap:24px;
+  }
+  .note strong{font-weight:600;font-size:clamp(24px,2.4vw,34px);letter-spacing:-.025em;line-height:1.1}
+  .note p{color:var(--grey);font-size:17px;max-width:56ch}
+
+  /* ---------- Contact ---------- */
+  .contact{
+    background:var(--charcoal);color:var(--offwhite);
+    padding:clamp(64px,9vw,130px) var(--pad) 0;
+    min-height:90vh;display:flex;flex-direction:column;justify-content:space-between;gap:64px;
+    position:relative;overflow:hidden;isolation:isolate;
+  }
+  .glow{
+    position:absolute;right:-25%;bottom:-45%;z-index:-1;pointer-events:none;
+    width:90vmax;height:90vmax;border-radius:50%;
+    background:radial-gradient(circle, rgba(230,84,22,.95) 0%, rgba(230,84,22,.35) 38%, rgba(230,84,22,0) 70%);
+  }
+  .contact h2{font-size:clamp(46px,8vw,124px);letter-spacing:-.045em;line-height:.95;max-width:12ch}
+  .contact-row{display:flex;flex-wrap:wrap;gap:12px}
+  .btn{
+    display:inline-block;padding:16px 26px;font-size:17px;font-weight:600;letter-spacing:-.01em;
+    background:var(--offwhite);color:var(--charcoal);
+    transition:background .2s,color .2s;will-change:transform;
+  }
+  .btn:hover{background:var(--orange);color:var(--offwhite)}
+  .btn.ghost{background:transparent;color:var(--offwhite);box-shadow:inset 0 0 0 1px rgba(245,245,245,.55)}
+  .btn.ghost:hover{background:var(--offwhite);color:var(--charcoal)}
+  .mega{
+    font-weight:600;font-size:clamp(70px,18.5vw,330px);line-height:.78;letter-spacing:-.05em;
+    white-space:nowrap;color:var(--offwhite);
+    margin:0 0 -.13em -.04em;user-select:none;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:860px){
+    .hero-body,.work-head,.note,.about{grid-template-columns:1fr}
+    .work,.services,.steps{grid-template-columns:1fr}
+    .svc{min-height:520px}
+    .tile,.tile.wide{min-height:480px}
+    .tile.wide .tile-text{display:flex;max-width:none}
+    .tile.wide .open{margin-top:0}
+    .tile.wide .tile-mock{left:8%;right:8%;width:auto}
+    .sq{display:none}
+    .device{justify-self:start;width:min(100%,300px)}
+    .screen{height:260px}
+    h1{font-size:clamp(44px,13vw,80px)}
+    .about-photo{min-height:420px}
+  }
+  @media (max-width:560px){
+    .nav nav a[href="#services"]{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .tile::before,.open,.btn,.cta,.tile-in{transition:none}
+    .svc-vis *,.svc-vis *::after{animation:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="pre" id="pre" aria-hidden="true"><span class="pre-t">Edit Theory</span><span class="pre-n" id="preN">0</span></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true">Open</div>
+
+<div class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Edit Theory, home">Edit Theory</a>
+  <nav aria-label="Main">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div>
+
+<header class="hero" id="top">
+  <div class="blob" id="blob" aria-hidden="true"></div>
+  <div class="blob2" id="blob2" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="guide" aria-hidden="true">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line id="guideLine" x1="3" y1="97" x2="97" y2="8" stroke="rgba(245,245,245,.45)" style="stroke-width:1px" vector-effect="non-scaling-stroke"/></svg>
+    <div class="sq" id="guideSq"></div>
+  </div>
+  <div class="hero-body" id="heroBody">
+    <div class="hero-copy">
+      <h1 id="h1">Websites that bring customers in</h1>
+      <p class="hero-sub">Built for local businesses and D2C brands. Eleven concept sites, one for each kind of business. Open the one closest to yours.</p>
+      <div class="hero-actions">
+        <a class="cta" href="#work">See the work</a>
+        <a class="cta alt" href="#contact">Talk to me</a>
+      </div>
+    </div>
+    <div class="device" id="device" aria-hidden="true">
+      <div class="device-tilt" id="deviceTilt">
+        <div class="frame">
+          <div class="bar"><i></i><i></i><i></i><b>yourbusiness.in</b></div>
+          <div class="screen">
+            <div id="screenPage">
+              <div class="pg-hero"><div class="ln big"></div><div class="ln s"></div><div class="pg-btn"></div></div>
+              <div class="pg-text"><div class="ln" style="width:90%"></div><div class="ln" style="width:75%"></div><div class="ln" style="width:82%"></div></div>
+              <div class="pg-grid"><div style="background:var(--charcoal)"></div><div style="background:var(--orange)"></div><div style="background:var(--beige)"></div><div style="background:var(--grey)"></div></div>
+              <div class="pg-text"><div class="ln" style="width:70%"></div><div class="ln" style="width:88%"></div></div>
+              <div class="pg-grid"><div style="background:var(--offwhite);box-shadow:inset 0 0 0 1px rgba(48,50,54,.12)"></div><div style="background:var(--orange)"></div></div>
+              <div class="pg-foot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-foot"><span>Websites, booking and automation for small businesses</span><span>Scroll to see the work</span></div>
+</header>
+
+<div class="marquee" id="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
+
+<main>
+  <section class="statement" aria-label="Intro">
+    <p id="statement">A good website feels like walking into your shop. Clear, warm and easy to book.</p>
+  </section>
+
+  <section class="work" id="work" aria-labelledby="work-title">
+    <div class="work-head">
+      <h2 id="work-title" data-split>Pick your kind of business</h2>
+      <p>Each site is a concept, so you can see the layout, the motion and the booking flow before we talk.</p>
+    </div>
+    <!-- tiles are rendered from DEMOS below -->
+  </section>
+
+  <section class="about" id="about" aria-labelledby="about-title">
+    <figure class="about-photo" id="aboutPhoto">
+      <div class="ph-fallback" aria-hidden="true"><span>S</span></div>
+      <img id="aboutImg" src="samhita.jpg" alt="Samhita" loading="lazy" onerror="this.remove()">
+      <figcaption>Samhita</figcaption>
+    </figure>
+    <div class="about-copy">
+      <div>
+        <h2 id="about-title" data-split>hey, i'm samhita</h2>
+        <div class="about-body">
+          <p class="ap">i make websites for local businesses and D2C brands, then set up the booking and follow-ups so you're not replying to every DM yourself.</p>
+          <p class="ap">i build fast with AI, then check the result myself. no lorem ipsum, no broken buttons, no "looks fine on my laptop."</p>
+          <p class="ap">my automations are public on github, so you can <a href="https://github.com/Samhita1008/edit-theory-agents" target="_blank" rel="noopener">see the receipts</a>. you talk to me directly, first call to launch.</p>
+        </div>
+      </div>
+      <dl class="about-specs">
+        <dt>Name</dt><dd>Samhita</dd>
+        <dt>Works with</dt><dd>Local businesses, D2C brands</dd>
+        <dt>Builds</dt><dd>Websites, booking, automation</dd>
+        <dt>Automation</dt><dd><a href="https://edittheory-portfolio.vercel.app" target="_blank" rel="noopener">Automation portfolio</a></dd>
+        <dt>Code</dt><dd><a href="https://github.com/Samhita1008/edit-theory-agents" target="_blank" rel="noopener">GitHub</a></dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="services" id="services" aria-labelledby="services-title">
+    <div class="services-head"><h2 id="services-title" data-split>What I build for you</h2></div>
+    <div class="svc t-beige"><div><h3>A website</h3><p>Fast, mobile-first and easy to read on a phone. Your menu, services, photos, hours and a clear way to contact you.</p></div>
+      <div class="svc-vis" aria-hidden="true"><div class="mini"><div class="mbar"><i></i><i></i><i></i></div><div class="mbody"><div class="b top"></div><div class="b l1"></div><div class="b l2"></div><div class="b row"><s></s><s></s><s></s></div></div></div></div></div>
+    <div class="svc t-orange"><div><h3>A website with booking</h3><p>Customers send a booking request from the site. Each request is logged for you automatically, so nothing is lost in chat.</p></div>
+      <div class="svc-vis" aria-hidden="true"><div class="cal"><div class="cal-t">Pick a date</div><div class="cal-g"><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s></div><div class="sent"><i></i>Booking request sent</div></div></div></div>
+    <div class="svc t-charcoal"><div><h3>Automation behind it</h3><p>Replies, reminders and follow-ups that run on their own, set up around how your business already works.</p><a class="svc-link" href="https://edittheory-portfolio.vercel.app" target="_blank" rel="noopener">See the automation work</a></div>
+      <div class="svc-vis" aria-hidden="true"><div class="flow"><div class="nd"><b></b>Request</div><div class="fl"></div><div class="nd"><b></b>Sheet</div><div class="fl"></div><div class="nd"><b></b>Reply</div></div></div></div>
+  </section>
+
+  <section class="process" id="process" aria-labelledby="process-title">
+    <h2 id="process-title" data-split>How it works</h2>
+    <ol class="steps">
+      <li><span class="n">1</span><h3>Pick a concept</h3><p>Open the demo closest to your business and tell me what you like.</p></li>
+      <li><span class="n">2</span><h3>Make it yours</h3><p>Your name, photos, menu or services, and the booking flow you need.</p></li>
+      <li><span class="n">3</span><h3>Review and launch</h3><p>You review it, I fix what's off, then it goes live. Automation can follow.</p></li>
+    </ol>
+  </section>
+
+  <section class="note" aria-label="About these demos">
+    <strong>Concept builds, not client work.</strong>
+    <p>These sites were made without a client brief to show what is possible. Names, photos and details in them are samples. Yours would use your own.</p>
+  </section>
+</main>
+
+<footer class="contact" id="contact">
+  <div class="glow" id="glow" aria-hidden="true"></div>
+  <div>
+    <h2 id="contactH" data-split>Let's build yours</h2>
+  </div>
+  <div class="contact-row">
+    <a class="btn" id="wa" href="#">Message on WhatsApp</a>
+    <a class="btn ghost" id="mail" href="#">Send an email</a>
+  </div>
+  <div class="mega" id="mega" aria-hidden="true">Edit Theory</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+  /* ====== EDIT THESE ====== */
+  const CONFIG = {
+    whatsapp: "91XXXXXXXXXX",          // country code + number, digits only
+    email: "you@example.com",
+    whatsappText: "Hi, I saw your portfolio and want a website for my business."
+  };
+
+  // slug = folder name in this repo (or a full URL).
+  // Preview image (optional): previews/<slug>.jpg, 3:2 screenshot of the demo. Or set img: "path".
+  const DEMOS = [
+    { slug:"restaurant",    name:"Restaurants",         what:"Amber Hearth: menu, gallery, location and contact on a scroll-driven page.", tone:"orange" },
+    { slug:"cafe",          name:"Cafés",               what:"Twirl Café: a build-your-own shake builder and a menu.",                      tone:"beige" },
+    { slug:"zouk",          name:"Clubs and lounges",   what:"Zouk Club and Kitchen: a night-venue page driven by scroll animation.",       tone:"charcoal" },
+    { slug:"beauty-parlour",name:"Beauty parlours",     what:"Petal & Pine: services and a book-now flow.",                                 tone:"offwhite" },
+    { slug:"saree",         name:"Saree shops",         what:"Pallu Atelier: a silk saree collection with an interactive drape studio.",    tone:"grey" },
+    { slug:"gym",           name:"Gyms",                what:"Ironhide: plans, classes, a split builder and a free-trial booking.",         tone:"orange" },
+    { slug:"travel-agency", name:"Travel agencies",     what:"Saltpath: browse trips, plan a trip and read the FAQ.",                       tone:"beige" },
+    { slug:"interior",      name:"Interior designers",  what:"Ember & Ash: project work, process and a walkthrough booking.",               tone:"charcoal" },
+    { slug:"real-estate",   name:"Real estate",         what:"Kestrel Realty: homes and plots with an EMI calculator and enquiry form.",    tone:"grey" },
+    { slug:"clothing-brand",name:"Clothing brands",     what:"Offbeat Supply: a streetwear drop, lookbook and best sellers.",               tone:"offwhite" },
+    { slug:"social-media",  name:"Marketing agencies",  what:"Pulsecraft: services, process, work and a growth calculator.",                tone:"orange" }
+  ];
+
+  /* ---------- Abstract previews (used until a real screenshot exists) ---------- */
+  const PAL = {
+    orange:["#303236","#F5F5F5","#D8D6C9"], beige:["#E65416","#303236","#F5F5F5"],
+    charcoal:["#E65416","#D8D6C9","#52555A"], offwhite:["#303236","#E65416","#D8D6C9"],
+    grey:["#E65416","#F5F5F5","#303236"]
+  };
+  const bl = s => '<b style="display:block;' + s + '"></b>';
+  function mockBody(tone, v){
+    const [a,b,c] = PAL[tone];
+    if (v === 0) return '<div style="display:flex;flex-direction:column;height:100%"><div style="flex:56;background:'+a+';padding:6%;display:flex;flex-direction:column;justify-content:flex-end;gap:5%">'
+      + bl("height:12%;width:62%;background:"+c) + bl("height:5%;width:38%;background:"+c+";opacity:.5")
+      + '</div><div style="flex:44;display:grid;grid-template-columns:repeat(3,1fr)">'
+      + bl("background:"+b) + bl("background:"+c) + bl("background:"+a+";opacity:.7") + '</div></div>';
+    if (v === 1) return '<div style="display:grid;grid-template-columns:1fr 1fr;height:100%"><div style="background:'+c+';padding:8%;display:flex;flex-direction:column;justify-content:center;gap:7%">'
+      + bl("height:9%;width:80%;background:"+a) + bl("height:9%;width:60%;background:"+a+";opacity:.6") + bl("height:9%;width:70%;background:"+a+";opacity:.35") + bl("height:15%;width:34%;background:"+b+";margin-top:6%")
+      + '</div><div style="background:'+a+';display:grid;grid-template-rows:2fr 1fr">'
+      + bl("background:"+b+";opacity:.9") + bl("background:"+c+";opacity:.5") + '</div></div>';
+    if (v === 2) return '<div style="position:relative;height:100%;background:'+a+'"><span style="position:absolute;left:50%;top:44%;width:34%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:'+b+'"></span>'
+      + '<div style="position:absolute;left:0;right:0;bottom:0;height:26%;background:'+c+';padding:3% 6%;display:flex;flex-direction:column;justify-content:center;gap:8%">'
+      + bl("height:12%;width:44%;background:"+a) + bl("height:12%;width:30%;background:"+a+";opacity:.5") + '</div></div>';
+    return '<div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);height:100%"><div style="grid-column:span 2;background:'+a+'"></div><div style="background:'+b+'"></div><div style="background:'+c+'"></div><div style="background:'+a+';opacity:.6"></div><div style="background:'+b+';opacity:.8"></div></div>';
+  }
+
+  /* ---------- Render ---------- */
+  const work = document.getElementById("work");
+  const N = DEMOS.length;
+  DEMOS.forEach((d, i) => {
+    const href = /^https?:/.test(d.slug) ? d.slug : "./" + d.slug + "/";
+    const img  = d.img || "previews/" + d.slug + ".jpg";
+    const wide = i === 0 || (i === N - 1 && (N - 1) % 2 === 1);
+    const a = document.createElement("a");
+    a.className = "tile t-" + d.tone + (wide ? " wide" : "");
+    a.href = href;
+    a.setAttribute("aria-label", "Open the " + d.name + " concept site");
+    a.innerHTML =
+      '<div class="tile-text"><div><h3 data-split></h3><p class="what"></p><p class="tag">Concept build</p></div><span class="open">Open demo</span></div>' +
+      '<div class="tile-mock"><div class="tile-in"><div class="frame">' +
+        '<div class="bar"><i></i><i></i><i></i><b>yourbusiness.in</b></div>' +
+        '<div class="mshot">' + mockBody(d.tone, i % 4) +
+        '<img class="shot" alt="" loading="lazy" onerror="this.remove()"></div>' +
+      '</div></div></div>';
+    a.querySelector("h3").textContent = d.name;
+    a.querySelector(".what").textContent = d.what;
+    a.querySelector(".shot").src = img;
+    work.appendChild(a);
+  });
+
+  document.getElementById("track").innerHTML = [0,1].map(() =>
+    '<div class="group">' + DEMOS.map(d => '<span>' + d.name + '</span><i></i>').join("") + '</div>'
+  ).join("");
+
+  document.getElementById("wa").href =
+    "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(CONFIG.whatsappText);
+  document.getElementById("mail").href = "mailto:" + CONFIG.email;
+
+  /* ---------- Motion ---------- */
+  (function motion(){
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const pre = document.getElementById("pre");
+    if (reduce || !window.gsap || !window.ScrollTrigger) { pre.remove(); return; }  // page works without motion
+    gsap.registerPlugin(ScrollTrigger);
+
+    const fine = matchMedia("(hover:hover) and (pointer:fine)").matches;
+    const $  = s => document.querySelector(s);
+    const $$ = s => [...document.querySelectorAll(s)];
+
+    /* smooth scroll */
+    let lenis = null, velocity = 0;
+    if (window.Lenis) {
+      lenis = new Lenis({ lerp: 0.1 });
+      lenis.on("scroll", e => { velocity = e.velocity; ScrollTrigger.update(); });
+      gsap.ticker.add(t => lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+      lenis.stop();
+      $$('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
+        const id = a.getAttribute("href");
+        const target = id.length > 1 && document.querySelector(id);
+        if (target) { e.preventDefault(); lenis.scrollTo(id === "#top" ? 0 : target, { duration: 1.4 }); }
+      }));
+    }
+
+    /* word-mask split */
+    const split = el => {
+      const text = el.textContent.trim();
+      el.setAttribute("aria-label", text);
+      el.innerHTML = text.split(/\s+/).map(w =>
+        '<span class="w" aria-hidden="true"><span class="wi">' + w + '</span></span>').join(" ");
+      return el.querySelectorAll(".wi");
+    };
+    const h1Words = split($("#h1"));
+    $$("[data-split]").forEach(el => el.__words = split(el));
+
+    /* progress bar */
+    gsap.to("#progress", { scaleX: 1, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: 0.2 } });
+
+    /* nav: solid after hero top, hides on scroll down, returns on scroll up */
+    const nav = $("#nav"); let lastY = 0, navHidden = false;
+    addEventListener("scroll", () => {
+      const y = scrollY;
+      nav.classList.toggle("solid", y > 60);
+      if (y > lastY && y > 400 && !navHidden) { navHidden = true; gsap.to(nav, { yPercent: -100, duration: 0.45, ease: "power3.out" }); }
+      else if ((y < lastY || y <= 400) && navHidden) { navHidden = false; gsap.to(nav, { yPercent: 0, duration: 0.45, ease: "power3.out" }); }
+      lastY = y;
+    }, { passive: true });
+
+    /* hero intro (plays after the preloader) */
+    const intro = gsap.timeline({ paused: true, defaults: { ease: "power4.out" } });
+    intro
+      .from(h1Words, { yPercent: 115, duration: 1.2, stagger: 0.09 }, 0)
+      .from(".hero-sub", { y: 24, opacity: 0, duration: 0.9 }, 0.5)
+      .from(".hero-actions", { y: 24, opacity: 0, duration: 0.9 }, 0.65)
+      .from(".nav", { opacity: 0, duration: 0.8 }, 0.3)
+      .from("#guideLine", { attr: { x2: 3, y2: 97 }, duration: 1.8, ease: "power3.inOut" }, 0.1)
+      .from("#guideSq", { scale: 0, opacity: 0, duration: 0.6, ease: "back.out(2)" }, 1.4)
+      .from(".hero-foot", { opacity: 0, duration: 1 }, 1.1);
+
+    /* preloader: counter, then the orange panel lifts away */
+    const preN = $("#preN"), counter = { v: 0 };
+    let started = false;
+    const start = () => { if (started) return; started = true; pre.remove(); if (lenis) lenis.start(); intro.play(); ScrollTrigger.refresh(); };
+    gsap.timeline()
+      .to(counter, { v: 100, duration: 1.5, ease: "power2.inOut", onUpdate: () => { preN.textContent = Math.round(counter.v); } })
+      .to(pre, { yPercent: -100, duration: 0.9, ease: "power4.inOut" })
+      .add(() => { if (lenis) lenis.start(); intro.play(); }, "-=0.5")
+      .add(start);
+    setTimeout(start, 5000);   // failsafe
+
+    /* hero glow + browser preview */
+    const hero = $("#top"), blob = $("#blob"), b2 = $("#blob2");
+    const dev = $("#device"), tilt = $("#deviceTilt"), pg = $("#screenPage"), scr = pg.parentElement;
+    gsap.set(blob, { xPercent: -50, yPercent: -50, x: hero.offsetWidth * 0.7, y: hero.offsetHeight * 0.45 });
+    gsap.set(b2,   { xPercent: -50, yPercent: -50, x: hero.offsetWidth * 0.8, y: hero.offsetHeight * 0.3 });
+    gsap.from(dev, { y: 90, opacity: 0, duration: 1.4, ease: "power4.out", delay: 2.4 });
+    gsap.to(dev, { y: "-=14", duration: 3.2, yoyo: true, repeat: -1, ease: "sine.inOut", delay: 4.2 });
+    gsap.to(pg, { y: () => -(pg.offsetHeight - scr.offsetHeight), duration: 10, ease: "sine.inOut",
+      yoyo: true, repeat: -1, repeatDelay: 1.2, delay: 3.5, invalidateOnRefresh: true });
+    if (fine) {
+      const bx = gsap.quickTo(blob, "x", { duration: 1.4, ease: "power3" });
+      const by = gsap.quickTo(blob, "y", { duration: 1.4, ease: "power3" });
+      const b2x = gsap.quickTo(b2, "x", { duration: 2.2, ease: "power3" });
+      const b2y = gsap.quickTo(b2, "y", { duration: 2.2, ease: "power3" });
+      const rY = gsap.quickTo(tilt, "rotateY", { duration: 0.9, ease: "power3" });
+      const rX = gsap.quickTo(tilt, "rotateX", { duration: 0.9, ease: "power3" });
+      hero.addEventListener("mousemove", e => {
+        const r = hero.getBoundingClientRect();
+        const px = e.clientX - r.left, py = e.clientY - r.top;
+        const nx = px / r.width - 0.5, ny = py / r.height - 0.5;
+        bx(px); by(py);
+        b2x(r.width * 0.8 - nx * r.width * 0.5); b2y(r.height * 0.3 - ny * r.height * 0.4);
+        rY(nx * 16); rX(-ny * 12);
+      });
+      hero.addEventListener("mouseleave", () => { rY(0); rX(0); });
+    } else {
+      gsap.to(blob, { x: "+=140", y: "-=90", duration: 7, yoyo: true, repeat: -1, ease: "sine.inOut" });
+    }
+    gsap.to("#heroBody", { yPercent: -14, ease: "none",
+      scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } });
+    gsap.to(blob, { scale: 1.5, ease: "none",
+      scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } });
+
+    /* marquee reacts to scroll speed */
+    $("#marquee").classList.add("is-marquee");
+    const mq = gsap.to("#track", { xPercent: -50, duration: 45, ease: "none", repeat: -1 });
+    gsap.ticker.add(() => {
+      const target = 1 + Math.min(Math.abs(velocity), 25) * 0.5;
+      mq.timeScale(gsap.utils.interpolate(mq.timeScale(), target, 0.1));
+      velocity *= 0.9;
+    });
+
+    /* statement: words light up as you scroll */
+    const st = $("#statement");
+    st.innerHTML = st.textContent.trim().split(/\s+/).map(w => '<span class="sw">' + w + '</span>').join(" ");
+    gsap.fromTo(st.querySelectorAll(".sw"), { opacity: 0.16 }, { opacity: 1, stagger: 0.12, ease: "none",
+      scrollTrigger: { trigger: st, start: "top 80%", end: "bottom 55%", scrub: true } });
+
+    /* section headings */
+    $$("[data-split]").forEach(el => {
+      if (el.closest(".tile") || el.id === "contactH") return;
+      gsap.from(el.__words, { yPercent: 115, duration: 1, stagger: 0.07, ease: "power4.out",
+        scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+    });
+
+    /* work tiles: wipe in, type rises, preview slides up and drifts with scroll */
+    $$(".tile").forEach(t => {
+      const mock = t.querySelector(".tile-mock");
+      gsap.timeline({ scrollTrigger: { trigger: t, start: "top 88%", once: true } })
+        .from(t, { clipPath: "inset(100% 0% 0% 0%)", duration: 1.1, ease: "power4.inOut", clearProps: "clipPath" })
+        .from(t.querySelectorAll(".wi"), { yPercent: 115, duration: 0.9, stagger: 0.06, ease: "power4.out" }, "-=0.5")
+        .from(t.querySelectorAll(".what,.tag,.open"), { y: 24, opacity: 0, duration: 0.7, stagger: 0.08, ease: "power3.out" }, "-=0.6")
+        .from(mock, { y: 120, opacity: 0, duration: 1.1, ease: "power4.out" }, "-=0.8");
+      gsap.fromTo(mock, { yPercent: 6 }, { yPercent: -6, ease: "none",
+        scrollTrigger: { trigger: t, start: "top bottom", end: "bottom top", scrub: true } });
+    });
+
+    /* about */
+    gsap.from("#aboutPhoto", { clipPath: "inset(100% 0% 0% 0%)", duration: 1.2, ease: "power4.inOut", clearProps: "clipPath",
+      scrollTrigger: { trigger: ".about", start: "top 75%", once: true } });
+    gsap.from(".about-copy .ap, .about-specs", { y: 28, opacity: 0, duration: 0.9, stagger: 0.12, ease: "power3.out",
+      scrollTrigger: { trigger: ".about", start: "top 60%", once: true } });
+    const img = $("#aboutImg");
+    if (img) gsap.fromTo(img, { yPercent: -4 }, { yPercent: 4, ease: "none",
+      scrollTrigger: { trigger: "#aboutPhoto", start: "top bottom", end: "bottom top", scrub: true } });
+
+    /* services */
+    $$(".svc").forEach(s => {
+      gsap.timeline({ scrollTrigger: { trigger: s, start: "top 88%", once: true } })
+        .from(s, { clipPath: "inset(0% 100% 0% 0%)", duration: 1.1, ease: "power4.inOut", clearProps: "clipPath" })
+        .from(s.children[0].children, { y: 28, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" }, "-=0.5")
+        .from(s.querySelector(".svc-vis"), { y: 36, opacity: 0, duration: 0.9, ease: "power3.out" }, "-=0.7");
+    });
+
+    /* process: lines draw, numbers rise */
+    gsap.fromTo(".steps li", { "--p": 0, y: 40, opacity: 0 }, { "--p": 1, y: 0, opacity: 1, duration: 1.1, stagger: 0.18, ease: "power3.out",
+      scrollTrigger: { trigger: ".steps", start: "top 82%", once: true } });
+
+    /* note */
+    gsap.from(".note > *", { y: 24, opacity: 0, duration: 0.9, stagger: 0.12, ease: "power3.out",
+      scrollTrigger: { trigger: ".note", start: "top 88%", once: true } });
+
+    /* contact */
+    gsap.from($("#contactH").__words, { yPercent: 115, duration: 1.1, stagger: 0.08, ease: "power4.out",
+      scrollTrigger: { trigger: "#contact", start: "top 65%", once: true } });
+    gsap.from(".contact-row", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out",
+      scrollTrigger: { trigger: "#contact", start: "top 55%", once: true } });
+    gsap.fromTo("#glow", { scale: 0.5, opacity: 0.4 }, { scale: 1.15, opacity: 1, ease: "none",
+      scrollTrigger: { trigger: "#contact", start: "top bottom", end: "bottom bottom", scrub: true } });
+    gsap.fromTo("#mega", { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, ease: "none",
+      scrollTrigger: { trigger: "#contact", start: "top 55%", end: "bottom bottom", scrub: true } });
+
+    /* pointer-only effects */
+    if (fine) {
+      document.documentElement.classList.add("has-cursor");
+      const cur = $("#cursor");
+      gsap.set(cur, { xPercent: -50, yPercent: -50 });
+      const cx = gsap.quickTo(cur, "x", { duration: 0.45, ease: "power3" });
+      const cy = gsap.quickTo(cur, "y", { duration: 0.45, ease: "power3" });
+      addEventListener("mousemove", e => { cx(e.clientX); cy(e.clientY); });
+
+      $$(".tile").forEach(t => {
+        t.addEventListener("mouseenter", () => gsap.to(cur, { scale: 1, duration: 0.45, ease: "back.out(2)", overwrite: "auto" }));
+        t.addEventListener("mouseleave", () => {
+          gsap.to(cur, { scale: 0, duration: 0.3, ease: "power2.in", overwrite: "auto" });
+          t.style.setProperty("--rx", "0deg"); t.style.setProperty("--ry", "0deg");
+        });
+        t.addEventListener("mousemove", e => {
+          const r = t.getBoundingClientRect();
+          const px = e.clientX - r.left, py = e.clientY - r.top;
+          t.style.setProperty("--mx", px + "px");
+          t.style.setProperty("--my", py + "px");
+          t.style.setProperty("--ry", ((px / r.width - 0.5) * 9).toFixed(2) + "deg");
+          t.style.setProperty("--rx", ((0.5 - py / r.height) * 6).toFixed(2) + "deg");
+        });
+      });
+
+      $$(".btn,.cta").forEach(b => {
+        b.addEventListener("mousemove", e => {
+          const r = b.getBoundingClientRect();
+          gsap.to(b, { x: (e.clientX - r.left - r.width / 2) * 0.3, y: (e.clientY - r.top - r.height / 2) * 0.4, duration: 0.4, ease: "power3.out" });
+        });
+        b.addEventListener("mouseleave", () => gsap.to(b, { x: 0, y: 0, duration: 0.9, ease: "elastic.out(1,0.4)" }));
+      });
+    }
+
+    addEventListener("load", () => ScrollTrigger.refresh());
+  })();
+</script>
+</body>
+</html>
