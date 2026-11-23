@@ -510,10 +510,7 @@
   <div>
     <h2 id="contactH" data-split>Let's build yours</h2>
   </div>
-  <div class="contact-row">
-    <a class="btn" id="wa" href="#">Message on WhatsApp</a>
-    <a class="btn ghost" id="mail" href="#">Send an email</a>
-  </div>
+  <div class="contact-row" id="contactRow"></div>
   <div class="mega" id="mega" aria-hidden="true">Edit Theory</div>
 </footer>
 
@@ -523,8 +520,11 @@
 <script>
   /* ====== EDIT THESE ====== */
   const CONFIG = {
-    whatsapp: "91XXXXXXXXXX",          // country code + number, digits only
-    email: "you@example.com",
+    // Leave a value empty ("") and its button is hidden.
+    instagram: "fr_samhitaaa",          // handle only
+    linkedin: "",                       // full profile URL
+    email: "",                          // e.g. "name@example.com"
+    whatsapp: "",                       // country code + number, digits only
     whatsappText: "Hi, I saw your portfolio and want a website for my business."
   };
 
@@ -596,9 +596,21 @@
     '<div class="group">' + DEMOS.map(d => '<span>' + d.name + '</span><i></i>').join("") + '</div>'
   ).join("");
 
-  document.getElementById("wa").href =
-    "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(CONFIG.whatsappText);
-  document.getElementById("mail").href = "mailto:" + CONFIG.email;
+  const CONTACTS = [
+    CONFIG.whatsapp  && ["Message on WhatsApp", "https://wa.me/" + CONFIG.whatsapp.replace(/\D/g, "") + "?text=" + encodeURIComponent(CONFIG.whatsappText)],
+    CONFIG.email     && ["Send an email", "mailto:" + CONFIG.email],
+    CONFIG.instagram && ["DM on Instagram", "https://instagram.com/" + CONFIG.instagram.replace(/^@/, "")],
+    CONFIG.linkedin  && ["Message on LinkedIn", CONFIG.linkedin]
+  ].filter(Boolean);
+  const contactRow = document.getElementById("contactRow");
+  CONTACTS.forEach(([label, href], i) => {
+    const a = document.createElement("a");
+    a.className = "btn" + (i ? " ghost" : "");
+    a.href = href;
+    a.textContent = label;
+    if (!/^mailto:/.test(href)) { a.target = "_blank"; a.rel = "noopener"; }
+    contactRow.appendChild(a);
+  });
 
   /* ---------- Motion ---------- */
   (function motion(){
