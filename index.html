@@ -243,13 +243,10 @@
   .about{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
   .about-photo{position:relative;min-height:clamp(480px,54vw,780px);overflow:hidden;margin:0;background:var(--beige)}
   .ph-fallback{
-    position:absolute;inset:0;display:grid;place-items:center;
+    position:absolute;inset:0;display:grid;place-items:end start;padding:var(--pad);
     background:radial-gradient(ellipse 85% 90% at 0% 100%, var(--orange) 0%, rgba(230,84,22,.4) 60%, rgba(230,84,22,0) 100%), var(--beige);
   }
-  .ph-fallback span{font-family:var(--display);font-weight:600;font-size:clamp(180px,30vw,440px);line-height:1;color:var(--charcoal)}
-  .about-photo img{position:absolute;left:0;top:-6%;width:100%;height:112%;object-fit:cover;object-position:50% 35%}
-  .about-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(48,50,54,.6),rgba(48,50,54,0) 45%);pointer-events:none}
-  .about-photo figcaption{position:absolute;left:var(--pad);bottom:var(--pad);z-index:2;color:var(--offwhite);font-size:17px;font-weight:500}
+  .ph-fallback span{font-family:var(--display);font-stretch:88%;font-weight:600;font-size:clamp(64px,10vw,150px);line-height:.9;letter-spacing:-.045em;color:var(--charcoal)}
   .about-copy{
     background:var(--beige);
     padding:clamp(40px,6vw,96px) var(--pad) var(--pad);
@@ -463,11 +460,7 @@
   </section>
 
   <section class="about" id="about" aria-labelledby="about-title">
-    <figure class="about-photo" id="aboutPhoto">
-      <div class="ph-fallback" aria-hidden="true"><span>S</span></div>
-      <img id="aboutImg" src="samhita.jpg" alt="Samhita" loading="lazy" onerror="this.remove()">
-      <figcaption>Samhita</figcaption>
-    </figure>
+    <div class="about-photo" id="aboutPhoto" aria-hidden="true"><div class="ph-fallback"><span>Edit<br>Theory</span></div></div>
     <div class="about-copy">
       <div>
         <h2 id="about-title" data-split>hey, i'm samhita</h2>
@@ -583,6 +576,8 @@
     const a = document.createElement("a");
     a.className = "tile t-" + d.tone + (wide ? " wide" : "");
     a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener";
     a.setAttribute("aria-label", "Open the " + d.name + " concept site");
     a.innerHTML =
       '<div class="tile-text"><div><h3 data-split></h3><p class="what"></p><p class="tag">Concept build</p></div><span class="open">Open demo</span></div>' +
@@ -749,9 +744,6 @@
       scrollTrigger: { trigger: ".about", start: "top 75%", once: true } });
     gsap.from(".about-copy .ap, .about-specs", { y: 28, opacity: 0, duration: 0.9, stagger: 0.12, ease: "power3.out",
       scrollTrigger: { trigger: ".about", start: "top 60%", once: true } });
-    const img = $("#aboutImg");
-    if (img) gsap.fromTo(img, { yPercent: -4 }, { yPercent: 4, ease: "none",
-      scrollTrigger: { trigger: "#aboutPhoto", start: "top bottom", end: "bottom top", scrub: true } });
 
     /* services */
     $$(".svc").forEach(s => {
